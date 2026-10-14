@@ -1,0 +1,1241 @@
+{
+  "_comment": "cms_body / js_libraries are the original schema (extended). cms_meta_generator (match against <meta name=generator content>) and cms_headers (response header + value regex) are NEW sections and require scanner support. Capture group 1 in patterns is the version where present.",
+  "cms_body": [
+    {
+      "pattern": "wp-content|wp-includes|wp-json",
+      "name": "WordPress"
+    },
+    {
+      "pattern": "/sites/default/|Drupal\\.settings",
+      "name": "Drupal"
+    },
+    {
+      "pattern": "Joomla!|/media/jui/|com_content",
+      "name": "Joomla"
+    },
+    {
+      "pattern": "cdn\\.shopify\\.com|Shopify\\.theme|myshopify\\.com",
+      "name": "Shopify"
+    },
+    {
+      "pattern": "Magento_|/skin/frontend/|/static/version",
+      "name": "Magento"
+    },
+    {
+      "pattern": "PrestaShop",
+      "name": "PrestaShop"
+    },
+    {
+      "pattern": "squarespace",
+      "name": "Squarespace"
+    },
+    {
+      "pattern": "wix\\.com|wixstatic",
+      "name": "Wix"
+    },
+    {
+      "pattern": "webflow\\.com|wf-page",
+      "name": "Webflow"
+    },
+    {
+      "pattern": "ghost\\.org|/ghost/",
+      "name": "Ghost"
+    },
+    {
+      "pattern": "typo3conf/|typo3temp/|/typo3/",
+      "name": "TYPO3"
+    },
+    {
+      "pattern": "/concrete/|concrete5|ccm_token|CCM_DISPATCHER_FILENAME",
+      "name": "Concrete CMS"
+    },
+    {
+      "pattern": "/umbraco/|umbraco-",
+      "name": "Umbraco"
+    },
+    {
+      "pattern": "/sitecore/|sc_mode=|sitecore",
+      "name": "Sitecore"
+    },
+    {
+      "pattern": "/cpresources/|craftcms|CRAFT_CSRF_TOKEN",
+      "name": "Craft CMS"
+    },
+    {
+      "pattern": "/modules/system/assets/|october/cms|octobercms",
+      "name": "October CMS"
+    },
+    {
+      "pattern": "/assets/components/|MODX|modx-",
+      "name": "MODX"
+    },
+    {
+      "pattern": "catalog/view/theme/|route=common/|index\\.php\\?route=",
+      "name": "OpenCart"
+    },
+    {
+      "pattern": "cdn\\d*\\.bigcommerce\\.com|bigcommerce\\.com/s-",
+      "name": "BigCommerce"
+    },
+    {
+      "pattern": "woocommerce|wc-ajax|wc_add_to_cart_params",
+      "name": "WooCommerce"
+    },
+    {
+      "pattern": "___gatsby|gatsby-image|gatsby-focus-wrapper|/page-data/",
+      "name": "Gatsby"
+    },
+    {
+      "pattern": "astro-island|astro-slot|/_astro/",
+      "name": "Astro"
+    },
+    {
+      "pattern": "__sveltekit|sveltekit-",
+      "name": "SvelteKit"
+    },
+    {
+      "pattern": "__remixContext|remix-",
+      "name": "Remix"
+    },
+    {
+      "pattern": "hugo-|Hugo \\d+\\.\\d+",
+      "name": "Hugo"
+    },
+    {
+      "pattern": "Jekyll v\\d|jekyll-",
+      "name": "Jekyll"
+    },
+    {
+      "pattern": "docusaurus|__docusaurus",
+      "name": "Docusaurus"
+    },
+    {
+      "pattern": "blogger\\.com|blogspot\\.com|blogger-",
+      "name": "Blogger"
+    },
+    {
+      "pattern": "weebly\\.com|editmysite\\.com|wsite-",
+      "name": "Weebly"
+    },
+    {
+      "pattern": "dmcdn\\.net|multiscreensite\\.com|dudaone",
+      "name": "Duda"
+    },
+    {
+      "pattern": "hs-sites\\.com|hubspotusercontent|hs_cos_wrapper",
+      "name": "HubSpot CMS"
+    },
+    {
+      "pattern": "/etc\\.clientlibs/|/content/dam/|/etc/designs/",
+      "name": "Adobe Experience Manager"
+    },
+    {
+      "pattern": "Liferay\\.ThemeDisplay|liferay-portal|/o/frontend-js-web",
+      "name": "Liferay"
+    },
+    {
+      "pattern": "DotNetNuke|/Portals/_default/|dnn\\.js|DNNROBOTS",
+      "name": "DNN (DotNetNuke)"
+    },
+    {
+      "pattern": "Kentico|/CMSPages/|CMSScripts/",
+      "name": "Kentico"
+    },
+    {
+      "pattern": "Sitefinity|/Sitefinity/|sf-",
+      "name": "Progress Sitefinity"
+    },
+    {
+      "pattern": "plone\\.|portal_css|plonetheme|content=\\\"Plone",
+      "name": "Plone"
+    },
+    {
+      "pattern": "discourse|Discourse\\.|data-discourse-setup",
+      "name": "Discourse"
+    },
+    {
+      "pattern": "phpBB|phpbb_|viewtopic\\.php\\?",
+      "name": "phpBB"
+    },
+    {
+      "pattern": "vBulletin|vb_|vbulletin_",
+      "name": "vBulletin"
+    },
+    {
+      "pattern": "mediawiki|/load\\.php\\?|wgPageName|mw-content-text",
+      "name": "MediaWiki"
+    },
+    {
+      "pattern": "confluence-|ajs-|atlassian-confluence|Confluence\\.",
+      "name": "Atlassian Confluence"
+    },
+    {
+      "pattern": "moodle|/theme/yui_combo\\.php|M\\.cfg",
+      "name": "Moodle"
+    },
+    {
+      "pattern": "SilverStripe|ss-",
+      "name": "SilverStripe"
+    },
+    {
+      "pattern": "ExpressionEngine|exp:|/themes/ee/|cp_session_id",
+      "name": "ExpressionEngine"
+    },
+    {
+      "pattern": "Textpattern|txp-",
+      "name": "Textpattern"
+    },
+    {
+      "pattern": "/user/themes/|Grav CMS|grav-",
+      "name": "Grav"
+    },
+    {
+      "pattern": "statamic|/vendor/statamic/",
+      "name": "Statamic"
+    },
+    {
+      "pattern": "strapi|/strapi-|/admin/init",
+      "name": "Strapi"
+    },
+    {
+      "pattern": "directus|/directus/",
+      "name": "Directus"
+    },
+    {
+      "pattern": "zendesk\\.com/hc/|zd-|help-center-",
+      "name": "Zendesk Guide"
+    },
+    {
+      "pattern": "demandware\\.(?:net|edgesuite)|dwanalytics|dwac_|/on/demandware\\.store/",
+      "name": "Salesforce Commerce Cloud (Demandware)"
+    },
+    {
+      "pattern": "force\\.com|lightning\\.force|salesforce-communities|/sfsites/",
+      "name": "Salesforce Experience Cloud"
+    },
+    {
+      "pattern": "hybris|/_ui/(?:desktop|responsive)/|yCommerce",
+      "name": "SAP Commerce (Hybris)"
+    },
+    {
+      "pattern": "odoo|/web/static/src/|o_website",
+      "name": "Odoo Website"
+    },
+    {
+      "pattern": "webnode\\.com|webnode-|wnd-",
+      "name": "Webnode"
+    },
+    {
+      "pattern": "tildacdn\\.com|t-records|tilda\\.ws",
+      "name": "Tilda"
+    },
+    {
+      "pattern": "framerusercontent\\.com|framer\\.website|data-framer-",
+      "name": "Framer"
+    },
+    {
+      "pattern": "carrd\\.co|data-carrd",
+      "name": "Carrd"
+    },
+    {
+      "pattern": "shopware|sw-|/bundles/storefront/|/theme/[0-9a-f]{32}/",
+      "name": "Shopware"
+    },
+    {
+      "pattern": "oscommerce|osCsid|catalog/includes",
+      "name": "osCommerce"
+    },
+    {
+      "pattern": "zen-?cart|zenid",
+      "name": "Zen Cart"
+    },
+    {
+      "pattern": "lightspeed|seoshop|cdn\\.webshopapp\\.com",
+      "name": "Lightspeed eCom"
+    },
+    {
+      "pattern": "ecwid\\.com|Ecwid\\.|ecwid-",
+      "name": "Ecwid"
+    },
+    {
+      "pattern": "/_nuxt/|__NUXT__",
+      "name": "Nuxt.js (assets)"
+    },
+    {
+      "pattern": "contentful\\.com|images\\.ctfassets\\.net|cdn\\.contentful",
+      "name": "Contentful (assets)"
+    },
+    {
+      "pattern": "sanity\\.io|cdn\\.sanity\\.io",
+      "name": "Sanity (assets)"
+    },
+    {
+      "pattern": "prismic\\.io|images\\.prismic\\.io|prismic-",
+      "name": "Prismic (assets)"
+    },
+    {
+      "pattern": "storyblok\\.com|a\\.storyblok\\.com|storyblok-",
+      "name": "Storyblok"
+    },
+    {
+      "pattern": "cdn\\.builder\\.io|builder\\.io|builder-content",
+      "name": "Builder.io"
+    },
+    {
+      "pattern": "ghost-portal|ghost-sdk|content=\\\"Ghost",
+      "name": "Ghost (markers)"
+    },
+    {
+      "pattern": "elementor|/elementor/|elementor-",
+      "name": "Elementor (WordPress)"
+    },
+    {
+      "pattern": "et_pb_|Divi|/wp-content/themes/Divi",
+      "name": "Divi (WordPress)"
+    },
+    {
+      "pattern": "/wp-content/plugins/woocommerce/|/wp-content/plugins/elementor/|/wp-content/plugins/",
+      "name": "WordPress plugin path"
+    },
+    {
+      "pattern": "/wp-content/themes/([\\w\\-]+)/",
+      "name": "WordPress theme path"
+    },
+    {
+      "pattern": "drupal-settings-json|data-drupal-selector|/core/misc/drupal\\.js|/misc/drupal\\.js",
+      "name": "Drupal (markers)"
+    },
+    {
+      "pattern": "joomla-script-options|/media/system/js/|/templates/system/|option=com_",
+      "name": "Joomla (markers)"
+    },
+    {
+      "pattern": "Magento_Ui/js|mage/cookies|requirejs/require\\.js|/static/frontend/Magento/",
+      "name": "Magento 2 (markers)"
+    },
+    {
+      "pattern": "prestashop\\.|PrestaShop-|/themes/[\\w-]+/assets/|ps_shoppingcart",
+      "name": "PrestaShop (markers)"
+    },
+    {
+      "pattern": "squarespace\\.com|static1\\.squarespace\\.com|Squarespace\\.|sqs-",
+      "name": "Squarespace (markers)"
+    },
+    {
+      "pattern": "static\\.parastorage\\.com|wixstatic\\.com|X-Wix-|wix-ui-",
+      "name": "Wix (markers)"
+    },
+    {
+      "pattern": "assets-global\\.website-files\\.com|cdn\\.prod\\.website-files\\.com|data-wf-(?:page|site)",
+      "name": "Webflow (markers)"
+    },
+    {
+      "pattern": "cdn\\.shopify\\.com/s/files|Shopify\\.shop|shopify-section|/cdn/shop/",
+      "name": "Shopify (markers)"
+    },
+    {
+      "pattern": "ghost-search|ghost-url|content=\\\"Ghost \\d",
+      "name": "Ghost (generator)"
+    },
+    {
+      "pattern": "cdn\\.jsdelivr\\.net/ghost/",
+      "name": "Ghost (jsdelivr assets)"
+    },
+    {
+      "pattern": "Powered by Wix|Created with Wix|wix-code|wix-bi",
+      "name": "Wix (footer)"
+    },
+    {
+      "pattern": "Powered by Shopify",
+      "name": "Shopify (footer)"
+    },
+    {
+      "pattern": "Powered by WordPress|Proudly powered by WordPress",
+      "name": "WordPress (footer)"
+    },
+    {
+      "pattern": "Powered by Drupal|Powered by <a[^>]*>Drupal",
+      "name": "Drupal (footer)"
+    },
+    {
+      "pattern": "Powered by Joomla|Joomla! - Open Source Content Management",
+      "name": "Joomla (footer)"
+    },
+    {
+      "pattern": "Powered by Magento|Copyright.*Magento",
+      "name": "Magento (footer)"
+    },
+    {
+      "pattern": "Powered by PrestaShop",
+      "name": "PrestaShop (footer)"
+    },
+    {
+      "pattern": "Powered by vBulletin",
+      "name": "vBulletin (footer)"
+    },
+    {
+      "pattern": "Powered by phpBB",
+      "name": "phpBB (footer)"
+    },
+    {
+      "pattern": "Powered by Discourse",
+      "name": "Discourse (footer)"
+    },
+    {
+      "pattern": "Powered by MediaWiki",
+      "name": "MediaWiki (footer)"
+    },
+    {
+      "pattern": "Powered by Ghost",
+      "name": "Ghost (footer)"
+    },
+    {
+      "pattern": "Powered by Squarespace",
+      "name": "Squarespace (footer)"
+    },
+    {
+      "pattern": "Powered by Webflow",
+      "name": "Webflow (footer)"
+    },
+    {
+      "pattern": "Built with Gatsby",
+      "name": "Gatsby (footer)"
+    },
+    {
+      "pattern": "Built with Docusaurus",
+      "name": "Docusaurus (footer)"
+    },
+    {
+      "pattern": "Powered by Hugo",
+      "name": "Hugo (footer)"
+    },
+    {
+      "pattern": "Powered by Jekyll",
+      "name": "Jekyll (footer)"
+    },
+    {
+      "pattern": "Powered by Blogger",
+      "name": "Blogger (footer)"
+    },
+    {
+      "pattern": "Powered by Weebly",
+      "name": "Weebly (footer)"
+    },
+    {
+      "pattern": "Powered by Bitrix|bitrix/js|/bitrix/templates/|BX\\.message",
+      "name": "1C-Bitrix"
+    },
+    {
+      "pattern": "Powered by Tumblr|assets\\.tumblr\\.com|tumblr-",
+      "name": "Tumblr"
+    },
+    {
+      "pattern": "Powered by Medium|cdn-images-1\\.medium\\.com|medium\\.com/m/",
+      "name": "Medium"
+    },
+    {
+      "pattern": "substackcdn\\.com|substack\\.com/api|substack-",
+      "name": "Substack"
+    },
+    {
+      "pattern": "beehiiv\\.com|beehiiv-|cdn\\.beehiiv\\.com",
+      "name": "beehiiv"
+    },
+    {
+      "pattern": "notion\\.so|notion-static\\.com|notion-page",
+      "name": "Notion (published site)"
+    },
+    {
+      "pattern": "cdn\\.mintlify\\.com|mintlify|docs\\.mintlify",
+      "name": "Mintlify"
+    },
+    {
+      "pattern": "gitbook\\.io|gitbook-|static-2c\\.gitbook",
+      "name": "GitBook"
+    },
+    {
+      "pattern": "readthedocs\\.org|readthedocs-|rtd-",
+      "name": "Read the Docs"
+    },
+    {
+      "pattern": "mkdocs|material\\.mkdocs|md-content",
+      "name": "MkDocs"
+    },
+    {
+      "pattern": "vuepress|vp-|VuePress",
+      "name": "VuePress / VitePress"
+    },
+    {
+      "pattern": "nextra|__next-|nextra-",
+      "name": "Nextra"
+    },
+    {
+      "pattern": "hexo|hexo-|themes/(?:next|landscape)",
+      "name": "Hexo"
+    },
+    {
+      "pattern": "eleventy|11ty",
+      "name": "Eleventy"
+    },
+    {
+      "pattern": "cdn\\.sitegroundmail|siteground|sg-cachepress|sg_cachepress",
+      "name": "SiteGround (SG Optimizer)"
+    }
+  ],
+  "js_libraries": [
+    {
+      "pattern": "jquery[-.]?([\\d.]+)?(?:\\.min)?\\.js",
+      "name": "jQuery"
+    },
+    {
+      "pattern": "react(?:-dom)?[@/]?([\\d.]+)?(?:\\.min)?\\.js",
+      "name": "React"
+    },
+    {
+      "pattern": "vue(?:\\.global)?[@/]?([\\d.]+)?(?:\\.min)?\\.js",
+      "name": "Vue.js"
+    },
+    {
+      "pattern": "angular[@/]?([\\d.]+)?(?:\\.min)?\\.js",
+      "name": "Angular"
+    },
+    {
+      "pattern": "bootstrap[@/]?([\\d.]+)?(?:\\.min)?\\.(?:js|css)",
+      "name": "Bootstrap"
+    },
+    {
+      "pattern": "__NEXT_DATA__",
+      "name": "Next.js"
+    },
+    {
+      "pattern": "id=\"__nuxt\"",
+      "name": "Nuxt.js"
+    },
+    {
+      "pattern": "ng-version=\"([\\d.]+)\"",
+      "name": "Angular (versioned)"
+    },
+    {
+      "pattern": "data-svelte",
+      "name": "Svelte"
+    },
+    {
+      "pattern": "alpinejs|x-data=",
+      "name": "Alpine.js"
+    },
+    {
+      "pattern": "htmx\\.org|hx-get=|hx-post=",
+      "name": "htmx"
+    },
+    {
+      "pattern": "lodash(?:\\.core)?[-.@/]?([\\d.]+)?(?:\\.min)?\\.js",
+      "name": "Lodash"
+    },
+    {
+      "pattern": "underscore[-.@/]?([\\d.]+)?(?:-min|\\.min)?\\.js",
+      "name": "Underscore.js"
+    },
+    {
+      "pattern": "moment(?:-with-locales)?[-.@/]?([\\d.]+)?(?:\\.min)?\\.js",
+      "name": "Moment.js"
+    },
+    {
+      "pattern": "dayjs[-.@/]?([\\d.]+)?(?:\\.min)?\\.js",
+      "name": "Day.js"
+    },
+    {
+      "pattern": "d3(?:\\.v\\d+)?[-.@/]?([\\d.]+)?(?:\\.min)?\\.js",
+      "name": "D3.js"
+    },
+    {
+      "pattern": "three(?:\\.module)?[-.@/]?([\\d.]+)?(?:\\.min)?\\.js",
+      "name": "Three.js"
+    },
+    {
+      "pattern": "gsap[-.@/]?([\\d.]+)?(?:\\.min)?\\.js|TweenMax[-.]?([\\d.]+)?(?:\\.min)?\\.js",
+      "name": "GSAP"
+    },
+    {
+      "pattern": "axios[-.@/]?([\\d.]+)?(?:\\.min)?\\.js",
+      "name": "Axios"
+    },
+    {
+      "pattern": "backbone[-.@/]?([\\d.]+)?(?:-min|\\.min)?\\.js",
+      "name": "Backbone.js"
+    },
+    {
+      "pattern": "ember[-.@/]?([\\d.]+)?(?:\\.min|\\.prod)?\\.js",
+      "name": "Ember.js"
+    },
+    {
+      "pattern": "knockout[-.@/]?([\\d.]+)?(?:\\.min)?\\.js",
+      "name": "Knockout.js"
+    },
+    {
+      "pattern": "chart(?:\\.umd)?[-.@/]?([\\d.]+)?(?:\\.min)?\\.js|Chart\\.js",
+      "name": "Chart.js"
+    },
+    {
+      "pattern": "leaflet[-.@/]?([\\d.]+)?(?:\\.min)?\\.(?:js|css)",
+      "name": "Leaflet"
+    },
+    {
+      "pattern": "swiper(?:-bundle)?[-.@/]?([\\d.]+)?(?:\\.min)?\\.(?:js|css)",
+      "name": "Swiper"
+    },
+    {
+      "pattern": "slick(?:\\.min)?\\.(?:js|css)|slick-carousel",
+      "name": "Slick carousel"
+    },
+    {
+      "pattern": "owl\\.carousel(?:\\.min)?\\.js|owl-carousel",
+      "name": "Owl Carousel"
+    },
+    {
+      "pattern": "select2(?:\\.full)?(?:\\.min)?\\.js",
+      "name": "Select2"
+    },
+    {
+      "pattern": "jquery\\.dataTables(?:\\.min)?\\.js|datatables(?:\\.min)?\\.js",
+      "name": "DataTables"
+    },
+    {
+      "pattern": "popper(?:\\.min)?\\.js|@popperjs/core",
+      "name": "Popper.js"
+    },
+    {
+      "pattern": "tailwindcss|cdn\\.tailwindcss\\.com|tailwind\\.config",
+      "name": "Tailwind CSS"
+    },
+    {
+      "pattern": "font-?awesome[-.@/]?([\\d.]+)?(?:\\.min)?\\.(?:js|css)",
+      "name": "Font Awesome"
+    },
+    {
+      "pattern": "modernizr[-.@/]?([\\d.]+)?(?:\\.min|-custom)?\\.js",
+      "name": "Modernizr"
+    },
+    {
+      "pattern": "require(?:\\.min)?\\.js|requirejs",
+      "name": "RequireJS"
+    },
+    {
+      "pattern": "core-js[@/]?([\\d.]+)?|corejs",
+      "name": "core-js"
+    },
+    {
+      "pattern": "@hotwired/stimulus|stimulus(?:\\.umd)?\\.js|data-controller=",
+      "name": "Stimulus"
+    },
+    {
+      "pattern": "@hotwired/turbo|turbo(?:\\.es2017-umd)?\\.js|<turbo-frame",
+      "name": "Turbo (Hotwire)"
+    },
+    {
+      "pattern": "lit-html|lit@|LitElement|lit-element",
+      "name": "Lit"
+    },
+    {
+      "pattern": "preact(?:\\.min)?\\.js|preact@|__PREACT",
+      "name": "Preact"
+    },
+    {
+      "pattern": "solid-js|_\\$HY|data-hk=",
+      "name": "SolidJS"
+    },
+    {
+      "pattern": "q:container|qwik",
+      "name": "Qwik"
+    },
+    {
+      "pattern": "wire:id=|livewire(?:\\.min)?\\.js|Livewire\\.",
+      "name": "Laravel Livewire"
+    },
+    {
+      "pattern": "data-page=\\\"\\{&quot;component|inertia",
+      "name": "Inertia.js"
+    },
+    {
+      "pattern": "mapbox-gl[-.@/]?([\\d.]+)?(?:\\.min)?\\.js",
+      "name": "Mapbox GL JS"
+    },
+    {
+      "pattern": "maps\\.googleapis\\.com/maps/api/js",
+      "name": "Google Maps JS API"
+    },
+    {
+      "pattern": "video(?:js)?[-.@/]?([\\d.]+)?(?:\\.min)?\\.js|videojs",
+      "name": "Video.js"
+    },
+    {
+      "pattern": "hls(?:\\.light)?[-.@/]?([\\d.]+)?(?:\\.min)?\\.js|Hls\\.isSupported",
+      "name": "hls.js"
+    },
+    {
+      "pattern": "lottie(?:\\.min|_light)?\\.js|lottie-web|lottie-player",
+      "name": "Lottie"
+    },
+    {
+      "pattern": "highcharts[-.@/]?([\\d.]+)?(?:\\.src)?\\.js|Highcharts\\.",
+      "name": "Highcharts"
+    },
+    {
+      "pattern": "plotly[-.@/]?([\\d.]+)?(?:\\.min)?\\.js|Plotly\\.",
+      "name": "Plotly"
+    },
+    {
+      "pattern": "MathJax[-.@/]?([\\d.]+)?|mathjax@",
+      "name": "MathJax"
+    },
+    {
+      "pattern": "katex[-.@/]?([\\d.]+)?(?:\\.min)?\\.(?:js|css)",
+      "name": "KaTeX"
+    },
+    {
+      "pattern": "jquery-ui[-.@/]?([\\d.]+)?(?:\\.min)?\\.js|jquery\\.ui",
+      "name": "jQuery UI"
+    },
+    {
+      "pattern": "jquery[-.]?migrate[-.@/]?([\\d.]+)?(?:\\.min)?\\.js",
+      "name": "jQuery Migrate"
+    },
+    {
+      "pattern": "jquery\\.mobile[-.@/]?([\\d.]+)?(?:\\.min)?\\.js",
+      "name": "jQuery Mobile"
+    },
+    {
+      "pattern": "prototype(?:-[\\d.]+)?(?:\\.min)?\\.js|Prototype\\.Version",
+      "name": "Prototype.js"
+    },
+    {
+      "pattern": "mootools(?:-core|-more)?[-.@/]?([\\d.]+)?(?:-yui-compressed|\\.min)?\\.js",
+      "name": "MooTools"
+    },
+    {
+      "pattern": "dojo(?:\\.js|/dojo)|dojoConfig",
+      "name": "Dojo"
+    },
+    {
+      "pattern": "yui(?:-min|/yui)\\.js|YUI\\(",
+      "name": "YUI"
+    },
+    {
+      "pattern": "ext-all(?:-debug)?\\.js|Ext\\.onReady",
+      "name": "Ext JS"
+    },
+    {
+      "pattern": "zepto[-.@/]?([\\d.]+)?(?:\\.min)?\\.js",
+      "name": "Zepto"
+    },
+    {
+      "pattern": "foundation[-.@/]?([\\d.]+)?(?:\\.min)?\\.(?:js|css)",
+      "name": "Foundation"
+    },
+    {
+      "pattern": "bulma[-.@/]?([\\d.]+)?(?:\\.min)?\\.css",
+      "name": "Bulma"
+    },
+    {
+      "pattern": "materialize[-.@/]?([\\d.]+)?(?:\\.min)?\\.(?:js|css)",
+      "name": "Materialize"
+    },
+    {
+      "pattern": "semantic(?:\\.min)?\\.(?:js|css)|fomantic",
+      "name": "Semantic UI"
+    },
+    {
+      "pattern": "uikit[-.@/]?([\\d.]+)?(?:\\.min)?\\.(?:js|css)",
+      "name": "UIkit"
+    },
+    {
+      "pattern": "@mui/|material-ui|MuiButton",
+      "name": "Material UI (MUI)"
+    },
+    {
+      "pattern": "ant-design|antd[@/]?([\\d.]+)?|ant-btn",
+      "name": "Ant Design"
+    },
+    {
+      "pattern": "chakra-ui|css-[a-z0-9]+-chakra",
+      "name": "Chakra UI"
+    },
+    {
+      "pattern": "webpackJsonp|__webpack_require__|webpackChunk",
+      "name": "webpack (bundle)"
+    },
+    {
+      "pattern": "vite/client|/@vite/|__vite__|modulepreload",
+      "name": "Vite (markers)"
+    },
+    {
+      "pattern": "parcelRequire|parcel-",
+      "name": "Parcel (bundle)"
+    },
+    {
+      "pattern": "sourceMappingURL=[^\\s\\\"']+\\.map",
+      "name": "Source map reference (info exposure)"
+    },
+    {
+      "pattern": "polyfill(?:\\.min)?\\.js|polyfill\\.io",
+      "name": "Polyfill (script)"
+    },
+    {
+      "pattern": "gtag/js|ga\\.js|analytics\\.js",
+      "name": "Google Analytics (script ref)"
+    },
+    {
+      "pattern": "socket\\.io(?:\\.min)?\\.js|socket\\.io/socket\\.io\\.js",
+      "name": "Socket.IO"
+    },
+    {
+      "pattern": "sockjs[-.@/]?([\\d.]+)?(?:\\.min)?\\.js",
+      "name": "SockJS"
+    },
+    {
+      "pattern": "signalr(?:\\.min)?\\.js|/signalr/hubs",
+      "name": "ASP.NET SignalR"
+    },
+    {
+      "pattern": "livewire|alpine\\.min\\.js|alpinejs@([\\d.]+)",
+      "name": "Alpine.js (versioned)"
+    },
+    {
+      "pattern": "htmx(?:\\.min)?\\.js|htmx\\.org@([\\d.]+)",
+      "name": "htmx (script)"
+    },
+    {
+      "pattern": "stripe\\.com/v3|js\\.stripe\\.com",
+      "name": "Stripe.js"
+    },
+    {
+      "pattern": "recaptcha/api\\.js|google\\.com/recaptcha",
+      "name": "reCAPTCHA (script)"
+    },
+    {
+      "pattern": "ckeditor[-.@/]?([\\d.]+)?|CKEDITOR\\.",
+      "name": "CKEditor"
+    },
+    {
+      "pattern": "tinymce[-.@/]?([\\d.]+)?(?:\\.min)?\\.js|tinyMCE\\.",
+      "name": "TinyMCE"
+    },
+    {
+      "pattern": "quill(?:\\.min)?\\.js|Quill\\(",
+      "name": "Quill"
+    },
+    {
+      "pattern": "monaco-editor|vs/loader\\.js",
+      "name": "Monaco Editor"
+    },
+    {
+      "pattern": "codemirror[-.@/]?([\\d.]+)?(?:\\.min)?\\.js|CodeMirror\\(",
+      "name": "CodeMirror"
+    },
+    {
+      "pattern": "prism(?:\\.min)?\\.js|Prism\\.highlight",
+      "name": "Prism.js"
+    },
+    {
+      "pattern": "highlight(?:\\.min)?\\.js|hljs\\.",
+      "name": "highlight.js"
+    },
+    {
+      "pattern": "flickity[-.@/]?([\\d.]+)?(?:\\.pkgd)?(?:\\.min)?\\.js",
+      "name": "Flickity"
+    },
+    {
+      "pattern": "aos(?:\\.min)?\\.js|data-aos=",
+      "name": "AOS (Animate On Scroll)"
+    },
+    {
+      "pattern": "wow(?:\\.min)?\\.js|wow animated",
+      "name": "WOW.js"
+    },
+    {
+      "pattern": "particles(?:\\.min)?\\.js|particlesJS",
+      "name": "particles.js"
+    },
+    {
+      "pattern": "lightbox(?:-plus-jquery)?(?:\\.min)?\\.js|fancybox[-.@/]?([\\d.]+)?|magnific-popup",
+      "name": "Lightbox / Fancybox"
+    },
+    {
+      "pattern": "isotope(?:\\.pkgd)?(?:\\.min)?\\.js|masonry(?:\\.pkgd)?(?:\\.min)?\\.js",
+      "name": "Isotope / Masonry"
+    },
+    {
+      "pattern": "cookieconsent(?:\\.min)?\\.js|cookie-consent",
+      "name": "Cookie consent script"
+    },
+    {
+      "pattern": "google-?tag|gtm\\.js",
+      "name": "Google Tag / GTM (script ref)"
+    }
+  ],
+  "cms_meta_generator": [
+    {
+      "pattern": "WordPress\\s*([\\d.]+)?",
+      "name": "WordPress"
+    },
+    {
+      "pattern": "Drupal\\s*([\\d.]+)?",
+      "name": "Drupal"
+    },
+    {
+      "pattern": "Joomla!?\\s*(?:-\\s*Open Source Content Management)?\\s*([\\d.]+)?",
+      "name": "Joomla"
+    },
+    {
+      "pattern": "Magento",
+      "name": "Magento"
+    },
+    {
+      "pattern": "Shopify",
+      "name": "Shopify"
+    },
+    {
+      "pattern": "PrestaShop",
+      "name": "PrestaShop"
+    },
+    {
+      "pattern": "Wix\\.com",
+      "name": "Wix"
+    },
+    {
+      "pattern": "Squarespace",
+      "name": "Squarespace"
+    },
+    {
+      "pattern": "Webflow",
+      "name": "Webflow"
+    },
+    {
+      "pattern": "Ghost\\s*([\\d.]+)?",
+      "name": "Ghost"
+    },
+    {
+      "pattern": "TYPO3\\s*(?:CMS)?\\s*([\\d.]+)?",
+      "name": "TYPO3"
+    },
+    {
+      "pattern": "Hugo\\s*([\\d.]+)?",
+      "name": "Hugo"
+    },
+    {
+      "pattern": "Jekyll\\s*v?([\\d.]+)?",
+      "name": "Jekyll"
+    },
+    {
+      "pattern": "Gatsby\\s*([\\d.]+)?",
+      "name": "Gatsby"
+    },
+    {
+      "pattern": "Docusaurus\\s*v?([\\d.]+)?",
+      "name": "Docusaurus"
+    },
+    {
+      "pattern": "Next\\.js",
+      "name": "Next.js"
+    },
+    {
+      "pattern": "Astro\\s*v?([\\d.]+)?",
+      "name": "Astro"
+    },
+    {
+      "pattern": "Nuxt",
+      "name": "Nuxt.js"
+    },
+    {
+      "pattern": "MediaWiki\\s*([\\d.]+)?",
+      "name": "MediaWiki"
+    },
+    {
+      "pattern": "DokuWiki",
+      "name": "DokuWiki"
+    },
+    {
+      "pattern": "Moodle",
+      "name": "Moodle"
+    },
+    {
+      "pattern": "vBulletin\\s*([\\d.]+)?",
+      "name": "vBulletin"
+    },
+    {
+      "pattern": "Discourse",
+      "name": "Discourse"
+    },
+    {
+      "pattern": "Elementor\\s*([\\d.]+)?",
+      "name": "Elementor"
+    },
+    {
+      "pattern": "WooCommerce\\s*([\\d.]+)?",
+      "name": "WooCommerce"
+    },
+    {
+      "pattern": "Powered by (?:Slider Revolution|Slider\\s?Rev)\\s*([\\d.]+)?",
+      "name": "Slider Revolution"
+    },
+    {
+      "pattern": "WPML\\s*ver:?\\s*([\\d.]+)?",
+      "name": "WPML"
+    },
+    {
+      "pattern": "Yoast SEO\\s*(?:plugin)?\\s*v?([\\d.]+)?",
+      "name": "Yoast SEO"
+    },
+    {
+      "pattern": "All in One SEO\\s*(?:Pro)?\\s*v?([\\d.]+)?",
+      "name": "All in One SEO"
+    },
+    {
+      "pattern": "Site Kit by Google\\s*([\\d.]+)?",
+      "name": "Site Kit by Google"
+    },
+    {
+      "pattern": "Contao\\s*(?:Open Source CMS)?",
+      "name": "Contao"
+    },
+    {
+      "pattern": "Concrete CMS|concrete5",
+      "name": "Concrete CMS"
+    },
+    {
+      "pattern": "Craft CMS",
+      "name": "Craft CMS"
+    },
+    {
+      "pattern": "Umbraco",
+      "name": "Umbraco"
+    },
+    {
+      "pattern": "Blogger",
+      "name": "Blogger"
+    },
+    {
+      "pattern": "HubSpot",
+      "name": "HubSpot CMS"
+    },
+    {
+      "pattern": "Odoo",
+      "name": "Odoo"
+    },
+    {
+      "pattern": "Tilda",
+      "name": "Tilda"
+    },
+    {
+      "pattern": "Framer\\s*([\\w.]+)?",
+      "name": "Framer"
+    },
+    {
+      "pattern": "Typo3",
+      "name": "TYPO3"
+    },
+    {
+      "pattern": "1C-Bitrix",
+      "name": "1C-Bitrix"
+    },
+    {
+      "pattern": "Mobirise\\s*([\\d.]+)?",
+      "name": "Mobirise"
+    },
+    {
+      "pattern": "BoldGrid",
+      "name": "BoldGrid"
+    }
+  ],
+  "cms_headers": [
+    {
+      "header": "x-generator",
+      "pattern": "Drupal\\s*(\\d+)?",
+      "name": "Drupal"
+    },
+    {
+      "header": "x-drupal-cache",
+      "pattern": ".+",
+      "name": "Drupal"
+    },
+    {
+      "header": "x-drupal-dynamic-cache",
+      "pattern": ".+",
+      "name": "Drupal"
+    },
+    {
+      "header": "x-pingback",
+      "pattern": "xmlrpc\\.php",
+      "name": "WordPress"
+    },
+    {
+      "header": "x-redirect-by",
+      "pattern": "WordPress",
+      "name": "WordPress"
+    },
+    {
+      "header": "link",
+      "pattern": "api\\.w\\.org",
+      "name": "WordPress"
+    },
+    {
+      "header": "x-wp-total",
+      "pattern": ".+",
+      "name": "WordPress (REST API)"
+    },
+    {
+      "header": "x-wp-totalpages",
+      "pattern": ".+",
+      "name": "WordPress (REST API)"
+    },
+    {
+      "header": "x-shopify-stage",
+      "pattern": ".+",
+      "name": "Shopify"
+    },
+    {
+      "header": "x-shopid",
+      "pattern": ".+",
+      "name": "Shopify"
+    },
+    {
+      "header": "x-sorting-hat-shopid",
+      "pattern": ".+",
+      "name": "Shopify"
+    },
+    {
+      "header": "x-wix-request-id",
+      "pattern": ".+",
+      "name": "Wix"
+    },
+    {
+      "header": "x-magento-cache-debug",
+      "pattern": ".+",
+      "name": "Magento"
+    },
+    {
+      "header": "x-magento-tags",
+      "pattern": ".+",
+      "name": "Magento"
+    },
+    {
+      "header": "x-magento-cache-id",
+      "pattern": ".+",
+      "name": "Magento"
+    },
+    {
+      "header": "x-umbraco-version",
+      "pattern": ".+",
+      "name": "Umbraco"
+    },
+    {
+      "header": "x-powered-by",
+      "pattern": "Craft CMS",
+      "name": "Craft CMS"
+    },
+    {
+      "header": "x-powered-by",
+      "pattern": "PrestaShop",
+      "name": "PrestaShop"
+    },
+    {
+      "header": "x-powered-by",
+      "pattern": "Statamic",
+      "name": "Statamic"
+    },
+    {
+      "header": "x-powered-by",
+      "pattern": "Strapi",
+      "name": "Strapi"
+    },
+    {
+      "header": "x-powered-by",
+      "pattern": "Ghost",
+      "name": "Ghost"
+    },
+    {
+      "header": "x-ghost-cache-status",
+      "pattern": ".+",
+      "name": "Ghost"
+    },
+    {
+      "header": "x-typo3-parsetime",
+      "pattern": ".+",
+      "name": "TYPO3"
+    },
+    {
+      "header": "x-hs-cache-config",
+      "pattern": ".+",
+      "name": "HubSpot CMS"
+    },
+    {
+      "header": "x-hs-cfworker-meta",
+      "pattern": ".+",
+      "name": "HubSpot CMS"
+    },
+    {
+      "header": "x-ah-environment",
+      "pattern": ".+",
+      "name": "Acquia (Drupal hosting)"
+    },
+    {
+      "header": "x-pantheon-styx-hostname",
+      "pattern": ".+",
+      "name": "Pantheon"
+    },
+    {
+      "header": "x-kinsta-cache",
+      "pattern": ".+",
+      "name": "Kinsta (WordPress hosting)"
+    },
+    {
+      "header": "x-wpe-loopback-upstream-addr",
+      "pattern": ".+",
+      "name": "WP Engine"
+    },
+    {
+      "header": "x-bitrix-composite",
+      "pattern": ".+",
+      "name": "1C-Bitrix"
+    },
+    {
+      "header": "x-bitrix-created-by",
+      "pattern": ".+",
+      "name": "1C-Bitrix"
+    },
+    {
+      "header": "x-confluence-request-time",
+      "pattern": ".+",
+      "name": "Atlassian Confluence"
+    },
+    {
+      "header": "x-ausername",
+      "pattern": ".+",
+      "name": "Atlassian (Jira/Confluence)"
+    },
+    {
+      "header": "x-arequestid",
+      "pattern": ".+",
+      "name": "Atlassian Jira"
+    },
+    {
+      "header": "x-discourse-route",
+      "pattern": ".+",
+      "name": "Discourse"
+    },
+    {
+      "header": "x-discourse-username",
+      "pattern": ".+",
+      "name": "Discourse"
+    },
+    {
+      "header": "x-moodle-version",
+      "pattern": ".+",
+      "name": "Moodle"
+    },
+    {
+      "header": "x-sitecore-ssl",
+      "pattern": ".+",
+      "name": "Sitecore"
+    }
+  ]
+}

@@ -1,0 +1,580 @@
+{
+  "_comment": "security_headers, risky_methods, rate_limit_headers and mime_signatures are the original sections (extended). info_disclosure_headers, cookie_flags, tls_checks, cors_probe, host_header_probe and redirect_checks are NEW sections and need scanner support. mime_signatures are offset-0 magic bytes only (formats whose magic is at an offset, like MP4 'ftyp' at 4 or tar 'ustar' at 257, cannot be matched by prefix). required_security_headers (webspy addition) is the subset of security_headers get_security reports as missing; other security_headers are listed only when present.",
+  "security_headers": {
+    "Strict-Transport-Security": "HSTS",
+    "Content-Security-Policy": "CSP",
+    "X-Frame-Options": "X-Frame-Options (clickjacking protection)",
+    "X-Content-Type-Options": "X-Content-Type-Options (MIME-sniffing protection)",
+    "Permissions-Policy": "Permissions-Policy",
+    "Referrer-Policy": "Referrer-Policy",
+    "Cross-Origin-Opener-Policy": "COOP",
+    "Cross-Origin-Embedder-Policy": "COEP",
+    "Cross-Origin-Resource-Policy": "CORP",
+    "Cache-Control": "Cache-Control (should be no-store/private on sensitive responses)",
+    "Clear-Site-Data": "Clear-Site-Data",
+    "Origin-Agent-Cluster": "Origin-Agent-Cluster",
+    "X-Permitted-Cross-Domain-Policies": "X-Permitted-Cross-Domain-Policies (Flash/PDF cross-domain)",
+    "X-DNS-Prefetch-Control": "X-DNS-Prefetch-Control",
+    "X-Download-Options": "X-Download-Options (legacy IE)",
+    "Expect-CT": "Expect-CT (deprecated)",
+    "X-XSS-Protection": "X-XSS-Protection (deprecated; '0' preferred)",
+    "Report-To": "Report-To (reporting endpoint)",
+    "Reporting-Endpoints": "Reporting-Endpoints",
+    "NEL": "Network Error Logging",
+    "Content-Security-Policy-Report-Only": "CSP (report-only)",
+    "Document-Policy": "Document-Policy",
+    "Cross-Origin-Embedder-Policy-Report-Only": "COEP (report-only)",
+    "Cross-Origin-Opener-Policy-Report-Only": "COOP (report-only)",
+    "Timing-Allow-Origin": "Timing-Allow-Origin",
+    "Access-Control-Allow-Origin": "CORS (Access-Control-Allow-Origin; flag '*' or reflected origin with credentials)",
+    "Access-Control-Allow-Credentials": "CORS (Allow-Credentials)",
+    "Access-Control-Allow-Methods": "CORS (Allow-Methods)",
+    "Access-Control-Allow-Headers": "CORS (Allow-Headers)",
+    "Access-Control-Expose-Headers": "CORS (Expose-Headers)",
+    "Access-Control-Max-Age": "CORS (Max-Age)",
+    "Vary": "Vary (cache keying)",
+    "Pragma": "Pragma (legacy cache control)",
+    "Expires": "Expires",
+    "Set-Cookie": "Set-Cookie (check Secure / HttpOnly / SameSite / __Host- / __Secure- prefixes)",
+    "Content-Type": "Content-Type (charset present?)",
+    "Content-Disposition": "Content-Disposition",
+    "Accept-CH": "Client Hints (Accept-CH)",
+    "Critical-CH": "Client Hints (Critical-CH)",
+    "Alt-Svc": "Alt-Svc (HTTP/3 advertised)",
+    "Link": "Link (preload / rel=)",
+    "Server-Timing": "Server-Timing (info disclosure)",
+    "Public-Key-Pins": "HPKP (deprecated / dangerous)",
+    "Public-Key-Pins-Report-Only": "HPKP report-only (deprecated)",
+    "Feature-Policy": "Feature-Policy (deprecated; use Permissions-Policy)",
+    "Sec-Fetch-Site": "Fetch Metadata (request header; server should use)",
+    "Supports-Loading-Mode": "Supports-Loading-Mode"
+  },
+  "risky_methods": {
+    "PUT": "allows direct file/resource upload if not properly authenticated",
+    "DELETE": "allows resource deletion if not properly authenticated",
+    "TRACE": "can enable Cross-Site Tracing (XST) attacks",
+    "CONNECT": "unusual for a web app to expose; can indicate proxy misconfiguration",
+    "PATCH": "allows partial resource modification if not properly authenticated",
+    "PROPFIND": "WebDAV directory/property listing; can expose file structure",
+    "PROPPATCH": "WebDAV property modification",
+    "MKCOL": "WebDAV collection creation (write access)",
+    "COPY": "WebDAV copy; can move/duplicate files",
+    "MOVE": "WebDAV move/rename; can overwrite or relocate files",
+    "LOCK": "WebDAV lock; can be used to deny service on resources",
+    "UNLOCK": "WebDAV unlock",
+    "SEARCH": "WebDAV SEARCH; can reveal file listings",
+    "VERSION-CONTROL": "WebDAV DeltaV; unusual on public sites",
+    "REPORT": "WebDAV/CalDAV REPORT; unusual on public sites",
+    "CHECKOUT": "WebDAV DeltaV checkout",
+    "CHECKIN": "WebDAV DeltaV checkin",
+    "MKWORKSPACE": "WebDAV DeltaV workspace creation",
+    "UPDATE": "WebDAV DeltaV update",
+    "LABEL": "WebDAV DeltaV label",
+    "MERGE": "WebDAV DeltaV merge",
+    "BASELINE-CONTROL": "WebDAV DeltaV baseline",
+    "MKACTIVITY": "WebDAV DeltaV activity creation",
+    "ORDERPATCH": "WebDAV ordered collections patch",
+    "ACL": "WebDAV ACL modification",
+    "BIND": "WebDAV BIND; can alias resources",
+    "UNBIND": "WebDAV UNBIND",
+    "REBIND": "WebDAV REBIND",
+    "PURGE": "Cache purge method (Varnish/nginx); unauthenticated purge = cache-poisoning/DoS vector",
+    "BAN": "Varnish BAN; unauthenticated ban = cache invalidation abuse",
+    "DEBUG": "ASP.NET DEBUG verb; can allow remote debugging attach",
+    "TRACK": "Microsoft TRACK (TRACE equivalent) — XST risk",
+    "SETHOME": "Non-standard method; legacy/hidden functionality",
+    "SUBSCRIBE": "WebDAV/UPnP SUBSCRIBE; unusual",
+    "NOTIFY": "UPnP NOTIFY; unusual on public sites",
+    "ARBITRARY": "Servers that accept arbitrary methods may have loose routing"
+  },
+  "rate_limit_headers": [
+    "X-RateLimit-Limit",
+    "X-RateLimit-Remaining",
+    "X-RateLimit-Reset",
+    "RateLimit-Limit",
+    "RateLimit-Remaining",
+    "RateLimit-Reset",
+    "Retry-After",
+    "X-Rate-Limit-Limit",
+    "X-Rate-Limit-Remaining",
+    "X-Rate-Limit-Reset",
+    "X-RateLimit-Used",
+    "X-RateLimit-Resource",
+    "X-RateLimit-Remaining-Minute",
+    "X-RateLimit-Remaining-Hour",
+    "X-RateLimit-Remaining-Day",
+    "X-RateLimit-Limit-Minute",
+    "X-RateLimit-Limit-Hour",
+    "X-RateLimit-Limit-Day",
+    "RateLimit-Policy",
+    "RateLimit",
+    "RateLimit-Reset-After",
+    "X-RateLimit-Reset-After",
+    "X-RateLimit-Bucket",
+    "X-RateLimit-Global",
+    "X-RateLimit-Scope",
+    "X-Retry-After",
+    "Ratelimit-Limit",
+    "Ratelimit-Remaining",
+    "Ratelimit-Reset",
+    "X-RateLimit-Burst-Capacity",
+    "X-RateLimit-Replenish-Rate",
+    "X-RateLimit-Requested-Tokens",
+    "X-Kong-Proxy-Latency",
+    "X-Kong-Upstream-Latency",
+    "X-RateLimit-Limit-Second",
+    "X-RateLimit-Remaining-Second",
+    "X-Envoy-Ratelimited",
+    "CF-RateLimit",
+    "x-ratelimit-reset-requests",
+    "x-ratelimit-reset-tokens",
+    "x-ratelimit-limit-requests",
+    "x-ratelimit-remaining-requests",
+    "x-ratelimit-limit-tokens",
+    "x-ratelimit-remaining-tokens",
+    "Apikey-RateLimit-Remaining",
+    "X-Shopify-Shop-Api-Call-Limit",
+    "X-Shopify-Api-Call-Limit",
+    "X-GitHub-Request-Id",
+    "X-Wp-Rate-Limit"
+  ],
+  "mime_signatures": [
+    {
+      "hex": "89504e470d0a1a0a",
+      "mime": "image/png"
+    },
+    {
+      "hex": "ffd8ff",
+      "mime": "image/jpeg"
+    },
+    {
+      "hex": "474946383761",
+      "mime": "image/gif"
+    },
+    {
+      "hex": "474946383961",
+      "mime": "image/gif"
+    },
+    {
+      "hex": "255044462d",
+      "mime": "application/pdf"
+    },
+    {
+      "hex": "504b0304",
+      "mime": "application/zip"
+    },
+    {
+      "hex": "1f8b",
+      "mime": "application/gzip"
+    },
+    {
+      "hex": "52494646",
+      "mime": "audio/video (RIFF container)"
+    },
+    {
+      "hex": "3c3f786d6c",
+      "mime": "application/xml"
+    },
+    {
+      "hex": "424d",
+      "mime": "image/bmp"
+    },
+    {
+      "hex": "377abcaf271c",
+      "mime": "application/x-7z-compressed"
+    },
+    {
+      "hex": "526172211a0700",
+      "mime": "application/vnd.rar (v4)"
+    },
+    {
+      "hex": "526172211a070100",
+      "mime": "application/vnd.rar (v5)"
+    },
+    {
+      "hex": "425a68",
+      "mime": "application/x-bzip2"
+    },
+    {
+      "hex": "fd377a585a00",
+      "mime": "application/x-xz"
+    },
+    {
+      "hex": "28b52ffd",
+      "mime": "application/zstd"
+    },
+    {
+      "hex": "04224d18",
+      "mime": "application/x-lz4"
+    },
+    {
+      "hex": "7f454c46",
+      "mime": "application/x-elf (executable)"
+    },
+    {
+      "hex": "4d5a",
+      "mime": "application/x-dosexec (Windows PE / .exe/.dll)"
+    },
+    {
+      "hex": "cffaedfe",
+      "mime": "application/x-mach-binary (64-bit)"
+    },
+    {
+      "hex": "cefaedfe",
+      "mime": "application/x-mach-binary (32-bit)"
+    },
+    {
+      "hex": "cafebabe",
+      "mime": "application/java-vm (.class) / Mach-O fat"
+    },
+    {
+      "hex": "53514c69746520666f726d6174203300",
+      "mime": "application/vnd.sqlite3 (database)"
+    },
+    {
+      "hex": "00000100",
+      "mime": "image/x-icon"
+    },
+    {
+      "hex": "49492a00",
+      "mime": "image/tiff (little-endian)"
+    },
+    {
+      "hex": "4d4d002a",
+      "mime": "image/tiff (big-endian)"
+    },
+    {
+      "hex": "774f4646",
+      "mime": "font/woff"
+    },
+    {
+      "hex": "774f4632",
+      "mime": "font/woff2"
+    },
+    {
+      "hex": "00010000",
+      "mime": "font/ttf (TrueType)"
+    },
+    {
+      "hex": "4f54544f",
+      "mime": "font/otf (OpenType)"
+    },
+    {
+      "hex": "4f676753",
+      "mime": "application/ogg"
+    },
+    {
+      "hex": "494433",
+      "mime": "audio/mpeg (MP3 with ID3)"
+    },
+    {
+      "hex": "fffb",
+      "mime": "audio/mpeg (MP3 frame)"
+    },
+    {
+      "hex": "664c6143",
+      "mime": "audio/flac"
+    },
+    {
+      "hex": "1a45dfa3",
+      "mime": "video/x-matroska / video/webm"
+    },
+    {
+      "hex": "25215053",
+      "mime": "application/postscript"
+    },
+    {
+      "hex": "7b5c72746631",
+      "mime": "application/rtf"
+    },
+    {
+      "hex": "d0cf11e0a1b11ae1",
+      "mime": "application/x-ole-storage (legacy .doc/.xls/.ppt/.msi)"
+    },
+    {
+      "hex": "3c21444f43545950",
+      "mime": "text/html (<!DOCTYPE)"
+    },
+    {
+      "hex": "3c68746d6c",
+      "mime": "text/html (<html)"
+    },
+    {
+      "hex": "3c737667",
+      "mime": "image/svg+xml"
+    },
+    {
+      "hex": "efbbbf",
+      "mime": "text/plain (UTF-8 BOM)"
+    },
+    {
+      "hex": "fffe",
+      "mime": "text/plain (UTF-16 LE BOM)"
+    },
+    {
+      "hex": "feff",
+      "mime": "text/plain (UTF-16 BE BOM)"
+    },
+    {
+      "hex": "6465780a",
+      "mime": "application/vnd.android.dex"
+    },
+    {
+      "hex": "0061736d",
+      "mime": "application/wasm"
+    },
+    {
+      "hex": "2d2d2d2d2d424547494e20",
+      "mime": "text/plain (PEM block: -----BEGIN )"
+    },
+    {
+      "hex": "2d2d2d2d2d424547494e204f50454e5353482050524956415445204b4559",
+      "mime": "PEM: OpenSSH private key (SENSITIVE)"
+    },
+    {
+      "hex": "2d2d2d2d2d424547494e205253412050524956415445204b4559",
+      "mime": "PEM: RSA private key (SENSITIVE)"
+    },
+    {
+      "hex": "2d2d2d2d2d424547494e2050524956415445204b4559",
+      "mime": "PEM: PKCS#8 private key (SENSITIVE)"
+    },
+    {
+      "hex": "2d2d2d2d2d424547494e204543205052495641544520",
+      "mime": "PEM: EC private key (SENSITIVE)"
+    },
+    {
+      "hex": "2d2d2d2d2d424547494e20504750205052495641544520",
+      "mime": "PGP private key block (SENSITIVE)"
+    },
+    {
+      "hex": "2d2d2d2d2d424547494e20504750205055424c4943",
+      "mime": "PGP public key block"
+    },
+    {
+      "hex": "03d9a29a67fb4bb5",
+      "mime": "application/x-keepass2 (KeePass DB)"
+    },
+    {
+      "hex": "d4c3b2a1",
+      "mime": "application/vnd.tcpdump.pcap (LE)"
+    },
+    {
+      "hex": "a1b2c3d4",
+      "mime": "application/vnd.tcpdump.pcap (BE)"
+    },
+    {
+      "hex": "0a0d0d0a",
+      "mime": "application/x-pcapng"
+    },
+    {
+      "hex": "5b636f726500",
+      "mime": "text/plain (git config '[core]' — hex of '[core' prefix variant)"
+    },
+    {
+      "hex": "5b636f7265",
+      "mime": "text/plain (git config '[core')"
+    },
+    {
+      "hex": "44495243",
+      "mime": "application/x-git-index (DIRC)"
+    },
+    {
+      "hex": "5041434b",
+      "mime": "application/x-git-pack (PACK)"
+    },
+    {
+      "hex": "23212f",
+      "mime": "text/x-shellscript (#!/)"
+    },
+    {
+      "hex": "3c3f706870",
+      "mime": "text/x-php (<?php source disclosed)"
+    },
+    {
+      "hex": "3c25",
+      "mime": "text/x-asp/jsp (<% source disclosed)"
+    },
+    {
+      "hex": "7b22",
+      "mime": "application/json (object start)"
+    },
+    {
+      "hex": "5b7b",
+      "mime": "application/json (array of objects)"
+    },
+    {
+      "hex": "2d2d2d0a",
+      "mime": "text/yaml (--- document start)"
+    },
+    {
+      "hex": "4d5a90000300000004000000ffff0000",
+      "mime": "application/x-dosexec (PE DOS stub)"
+    },
+    {
+      "hex": "1f9d",
+      "mime": "application/x-compress (.Z)"
+    },
+    {
+      "hex": "1f8b08",
+      "mime": "application/gzip (deflate)"
+    },
+    {
+      "hex": "504b0506",
+      "mime": "application/zip (empty archive)"
+    },
+    {
+      "hex": "504b0708",
+      "mime": "application/zip (spanned)"
+    },
+    {
+      "hex": "6d6f6f76",
+      "mime": "video/quicktime (moov)"
+    },
+    {
+      "hex": "464c56",
+      "mime": "video/x-flv"
+    },
+    {
+      "hex": "3026b2758e66cf11",
+      "mime": "video/x-ms-asf / wmv"
+    },
+    {
+      "hex": "38425053",
+      "mime": "image/vnd.adobe.photoshop (PSD)"
+    }
+  ],
+  "info_disclosure_headers": {
+    "Server": "Web server/vendor/version banner",
+    "X-Powered-By": "Backend technology / version",
+    "X-AspNet-Version": "ASP.NET runtime version",
+    "X-AspNetMvc-Version": "ASP.NET MVC version",
+    "X-AspNetCore-Version": "ASP.NET Core version",
+    "X-Generator": "CMS / generator (e.g. Drupal 9)",
+    "X-Drupal-Cache": "Drupal cache state",
+    "X-Drupal-Dynamic-Cache": "Drupal dynamic cache state",
+    "X-Pingback": "WordPress XML-RPC endpoint URL",
+    "X-Runtime": "Rails response time (timing side-channel)",
+    "X-Version": "Application version",
+    "X-App-Version": "Application version",
+    "X-Backend-Server": "Origin hostname/IP leak",
+    "X-Served-By": "Backend / cache node hostname",
+    "X-Server": "Backend server name",
+    "X-Host": "Backend hostname",
+    "X-Forwarded-Server": "Forwarding proxy name",
+    "X-Real-IP": "Internal IP leak (should not be sent in responses)",
+    "X-Originating-IP": "Origin IP leak",
+    "X-Debug-Token": "Symfony profiler token (profiler may be reachable at /_profiler/<token>)",
+    "X-Debug-Token-Link": "Symfony profiler URL",
+    "X-Debug": "Debug mode marker",
+    "X-Magento-Cache-Debug": "Magento cache debug",
+    "X-Magento-Tags": "Magento cache tags",
+    "X-Varnish": "Varnish request IDs",
+    "Via": "Intermediary proxies / versions",
+    "X-Cache-Hits": "Cache internals",
+    "X-Cache-Key": "Cache key internals",
+    "X-Request-Id": "Request tracing ID",
+    "X-Trace-Id": "Distributed tracing ID",
+    "X-Correlation-Id": "Correlation ID",
+    "X-B3-TraceId": "Zipkin tracing ID",
+    "traceparent": "W3C trace context",
+    "Server-Timing": "Backend timings / internals",
+    "X-Envoy-Upstream-Service-Time": "Upstream timing (Envoy)",
+    "X-Envoy-Peer-Metadata": "Istio mesh metadata leak",
+    "X-Jenkins": "Jenkins version",
+    "X-Hudson": "Hudson/Jenkins marker",
+    "X-Confluence-Request-Time": "Confluence marker",
+    "X-AREQUESTID": "Atlassian request marker",
+    "X-Oracle-Dms-Ecid": "Oracle marker",
+    "X-Content-Powered-By": "Technology marker",
+    "X-Mod-Pagespeed": "mod_pagespeed version",
+    "X-Page-Speed": "PageSpeed version",
+    "X-Turbo-Charged-By": "LiteSpeed marker",
+    "X-Sucuri-ID": "Sucuri WAF marker",
+    "X-Frame-Options-Report": "Misc",
+    "WWW-Authenticate": "Auth realm may name internal systems (check realm string)",
+    "Link": "May reveal API root (rel=https://api.w.org/)",
+    "Location": "Redirects to internal hostnames/IPs"
+  },
+  "cookie_flags": {
+    "required": [
+      "Secure",
+      "HttpOnly",
+      "SameSite"
+    ],
+    "prefixes": [
+      "__Host-",
+      "__Secure-"
+    ],
+    "session_cookie_name_hints": [
+      "session",
+      "sessid",
+      "sid",
+      "auth",
+      "token",
+      "jwt",
+      "login",
+      "remember",
+      "csrf",
+      "xsrf"
+    ],
+    "note": "Report session/auth cookies missing Secure (on HTTPS sites), HttpOnly, or SameSite; flag SameSite=None without Secure."
+  },
+  "tls_checks": {
+    "flag_protocols": [
+      "SSLv2",
+      "SSLv3",
+      "TLSv1.0",
+      "TLSv1.1"
+    ],
+    "min_ok_protocol": "TLSv1.2",
+    "flag_cert_days_remaining_below": 30,
+    "flag_cert_self_signed": true,
+    "flag_cert_hostname_mismatch": true,
+    "flag_weak_signature": [
+      "md5",
+      "sha1"
+    ],
+    "flag_weak_key": {
+      "rsa_bits_below": 2048,
+      "ec_bits_below": 224
+    },
+    "note": "Active TLS probing is optional; these thresholds are for reporting only."
+  },
+  "cors_probe": {
+    "origins": [
+      "https://evil.example",
+      "null",
+      "https://{host}.evil.example",
+      "https://evil.example.{host}"
+    ],
+    "note": "Send as Origin header with a normal GET; flag if the exact origin (or 'null') is reflected in Access-Control-Allow-Origin together with Access-Control-Allow-Credentials: true."
+  },
+  "host_header_probe": {
+    "headers": [
+      "X-Forwarded-Host",
+      "X-Host",
+      "X-Forwarded-Server",
+      "Forwarded"
+    ],
+    "canary": "canary.invalid",
+    "note": "Flag if the canary value is reflected in the body, Location header, or links (host header injection / cache poisoning indicator)."
+  },
+  "redirect_checks": {
+    "http_to_https_expected": true,
+    "max_chain_length_flag": 4,
+    "flag_mixed_content": true,
+    "flag_www_nonwww_inconsistency": true
+  },
+  "required_security_headers": [
+    "Strict-Transport-Security",
+    "Content-Security-Policy",
+    "X-Frame-Options",
+    "X-Content-Type-Options",
+    "Permissions-Policy",
+    "Referrer-Policy",
+    "Cross-Origin-Opener-Policy",
+    "Cross-Origin-Embedder-Policy",
+    "Cross-Origin-Resource-Policy"
+  ]
+}

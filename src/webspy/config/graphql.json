@@ -1,0 +1,124 @@
+{
+  "_comment": "introspection_query is the original probe. The other probes are NEW and need scanner support. All are read-only queries (introspection / __typename); none mutate data.",
+  "introspection_query": {
+    "query": "query IntrospectionCheck { __schema { queryType { name } mutationType { name } types { name kind } } }"
+  },
+  "full_introspection_query": {
+    "query": "query IntrospectionQuery { __schema { queryType { name } mutationType { name } subscriptionType { name } types { ...FullType } directives { name description locations args { ...InputValue } } } } fragment FullType on __Type { kind name description fields(includeDeprecated: true) { name description args { ...InputValue } type { ...TypeRef } isDeprecated deprecationReason } inputFields { ...InputValue } interfaces { ...TypeRef } enumValues(includeDeprecated: true) { name description isDeprecated deprecationReason } possibleTypes { ...TypeRef } } fragment InputValue on __InputValue { name description type { ...TypeRef } defaultValue } fragment TypeRef on __Type { kind name ofType { kind name ofType { kind name ofType { kind name ofType { kind name ofType { kind name ofType { kind name ofType { kind name } } } } } } } }"
+  },
+  "typename_probe": {
+    "query": "query { __typename }"
+  },
+  "type_probe": {
+    "query": "query { __type(name: \"Query\") { name kind fields { name } } }"
+  },
+  "field_suggestion_probe": {
+    "query": "query { __typenam }",
+    "note": "Servers with field suggestions enabled answer with 'Did you mean ...'; leak schema even when introspection is disabled."
+  },
+  "get_probe": {
+    "method": "GET",
+    "query_string": "?query=%7B__typename%7D",
+    "note": "GET-based queries enable CSRF-style cross-site requests; flag if 200 with data."
+  },
+  "form_probe": {
+    "method": "POST",
+    "content_type": "application/x-www-form-urlencoded",
+    "body": "query=%7B__typename%7D",
+    "note": "Non-JSON content types accepted => CSRF risk."
+  },
+  "batch_probe": [
+    {
+      "query": "query { __typename }"
+    },
+    {
+      "query": "query { __typename }"
+    }
+  ],
+  "alias_probe": {
+    "query": "query { a: __typename b: __typename c: __typename }",
+    "note": "Presence of alias support is normal; combine with rate-limit checks."
+  },
+  "introspection_disabled_markers": [
+    "introspection is disabled",
+    "introspection is not allowed",
+    "GraphQL introspection is not allowed",
+    "Introspection queries are disabled",
+    "Cannot query field \"__schema\"",
+    "Cannot query field '__schema'",
+    "introspection has been disabled",
+    "validation error: .*__schema"
+  ],
+  "graphql_response_markers": [
+    "\"data\":",
+    "\"errors\":",
+    "\"__typename\"",
+    "Cannot query field",
+    "Syntax Error: Expected",
+    "Must provide query string",
+    "GraphQL operations must contain a non-empty `query`",
+    "Unknown type",
+    "Did you mean",
+    "GET query missing",
+    "Persisted query not found",
+    "PersistedQueryNotFound",
+    "\"extensions\":",
+    "apollo",
+    "Apollo Server",
+    "hasura",
+    "graphql-yoga",
+    "Unexpected token"
+  ],
+  "graphql_endpoints": [
+    "/graphql",
+    "/graphql/",
+    "/api/graphql",
+    "/api/graphql/",
+    "/graphql/v1",
+    "/graphql/api",
+    "/v1/graphql",
+    "/v2/graphql",
+    "/v1/graphql/",
+    "/api/v1/graphql",
+    "/api/v2/graphql",
+    "/gql",
+    "/api/gql",
+    "/query",
+    "/api/query",
+    "/graph",
+    "/graphiql",
+    "/graphql/console",
+    "/graphql/playground",
+    "/playground",
+    "/altair",
+    "/explorer",
+    "/graphql-explorer",
+    "/hasura/v1/graphql",
+    "/v1alpha1/graphql",
+    "/console/graphql",
+    "/admin/graphql",
+    "/graphql.php",
+    "/index.php?graphql",
+    "/wp-json/graphql",
+    "/?graphql",
+    "/graphql/schema",
+    "/___graphql",
+    "/subscriptions",
+    "/ws/graphql",
+    "/federation",
+    "/subgraph",
+    "/_graphql",
+    "/.graphql",
+    "/api/graph",
+    "/data/graphql",
+    "/cms/graphql",
+    "/storefront/graphql",
+    "/storefront-api/graphql",
+    "/api/2024-10/graphql.json",
+    "/admin/api/graphql.json",
+    "/gateway/graphql",
+    "/public/graphql",
+    "/internal/graphql",
+    "/private/graphql"
+  ]
+}

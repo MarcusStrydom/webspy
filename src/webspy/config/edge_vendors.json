@@ -1,0 +1,158 @@
+{
+  "headers": [
+    {
+      "header": "cf-ray",
+      "vendor": "Cloudflare"
+    },
+    {
+      "header": "cf-cache-status",
+      "vendor": "Cloudflare"
+    },
+    {
+      "header": "x-amz-cf-id",
+      "vendor": "Amazon CloudFront"
+    },
+    {
+      "header": "x-amz-cf-pop",
+      "vendor": "Amazon CloudFront"
+    },
+    {
+      "header": "x-akamai-transformed",
+      "vendor": "Akamai"
+    },
+    {
+      "header": "akamai-origin-hop",
+      "vendor": "Akamai"
+    },
+    {
+      "header": "x-fastly-request-id",
+      "vendor": "Fastly"
+    },
+    {
+      "header": "fastly-debug-digest",
+      "vendor": "Fastly"
+    },
+    {
+      "header": "x-sucuri-id",
+      "vendor": "Sucuri"
+    },
+    {
+      "header": "x-sucuri-cache",
+      "vendor": "Sucuri"
+    },
+    {
+      "header": "x-vercel-id",
+      "vendor": "Vercel"
+    },
+    {
+      "header": "x-nf-request-id",
+      "vendor": "Netlify"
+    },
+    {
+      "header": "x-azure-ref",
+      "vendor": "Azure Front Door / CDN"
+    },
+    {
+      "header": "x-bunny-id",
+      "vendor": "Bunny CDN"
+    },
+    {
+      "header": "x-iinfo",
+      "vendor": "Incapsula/Imperva"
+    },
+    {
+      "header": "x-cdis",
+      "vendor": "Incapsula/Imperva"
+    }
+  ],
+  "cname_patterns": [
+    {
+      "pattern": "cloudflare",
+      "vendor": "Cloudflare"
+    },
+    {
+      "pattern": "cloudfront\\.net",
+      "vendor": "Amazon CloudFront"
+    },
+    {
+      "pattern": "akamai",
+      "vendor": "Akamai"
+    },
+    {
+      "pattern": "fastly\\.net",
+      "vendor": "Fastly"
+    },
+    {
+      "pattern": "azureedge\\.net|azurefd\\.net",
+      "vendor": "Azure CDN / Front Door"
+    },
+    {
+      "pattern": "cdn77",
+      "vendor": "CDN77"
+    },
+    {
+      "pattern": "bunnycdn|b-cdn\\.net",
+      "vendor": "Bunny CDN"
+    },
+    {
+      "pattern": "stackpathcdn|stackpathdns",
+      "vendor": "StackPath"
+    },
+    {
+      "pattern": "edgecastcdn",
+      "vendor": "Edgecast (Verizon)"
+    },
+    {
+      "pattern": "netlify",
+      "vendor": "Netlify"
+    },
+    {
+      "pattern": "vercel-dns|vercel\\.app",
+      "vendor": "Vercel"
+    },
+    {
+      "pattern": "googleusercontent|ghs\\.google",
+      "vendor": "Google hosting/CDN"
+    },
+    {
+      "pattern": "sucuri",
+      "vendor": "Sucuri"
+    },
+    {
+      "pattern": "keycdn",
+      "vendor": "KeyCDN"
+    }
+  ],
+  "server_checks": [
+    {
+      "needle": "cloudflare",
+      "vendor": "Cloudflare"
+    },
+    {
+      "needle": "akamaighost",
+      "vendor": "Akamai"
+    },
+    {
+      "needle": "cloudfront",
+      "vendor": "Amazon CloudFront"
+    }
+  ],
+  "cert_issuer_checks": [
+    {
+      "needle": "cloudflare",
+      "vendor": "Cloudflare"
+    },
+    {
+      "needle": "akamai",
+      "vendor": "Akamai"
+    },
+    {
+      "needle": "amazon",
+      "vendor": "Amazon CloudFront"
+    },
+    {
+      "needle": "fastly",
+      "vendor": "Fastly"
+    }
+  ]
+}

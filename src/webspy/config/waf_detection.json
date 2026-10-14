@@ -1,0 +1,92 @@
+{
+  "waf_only_headers": [
+    {
+      "header": "x-waf-event-info",
+      "vendor": "generic WAF (declares itself)",
+      "confidence": "medium"
+    },
+    {
+      "header": "x-protected-by",
+      "vendor": "generic WAF/security layer",
+      "confidence": "medium"
+    }
+  ],
+  "cookie_checks": [
+    {
+      "pattern": "incap_ses",
+      "vendor": "Incapsula/Imperva"
+    },
+    {
+      "pattern": "visid_incap",
+      "vendor": "Incapsula/Imperva"
+    },
+    {
+      "pattern": "__cfduid",
+      "vendor": "Cloudflare (legacy cookie)"
+    },
+    {
+      "pattern": "awsalb",
+      "vendor": "AWS ALB (load balancer, not strictly a WAF)"
+    },
+    {
+      "pattern": "barra_counter_session",
+      "vendor": "Barracuda WAF"
+    },
+    {
+      "pattern": "citrix_ns_id",
+      "vendor": "Citrix NetScaler"
+    },
+    {
+      "pattern": "ns_af",
+      "vendor": "Citrix NetScaler AppFirewall"
+    },
+    {
+      "pattern": "bigipserver",
+      "vendor": "F5 BIG-IP ASM"
+    }
+  ],
+  "block_page_checks": [
+    {
+      "pattern": "attention required.*cloudflare|cloudflare ray id",
+      "vendor": "Cloudflare"
+    },
+    {
+      "pattern": "access denied.*sucuri|sucuri website firewall",
+      "vendor": "Sucuri"
+    },
+    {
+      "pattern": "request unsuccessful.*incapsula|incapsula incident id",
+      "vendor": "Incapsula/Imperva"
+    },
+    {
+      "pattern": "the requested url was rejected.*please consult",
+      "vendor": "F5 BIG-IP ASM"
+    },
+    {
+      "pattern": "akamai reference",
+      "vendor": "Akamai"
+    },
+    {
+      "pattern": "blocked by.*barracuda",
+      "vendor": "Barracuda WAF"
+    },
+    {
+      "pattern": "modsecurity",
+      "vendor": "ModSecurity"
+    }
+  ],
+  "server_checks": [
+    {
+      "needle": "cloudflare",
+      "vendor": "Cloudflare"
+    },
+    {
+      "needle": "sucuri",
+      "vendor": "Sucuri"
+    },
+    {
+      "needle": "akamaighost",
+      "vendor": "Akamai"
+    }
+  ]
+}

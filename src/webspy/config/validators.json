@@ -1,0 +1,159 @@
+{
+  "_comment": "Content validators for exposed_files. A hit counts only if the first 4 KB of the body matches. flags: i = ignore case, m = multiline.",
+  "validators": [
+    {
+      "paths": [
+        "/.git/config"
+      ],
+      "pattern": "\\[(?:core|remote|branch)",
+      "flags": ""
+    },
+    {
+      "paths": [
+        "/.git/HEAD"
+      ],
+      "pattern": "^ref:\\s*refs/",
+      "flags": "m"
+    },
+    {
+      "paths": [
+        "/.git/logs/HEAD"
+      ],
+      "pattern": "^[0-9a-f]{40}\\s",
+      "flags": "m"
+    },
+    {
+      "paths": [
+        "/.env",
+        "/.env.local",
+        "/.env.production",
+        "/.env.backup"
+      ],
+      "pattern": "^[A-Za-z_][A-Za-z0-9_]*\\s*=",
+      "flags": "m"
+    },
+    {
+      "paths": [
+        "/.htpasswd"
+      ],
+      "pattern": "^[^:\\s]+:\\S+",
+      "flags": "m"
+    },
+    {
+      "paths": [
+        "/.DS_Store"
+      ],
+      "pattern": "Bud1",
+      "flags": ""
+    },
+    {
+      "paths": [
+        "/web.config",
+        "/web.config.bak"
+      ],
+      "pattern": "<configuration",
+      "flags": "i"
+    },
+    {
+      "paths": [
+        "/backup.zip",
+        "/site-backup.zip"
+      ],
+      "pattern": "^PK",
+      "flags": ""
+    },
+    {
+      "paths": [
+        "/backup.sql"
+      ],
+      "pattern": "CREATE TABLE|INSERT INTO|mysqldump|PostgreSQL database dump",
+      "flags": "i"
+    },
+    {
+      "paths": [
+        "/composer.json"
+      ],
+      "pattern": "\"(?:require|name)\"\\s*:",
+      "flags": ""
+    },
+    {
+      "paths": [
+        "/package.json"
+      ],
+      "pattern": "\"(?:name|dependencies|scripts)\"\\s*:",
+      "flags": ""
+    },
+    {
+      "paths": [
+        "/composer.lock"
+      ],
+      "pattern": "\"packages\"\\s*:",
+      "flags": ""
+    },
+    {
+      "paths": [
+        "/package-lock.json"
+      ],
+      "pattern": "\"(?:lockfileVersion|packages|dependencies)\"\\s*:",
+      "flags": ""
+    },
+    {
+      "paths": [
+        "/docker-compose.yml"
+      ],
+      "pattern": "^\\s*(?:services|version)\\s*:",
+      "flags": "m"
+    },
+    {
+      "paths": [
+        "/Dockerfile"
+      ],
+      "pattern": "^\\s*FROM\\s",
+      "flags": "im"
+    },
+    {
+      "paths": [
+        "/phpinfo.php",
+        "/info.php"
+      ],
+      "pattern": "phpinfo\\(\\)|PHP Version",
+      "flags": "i"
+    },
+    {
+      "paths": [
+        "/server-status"
+      ],
+      "pattern": "Apache Server Status",
+      "flags": "i"
+    },
+    {
+      "paths": [
+        "/server-info"
+      ],
+      "pattern": "Apache Server Information",
+      "flags": "i"
+    },
+    {
+      "paths": [
+        "/.ssh/id_rsa",
+        "/id_rsa"
+      ],
+      "pattern": "PRIVATE KEY",
+      "flags": ""
+    },
+    {
+      "paths": [
+        "/.svn/entries"
+      ],
+      "pattern": "^\\d+\\s*$|dir",
+      "flags": "m"
+    },
+    {
+      "paths": [
+        "/config.json"
+      ],
+      "pattern": "^\\s*[\\{\\[]",
+      "flags": ""
+    }
+  ]
+}

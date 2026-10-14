@@ -1,0 +1,100 @@
+{
+  "_comment": "pattern matches the final CNAME target. fingerprint is a body regex shown by an unclaimed resource (null = target existence is the only signal).",
+  "signatures": [
+    {
+      "pattern": "\\.github\\.io$",
+      "service": "GitHub Pages",
+      "fingerprint": "There isn't a GitHub Pages site here"
+    },
+    {
+      "pattern": "\\.herokuapp\\.com$|\\.herokudns\\.com$",
+      "service": "Heroku",
+      "fingerprint": "No such app"
+    },
+    {
+      "pattern": "\\.s3[.\\-][\\w.\\-]*amazonaws\\.com$|\\.s3\\.amazonaws\\.com$",
+      "service": "AWS S3",
+      "fingerprint": "NoSuchBucket"
+    },
+    {
+      "pattern": "\\.elasticbeanstalk\\.com$",
+      "service": "AWS Elastic Beanstalk",
+      "fingerprint": null
+    },
+    {
+      "pattern": "\\.azurewebsites\\.net$",
+      "service": "Azure App Service",
+      "fingerprint": "404 Web Site not found"
+    },
+    {
+      "pattern": "\\.cloudapp\\.net$|\\.cloudapp\\.azure\\.com$|\\.trafficmanager\\.net$|\\.blob\\.core\\.windows\\.net$",
+      "service": "Azure",
+      "fingerprint": null
+    },
+    {
+      "pattern": "\\.netlify\\.(?:app|com)$",
+      "service": "Netlify",
+      "fingerprint": "Not Found - Request ID"
+    },
+    {
+      "pattern": "\\.surge\\.sh$",
+      "service": "Surge",
+      "fingerprint": "project not found"
+    },
+    {
+      "pattern": "\\.pantheonsite\\.io$",
+      "service": "Pantheon",
+      "fingerprint": "404 error unknown site"
+    },
+    {
+      "pattern": "\\.ghost\\.io$",
+      "service": "Ghost",
+      "fingerprint": "Domain is not configured"
+    },
+    {
+      "pattern": "\\.myshopify\\.com$",
+      "service": "Shopify",
+      "fingerprint": "Sorry, this shop is currently unavailable"
+    },
+    {
+      "pattern": "\\.readthedocs\\.io$",
+      "service": "Read the Docs",
+      "fingerprint": "unknown to Read the Docs"
+    },
+    {
+      "pattern": "\\.bitbucket\\.io$",
+      "service": "Bitbucket",
+      "fingerprint": "Repository not found"
+    },
+    {
+      "pattern": "\\.zendesk\\.com$",
+      "service": "Zendesk",
+      "fingerprint": "Help Center Closed"
+    },
+    {
+      "pattern": "\\.fastly\\.net$",
+      "service": "Fastly",
+      "fingerprint": "Fastly error: unknown domain"
+    },
+    {
+      "pattern": "\\.helpscoutdocs\\.com$",
+      "service": "Help Scout",
+      "fingerprint": "No settings were found for this company"
+    },
+    {
+      "pattern": "\\.tumblr\\.com$",
+      "service": "Tumblr",
+      "fingerprint": "Whatever you were looking for doesn't currently exist"
+    },
+    {
+      "pattern": "\\.uservoice\\.com$",
+      "service": "UserVoice",
+      "fingerprint": "This UserVoice subdomain is currently available"
+    },
+    {
+      "pattern": "\\.vercel\\.app$|\\.now\\.sh$",
+      "service": "Vercel",
+      "fingerprint": "DEPLOYMENT_NOT_FOUND|The deployment could not be found"
+    }
+  ]
+}

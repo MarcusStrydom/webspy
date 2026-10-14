@@ -1,0 +1,1696 @@
+{
+  "_comment": "server_checks / powered_by_checks / cookie_checks / extension_checks are the original sections (extended). header_checks (header name + value regex) is a NEW section and needs scanner support. Needles in server_checks and powered_by_checks should be matched case-insensitively against the lower-cased header value.",
+  "server_checks": [
+    {
+      "needle": "nginx",
+      "engine": "nginx (reverse proxy/server)",
+      "confidence": "medium"
+    },
+    {
+      "needle": "apache",
+      "engine": "Apache (server)",
+      "confidence": "medium"
+    },
+    {
+      "needle": "cloudflare",
+      "engine": "Cloudflare (proxy/CDN, not origin engine)",
+      "confidence": "medium"
+    },
+    {
+      "needle": "microsoft-iis",
+      "engine": "ASP.NET / IIS",
+      "confidence": "high"
+    },
+    {
+      "needle": "gunicorn",
+      "engine": "Python (Gunicorn — likely Flask/Django)",
+      "confidence": "high"
+    },
+    {
+      "needle": "werkzeug",
+      "engine": "Flask (Werkzeug dev server)",
+      "confidence": "high"
+    },
+    {
+      "needle": "kestrel",
+      "engine": "ASP.NET Core (Kestrel)",
+      "confidence": "high"
+    },
+    {
+      "needle": "litespeed",
+      "engine": "LiteSpeed (server)",
+      "confidence": "medium"
+    },
+    {
+      "needle": "openresty",
+      "engine": "OpenResty (nginx + Lua)",
+      "confidence": "medium"
+    },
+    {
+      "needle": "caddy",
+      "engine": "Caddy (server)",
+      "confidence": "medium"
+    },
+    {
+      "needle": "coyote",
+      "engine": "Java (Apache Tomcat / Coyote)",
+      "confidence": "high"
+    },
+    {
+      "needle": "tomcat",
+      "engine": "Java (Apache Tomcat)",
+      "confidence": "high"
+    },
+    {
+      "needle": "jetty",
+      "engine": "Java (Jetty)",
+      "confidence": "high"
+    },
+    {
+      "needle": "tengine",
+      "engine": "Tengine (Alibaba nginx fork)",
+      "confidence": "medium"
+    },
+    {
+      "needle": "lighttpd",
+      "engine": "lighttpd (server)",
+      "confidence": "medium"
+    },
+    {
+      "needle": "cowboy",
+      "engine": "Erlang/Elixir (Cowboy — likely Phoenix)",
+      "confidence": "high"
+    },
+    {
+      "needle": "phusion passenger",
+      "engine": "Phusion Passenger (Ruby/Python/Node app server)",
+      "confidence": "high"
+    },
+    {
+      "needle": "passenger",
+      "engine": "Phusion Passenger (Ruby/Python/Node app server)",
+      "confidence": "medium"
+    },
+    {
+      "needle": "uvicorn",
+      "engine": "Python (Uvicorn — ASGI, likely FastAPI/Starlette)",
+      "confidence": "high"
+    },
+    {
+      "needle": "hypercorn",
+      "engine": "Python (Hypercorn — ASGI)",
+      "confidence": "high"
+    },
+    {
+      "needle": "daphne",
+      "engine": "Python (Daphne — Django Channels)",
+      "confidence": "high"
+    },
+    {
+      "needle": "waitress",
+      "engine": "Python (Waitress WSGI)",
+      "confidence": "high"
+    },
+    {
+      "needle": "tornadoserver",
+      "engine": "Python (Tornado)",
+      "confidence": "high"
+    },
+    {
+      "needle": "cherrypy",
+      "engine": "Python (CherryPy)",
+      "confidence": "high"
+    },
+    {
+      "needle": "twisted",
+      "engine": "Python (Twisted)",
+      "confidence": "high"
+    },
+    {
+      "needle": "granian",
+      "engine": "Python (Granian — ASGI/WSGI)",
+      "confidence": "high"
+    },
+    {
+      "needle": "thin",
+      "engine": "Ruby (Thin)",
+      "confidence": "medium"
+    },
+    {
+      "needle": "puma",
+      "engine": "Ruby (Puma)",
+      "confidence": "high"
+    },
+    {
+      "needle": "unicorn",
+      "engine": "Ruby (Unicorn)",
+      "confidence": "high"
+    },
+    {
+      "needle": "webrick",
+      "engine": "Ruby (WEBrick)",
+      "confidence": "high"
+    },
+    {
+      "needle": "mongrel",
+      "engine": "Ruby (Mongrel)",
+      "confidence": "high"
+    },
+    {
+      "needle": "wildfly",
+      "engine": "Java (WildFly/JBoss)",
+      "confidence": "high"
+    },
+    {
+      "needle": "jboss",
+      "engine": "Java (JBoss)",
+      "confidence": "high"
+    },
+    {
+      "needle": "weblogic",
+      "engine": "Java (Oracle WebLogic)",
+      "confidence": "high"
+    },
+    {
+      "needle": "websphere",
+      "engine": "Java (IBM WebSphere)",
+      "confidence": "high"
+    },
+    {
+      "needle": "glassfish",
+      "engine": "Java (GlassFish)",
+      "confidence": "high"
+    },
+    {
+      "needle": "payara",
+      "engine": "Java (Payara)",
+      "confidence": "high"
+    },
+    {
+      "needle": "resin",
+      "engine": "Java (Resin)",
+      "confidence": "high"
+    },
+    {
+      "needle": "undertow",
+      "engine": "Java (Undertow)",
+      "confidence": "high"
+    },
+    {
+      "needle": "netty",
+      "engine": "Java (Netty)",
+      "confidence": "medium"
+    },
+    {
+      "needle": "envoy",
+      "engine": "Envoy (proxy / service mesh)",
+      "confidence": "medium"
+    },
+    {
+      "needle": "istio-envoy",
+      "engine": "Istio (Envoy sidecar)",
+      "confidence": "high"
+    },
+    {
+      "needle": "haproxy",
+      "engine": "HAProxy (load balancer)",
+      "confidence": "medium"
+    },
+    {
+      "needle": "varnish",
+      "engine": "Varnish (cache)",
+      "confidence": "medium"
+    },
+    {
+      "needle": "squid",
+      "engine": "Squid (proxy cache)",
+      "confidence": "medium"
+    },
+    {
+      "needle": "traefik",
+      "engine": "Traefik (proxy)",
+      "confidence": "medium"
+    },
+    {
+      "needle": "kong",
+      "engine": "Kong (API gateway)",
+      "confidence": "medium"
+    },
+    {
+      "needle": "google frontend",
+      "engine": "Google Cloud (Google Frontend)",
+      "confidence": "medium"
+    },
+    {
+      "needle": "gse",
+      "engine": "Google Web Server (GSE)",
+      "confidence": "medium"
+    },
+    {
+      "needle": "gws",
+      "engine": "Google Web Server (GWS)",
+      "confidence": "medium"
+    },
+    {
+      "needle": "amazons3",
+      "engine": "Amazon S3 (static hosting)",
+      "confidence": "high"
+    },
+    {
+      "needle": "awselb",
+      "engine": "AWS Elastic Load Balancer",
+      "confidence": "high"
+    },
+    {
+      "needle": "cloudfront",
+      "engine": "Amazon CloudFront (CDN)",
+      "confidence": "medium"
+    },
+    {
+      "needle": "github.com",
+      "engine": "GitHub Pages",
+      "confidence": "high"
+    },
+    {
+      "needle": "netlify",
+      "engine": "Netlify (hosting)",
+      "confidence": "high"
+    },
+    {
+      "needle": "vercel",
+      "engine": "Vercel (hosting)",
+      "confidence": "high"
+    },
+    {
+      "needle": "akamaighost",
+      "engine": "Akamai (edge)",
+      "confidence": "medium"
+    },
+    {
+      "needle": "sucuri/cloudproxy",
+      "engine": "Sucuri CloudProxy (WAF/CDN)",
+      "confidence": "high"
+    },
+    {
+      "needle": "microsoft-httpapi",
+      "engine": "Windows HTTP.sys (Microsoft-HTTPAPI)",
+      "confidence": "high"
+    },
+    {
+      "needle": "microsoft-azure-application-gateway",
+      "engine": "Azure Application Gateway",
+      "confidence": "high"
+    },
+    {
+      "needle": "azure",
+      "engine": "Microsoft Azure (hosting)",
+      "confidence": "low"
+    },
+    {
+      "needle": "bunnycdn",
+      "engine": "Bunny CDN (edge)",
+      "confidence": "medium"
+    },
+    {
+      "needle": "ats",
+      "engine": "Apache Traffic Server",
+      "confidence": "low"
+    },
+    {
+      "needle": "apache-coyote",
+      "engine": "Java (Apache Coyote / Tomcat)",
+      "confidence": "high"
+    },
+    {
+      "needle": "apache tomcat",
+      "engine": "Java (Apache Tomcat)",
+      "confidence": "high"
+    },
+    {
+      "needle": "mod_perl",
+      "engine": "Perl (mod_perl on Apache)",
+      "confidence": "high"
+    },
+    {
+      "needle": "mod_python",
+      "engine": "Python (mod_python on Apache)",
+      "confidence": "high"
+    },
+    {
+      "needle": "mod_wsgi",
+      "engine": "Python (mod_wsgi on Apache)",
+      "confidence": "high"
+    },
+    {
+      "needle": "mod_fcgid",
+      "engine": "Apache (mod_fcgid — likely PHP-FPM/CGI)",
+      "confidence": "medium"
+    },
+    {
+      "needle": "openssl",
+      "engine": "OpenSSL-enabled Apache (version leak)",
+      "confidence": "low"
+    },
+    {
+      "needle": "jetty(",
+      "engine": "Java (Jetty, version leak)",
+      "confidence": "high"
+    },
+    {
+      "needle": "zope",
+      "engine": "Python (Zope / Plone)",
+      "confidence": "high"
+    },
+    {
+      "needle": "plesk",
+      "engine": "Plesk (hosting panel)",
+      "confidence": "medium"
+    },
+    {
+      "needle": "cpanel",
+      "engine": "cPanel (hosting panel)",
+      "confidence": "medium"
+    }
+  ],
+  "powered_by_checks": [
+    {
+      "needle": "php",
+      "engine": "PHP",
+      "confidence": "high"
+    },
+    {
+      "needle": "express",
+      "engine": "Node.js / Express",
+      "confidence": "high"
+    },
+    {
+      "needle": "asp.net",
+      "engine": "ASP.NET",
+      "confidence": "high"
+    },
+    {
+      "needle": "next.js",
+      "engine": "Next.js",
+      "confidence": "high"
+    },
+    {
+      "needle": "wp engine",
+      "engine": "WordPress on WP Engine",
+      "confidence": "high"
+    },
+    {
+      "needle": "servlet",
+      "engine": "Java (Servlet)",
+      "confidence": "high"
+    },
+    {
+      "needle": "jsp",
+      "engine": "Java (JSP)",
+      "confidence": "high"
+    },
+    {
+      "needle": "nuxt",
+      "engine": "Nuxt.js",
+      "confidence": "high"
+    },
+    {
+      "needle": "koa",
+      "engine": "Node.js / Koa",
+      "confidence": "medium"
+    },
+    {
+      "needle": "hapi",
+      "engine": "Node.js / hapi",
+      "confidence": "medium"
+    },
+    {
+      "needle": "sails",
+      "engine": "Node.js / Sails.js",
+      "confidence": "high"
+    },
+    {
+      "needle": "nestjs",
+      "engine": "Node.js / NestJS",
+      "confidence": "high"
+    },
+    {
+      "needle": "fastify",
+      "engine": "Node.js / Fastify",
+      "confidence": "medium"
+    },
+    {
+      "needle": "phusion passenger",
+      "engine": "Phusion Passenger",
+      "confidence": "high"
+    },
+    {
+      "needle": "mod_perl",
+      "engine": "Perl (mod_perl)",
+      "confidence": "high"
+    },
+    {
+      "needle": "perl",
+      "engine": "Perl",
+      "confidence": "medium"
+    },
+    {
+      "needle": "python",
+      "engine": "Python",
+      "confidence": "medium"
+    },
+    {
+      "needle": "ruby",
+      "engine": "Ruby",
+      "confidence": "medium"
+    },
+    {
+      "needle": "django",
+      "engine": "Django",
+      "confidence": "high"
+    },
+    {
+      "needle": "flask",
+      "engine": "Flask",
+      "confidence": "medium"
+    },
+    {
+      "needle": "laravel",
+      "engine": "Laravel",
+      "confidence": "high"
+    },
+    {
+      "needle": "craft cms",
+      "engine": "Craft CMS (PHP / Yii)",
+      "confidence": "high"
+    },
+    {
+      "needle": "umbraco",
+      "engine": "Umbraco (ASP.NET)",
+      "confidence": "high"
+    },
+    {
+      "needle": "typo3",
+      "engine": "TYPO3 (PHP)",
+      "confidence": "high"
+    },
+    {
+      "needle": "sitecore",
+      "engine": "Sitecore (ASP.NET)",
+      "confidence": "high"
+    },
+    {
+      "needle": "strapi",
+      "engine": "Strapi (Node.js)",
+      "confidence": "high"
+    },
+    {
+      "needle": "ghost",
+      "engine": "Ghost (Node.js)",
+      "confidence": "high"
+    },
+    {
+      "needle": "statamic",
+      "engine": "Statamic (Laravel/PHP)",
+      "confidence": "high"
+    },
+    {
+      "needle": "prestashop",
+      "engine": "PrestaShop (PHP)",
+      "confidence": "high"
+    },
+    {
+      "needle": "w3 total cache",
+      "engine": "WordPress (W3 Total Cache)",
+      "confidence": "high"
+    },
+    {
+      "needle": "wp rocket",
+      "engine": "WordPress (WP Rocket)",
+      "confidence": "high"
+    },
+    {
+      "needle": "litespeed",
+      "engine": "LiteSpeed (cache / server)",
+      "confidence": "medium"
+    },
+    {
+      "needle": "pleskwin",
+      "engine": "Plesk (Windows)",
+      "confidence": "high"
+    },
+    {
+      "needle": "plesklin",
+      "engine": "Plesk (Linux)",
+      "confidence": "high"
+    },
+    {
+      "needle": "vapor",
+      "engine": "Swift (Vapor)",
+      "confidence": "medium"
+    },
+    {
+      "needle": "phalcon",
+      "engine": "PHP (Phalcon)",
+      "confidence": "high"
+    },
+    {
+      "needle": "zend",
+      "engine": "PHP (Zend Framework / Laminas)",
+      "confidence": "medium"
+    },
+    {
+      "needle": "symfony",
+      "engine": "PHP (Symfony)",
+      "confidence": "high"
+    },
+    {
+      "needle": "cakephp",
+      "engine": "PHP (CakePHP)",
+      "confidence": "high"
+    },
+    {
+      "needle": "codeigniter",
+      "engine": "PHP (CodeIgniter)",
+      "confidence": "high"
+    },
+    {
+      "needle": "slim",
+      "engine": "PHP (Slim)",
+      "confidence": "medium"
+    },
+    {
+      "needle": "rails",
+      "engine": "Ruby on Rails",
+      "confidence": "high"
+    },
+    {
+      "needle": "sinatra",
+      "engine": "Ruby (Sinatra)",
+      "confidence": "medium"
+    },
+    {
+      "needle": "play",
+      "engine": "Scala/Java (Play Framework)",
+      "confidence": "low"
+    },
+    {
+      "needle": "spring",
+      "engine": "Java (Spring)",
+      "confidence": "medium"
+    },
+    {
+      "needle": "quarkus",
+      "engine": "Java (Quarkus)",
+      "confidence": "high"
+    },
+    {
+      "needle": "micronaut",
+      "engine": "Java (Micronaut)",
+      "confidence": "high"
+    },
+    {
+      "needle": "blazor",
+      "engine": "ASP.NET (Blazor)",
+      "confidence": "high"
+    },
+    {
+      "needle": "hhvm",
+      "engine": "PHP (HHVM)",
+      "confidence": "high"
+    },
+    {
+      "needle": "shopify",
+      "engine": "Shopify",
+      "confidence": "high"
+    },
+    {
+      "needle": "wix",
+      "engine": "Wix",
+      "confidence": "high"
+    },
+    {
+      "needle": "squarespace",
+      "engine": "Squarespace",
+      "confidence": "high"
+    },
+    {
+      "needle": "webflow",
+      "engine": "Webflow",
+      "confidence": "high"
+    },
+    {
+      "needle": "astro",
+      "engine": "Astro",
+      "confidence": "high"
+    },
+    {
+      "needle": "sveltekit",
+      "engine": "SvelteKit",
+      "confidence": "high"
+    },
+    {
+      "needle": "remix",
+      "engine": "Remix (React)",
+      "confidence": "high"
+    },
+    {
+      "needle": "gatsby",
+      "engine": "Gatsby",
+      "confidence": "high"
+    },
+    {
+      "needle": "angular universal",
+      "engine": "Angular Universal (SSR)",
+      "confidence": "high"
+    },
+    {
+      "needle": "analog",
+      "engine": "Analog (Angular meta-framework)",
+      "confidence": "high"
+    },
+    {
+      "needle": "elementor",
+      "engine": "WordPress (Elementor)",
+      "confidence": "high"
+    },
+    {
+      "needle": "woocommerce",
+      "engine": "WordPress (WooCommerce)",
+      "confidence": "high"
+    },
+    {
+      "needle": "bun",
+      "engine": "Bun runtime",
+      "confidence": "medium"
+    },
+    {
+      "needle": "deno",
+      "engine": "Deno runtime",
+      "confidence": "medium"
+    }
+  ],
+  "cookie_checks": [
+    {
+      "pattern": "PHPSESSID",
+      "engine": "PHP",
+      "confidence": "high"
+    },
+    {
+      "pattern": "JSESSIONID",
+      "engine": "Java (JSP/Servlet, often Spring/Tomcat)",
+      "confidence": "high"
+    },
+    {
+      "pattern": "ASP\\.NET_SessionId",
+      "engine": "ASP.NET",
+      "confidence": "high"
+    },
+    {
+      "pattern": "ASPSESSIONID",
+      "engine": "Classic ASP",
+      "confidence": "high"
+    },
+    {
+      "pattern": "csrftoken|sessionid",
+      "engine": "Django",
+      "confidence": "medium"
+    },
+    {
+      "pattern": "django_language",
+      "engine": "Django",
+      "confidence": "high"
+    },
+    {
+      "pattern": "laravel_session|XSRF-TOKEN",
+      "engine": "Laravel",
+      "confidence": "high"
+    },
+    {
+      "pattern": "connect\\.sid",
+      "engine": "Node.js / Express (express-session)",
+      "confidence": "high"
+    },
+    {
+      "pattern": "_rails_session|_session_id",
+      "engine": "Ruby on Rails",
+      "confidence": "high"
+    },
+    {
+      "pattern": "wordpress_|wp-settings",
+      "engine": "WordPress",
+      "confidence": "high"
+    },
+    {
+      "pattern": "CAKEPHP",
+      "engine": "CakePHP",
+      "confidence": "high"
+    },
+    {
+      "pattern": "ci_session",
+      "engine": "CodeIgniter",
+      "confidence": "high"
+    },
+    {
+      "pattern": "symfony",
+      "engine": "Symfony",
+      "confidence": "high"
+    },
+    {
+      "pattern": "\\.AspNetCore\\.(?:Session|Antiforgery|Cookies|Identity)",
+      "engine": "ASP.NET Core",
+      "confidence": "high"
+    },
+    {
+      "pattern": "\\.ASPXAUTH|\\.ASPXANONYMOUS|\\.ASPXROLES",
+      "engine": "ASP.NET (Forms authentication)",
+      "confidence": "high"
+    },
+    {
+      "pattern": "__RequestVerificationToken",
+      "engine": "ASP.NET MVC (anti-forgery)",
+      "confidence": "high"
+    },
+    {
+      "pattern": "ARRAffinity|ARRAffinitySameSite",
+      "engine": "Azure App Service (ARR affinity)",
+      "confidence": "high"
+    },
+    {
+      "pattern": "CFID|CFTOKEN",
+      "engine": "ColdFusion",
+      "confidence": "high"
+    },
+    {
+      "pattern": "PLAY_SESSION|PLAY_FLASH",
+      "engine": "Play Framework (Scala/Java)",
+      "confidence": "high"
+    },
+    {
+      "pattern": "rack\\.session",
+      "engine": "Ruby (Rack)",
+      "confidence": "high"
+    },
+    {
+      "pattern": "beaker\\.session\\.id",
+      "engine": "Python (Beaker / Pylons / Pyramid)",
+      "confidence": "high"
+    },
+    {
+      "pattern": "grafana_session|grafana_sess",
+      "engine": "Grafana",
+      "confidence": "high"
+    },
+    {
+      "pattern": "nette-browser|_nss",
+      "engine": "Nette (PHP)",
+      "confidence": "high"
+    },
+    {
+      "pattern": "YII_CSRF_TOKEN|_csrf-frontend|_csrf-backend|advanced-frontend|advanced-backend",
+      "engine": "Yii (PHP)",
+      "confidence": "high"
+    },
+    {
+      "pattern": "SS?ESS[a-f0-9]{32}",
+      "engine": "Drupal",
+      "confidence": "high"
+    },
+    {
+      "pattern": "Drupal\\.visitor",
+      "engine": "Drupal",
+      "confidence": "high"
+    },
+    {
+      "pattern": "wordpress_logged_in|wordpress_test_cookie|wp-postpass|comment_author_|wp_woocommerce_session_",
+      "engine": "WordPress",
+      "confidence": "high"
+    },
+    {
+      "pattern": "PrestaShop-[a-f0-9]{32}",
+      "engine": "PrestaShop",
+      "confidence": "high"
+    },
+    {
+      "pattern": "mage-cache-sessid|mage-messages|form_key|private_content_version|mage-cache-storage",
+      "engine": "Magento",
+      "confidence": "high"
+    },
+    {
+      "pattern": "_shopify_s|_shopify_y|_shopify_sa_|cart_sig|_orig_referrer|_landing_page",
+      "engine": "Shopify",
+      "confidence": "high"
+    },
+    {
+      "pattern": "fe_typo_user|be_typo_user",
+      "engine": "TYPO3",
+      "confidence": "high"
+    },
+    {
+      "pattern": "exp_csrf_token|exp_sessionid|exp_last_visit",
+      "engine": "ExpressionEngine",
+      "confidence": "high"
+    },
+    {
+      "pattern": "OCSESSID|currency=",
+      "engine": "OpenCart",
+      "confidence": "medium"
+    },
+    {
+      "pattern": "osCsid",
+      "engine": "osCommerce",
+      "confidence": "high"
+    },
+    {
+      "pattern": "BITRIX_SM_",
+      "engine": "1C-Bitrix",
+      "confidence": "high"
+    },
+    {
+      "pattern": "MoodleSession|MOODLEID1_",
+      "engine": "Moodle",
+      "confidence": "high"
+    },
+    {
+      "pattern": "phpbb3_|phpbb_",
+      "engine": "phpBB",
+      "confidence": "high"
+    },
+    {
+      "pattern": "bb_sessionhash|bb_lastvisit|bbuserid",
+      "engine": "vBulletin",
+      "confidence": "high"
+    },
+    {
+      "pattern": "ghost-admin-api-session|ghost-members-ssr",
+      "engine": "Ghost",
+      "confidence": "high"
+    },
+    {
+      "pattern": "UMB_UCONTEXT|UMB-XSRF-TOKEN|UMB_UPDCHECK",
+      "engine": "Umbraco",
+      "confidence": "high"
+    },
+    {
+      "pattern": "SC_ANALYTICS_GLOBAL_COOKIE|sitecore",
+      "engine": "Sitecore",
+      "confidence": "medium"
+    },
+    {
+      "pattern": "\\.DOTNETNUKE|dnn_IsMobile|DNNPersonalization|__dnn",
+      "engine": "DNN (DotNetNuke)",
+      "confidence": "high"
+    },
+    {
+      "pattern": "CraftSessionId|CRAFT_CSRF_TOKEN",
+      "engine": "Craft CMS",
+      "confidence": "high"
+    },
+    {
+      "pattern": "CGISESSID",
+      "engine": "Perl (CGI::Session)",
+      "confidence": "high"
+    },
+    {
+      "pattern": "SAP_SESSIONID_|sap-usercontext|sap-contextid",
+      "engine": "SAP NetWeaver",
+      "confidence": "high"
+    },
+    {
+      "pattern": "DomAuthSessId|LtpaToken|LtpaToken2",
+      "engine": "IBM Domino / WebSphere (LTPA)",
+      "confidence": "high"
+    },
+    {
+      "pattern": "_ZopeId|__ac(?:_name)?",
+      "engine": "Zope / Plone",
+      "confidence": "medium"
+    },
+    {
+      "pattern": "svSession|XSRF-TOKEN.*wix|ssr-caching",
+      "engine": "Wix",
+      "confidence": "medium"
+    },
+    {
+      "pattern": "__prerender_bypass|__next_preview_data",
+      "engine": "Next.js (preview/prerender)",
+      "confidence": "high"
+    },
+    {
+      "pattern": "sails\\.sid",
+      "engine": "Node.js / Sails.js",
+      "confidence": "high"
+    },
+    {
+      "pattern": "koa\\.sid|koa:sess",
+      "engine": "Node.js / Koa",
+      "confidence": "high"
+    },
+    {
+      "pattern": "express:sess|express\\.sid",
+      "engine": "Node.js / Express (cookie-session)",
+      "confidence": "high"
+    },
+    {
+      "pattern": "JSESSIONID\\.[0-9a-f]{8,}",
+      "engine": "Jenkins (Java)",
+      "confidence": "high"
+    },
+    {
+      "pattern": "SESSION=[0-9a-f-]{36}",
+      "engine": "Java (Spring Session)",
+      "confidence": "medium"
+    },
+    {
+      "pattern": "BIGipServer",
+      "engine": "F5 BIG-IP (load balancer)",
+      "confidence": "high"
+    },
+    {
+      "pattern": "TS[0-9a-f]{8,}",
+      "engine": "F5 BIG-IP ASM",
+      "confidence": "medium"
+    },
+    {
+      "pattern": "AWSALB|AWSALBCORS|AWSELB",
+      "engine": "AWS ELB/ALB",
+      "confidence": "high"
+    },
+    {
+      "pattern": "SERVERID|SRVID|server_id",
+      "engine": "HAProxy (cookie persistence)",
+      "confidence": "low"
+    },
+    {
+      "pattern": "nlbi_\\d+|incap_ses_|visid_incap_",
+      "engine": "Imperva Incapsula",
+      "confidence": "high"
+    },
+    {
+      "pattern": "cf_clearance|__cf_bm|__cflb",
+      "engine": "Cloudflare",
+      "confidence": "high"
+    },
+    {
+      "pattern": "_ga|_gid|_gat",
+      "engine": "Google Analytics (cookie)",
+      "confidence": "low"
+    },
+    {
+      "pattern": "x-?csrf-?token",
+      "engine": "Generic CSRF token",
+      "confidence": "low"
+    },
+    {
+      "pattern": "sessionid=|session_id=",
+      "engine": "Generic session cookie",
+      "confidence": "low"
+    },
+    {
+      "pattern": "Flask-Session|session=eyJ",
+      "engine": "Flask (signed session)",
+      "confidence": "medium"
+    },
+    {
+      "pattern": "gin-contrib/sessions|mysession",
+      "engine": "Go (gin sessions)",
+      "confidence": "low"
+    },
+    {
+      "pattern": "csrf_token|_csrf",
+      "engine": "Generic CSRF (framework unknown)",
+      "confidence": "low"
+    },
+    {
+      "pattern": "PHPSESSID.*(?:Magento|frontend)",
+      "engine": "Magento (PHPSESSID)",
+      "confidence": "low"
+    },
+    {
+      "pattern": "BX_USER_ID",
+      "engine": "1C-Bitrix",
+      "confidence": "high"
+    },
+    {
+      "pattern": "Elgg",
+      "engine": "Elgg",
+      "confidence": "high"
+    },
+    {
+      "pattern": "cookie_consent_user_accepted|cc_cookie",
+      "engine": "Cookie banner (generic)",
+      "confidence": "low"
+    }
+  ],
+  "extension_checks": [
+    {
+      "pattern": "\\.php(\\?|\"|\\')",
+      "engine": "PHP",
+      "confidence": "medium"
+    },
+    {
+      "pattern": "\\.aspx(\\?|\"|\\')",
+      "engine": "ASP.NET",
+      "confidence": "medium"
+    },
+    {
+      "pattern": "\\.jsp(\\?|\"|\\')",
+      "engine": "Java (JSP)",
+      "confidence": "medium"
+    },
+    {
+      "pattern": "\\.cfm(\\?|\"|\\')",
+      "engine": "ColdFusion",
+      "confidence": "medium"
+    },
+    {
+      "pattern": "\\.do(\\?|\"|\\')",
+      "engine": "Java (Struts, likely)",
+      "confidence": "low"
+    },
+    {
+      "pattern": "\\.asp(\\?|\\\"|\\')",
+      "engine": "Classic ASP",
+      "confidence": "medium"
+    },
+    {
+      "pattern": "\\.ashx(\\?|\\\"|\\')",
+      "engine": "ASP.NET (HTTP handler)",
+      "confidence": "medium"
+    },
+    {
+      "pattern": "\\.asmx(\\?|\\\"|\\')",
+      "engine": "ASP.NET (ASMX web service)",
+      "confidence": "medium"
+    },
+    {
+      "pattern": "\\.axd(\\?|\\\"|\\')",
+      "engine": "ASP.NET (WebResource/ScriptResource)",
+      "confidence": "medium"
+    },
+    {
+      "pattern": "\\.jspx(\\?|\\\"|\\')",
+      "engine": "Java (JSPX)",
+      "confidence": "medium"
+    },
+    {
+      "pattern": "\\.action(\\?|\\\"|\\')",
+      "engine": "Java (Struts 2)",
+      "confidence": "low"
+    },
+    {
+      "pattern": "\\.(?:cgi|pl)(\\?|\\\"|\\')",
+      "engine": "Perl / CGI",
+      "confidence": "low"
+    },
+    {
+      "pattern": "\\.py(\\?|\\\"|\\')",
+      "engine": "Python (CGI/WSGI)",
+      "confidence": "low"
+    },
+    {
+      "pattern": "\\.nsf(/|\\?|\\\"|\\')",
+      "engine": "IBM Lotus Domino",
+      "confidence": "medium"
+    },
+    {
+      "pattern": "\\.php[345](\\?|\\\"|\\')|\\.phtml(\\?|\\\"|\\')",
+      "engine": "PHP (legacy extension)",
+      "confidence": "medium"
+    },
+    {
+      "pattern": "\\.cfc(\\?|\\\"|\\')",
+      "engine": "ColdFusion (CFC)",
+      "confidence": "medium"
+    },
+    {
+      "pattern": "\\.xhtml(\\?|\\\"|\\')|\\.faces(\\?|\\\"|\\')|\\.jsf(\\?|\\\"|\\')|javax\\.faces\\.ViewState",
+      "engine": "Java (JSF)",
+      "confidence": "medium"
+    },
+    {
+      "pattern": "\\.jhtml(\\?|\\\"|\\')",
+      "engine": "Java (ATG Dynamo)",
+      "confidence": "medium"
+    },
+    {
+      "pattern": "\\.shtml(\\?|\\\"|\\')",
+      "engine": "Server Side Includes (SSI)",
+      "confidence": "low"
+    },
+    {
+      "pattern": "\\.lasso(\\?|\\\"|\\')",
+      "engine": "Lasso",
+      "confidence": "medium"
+    },
+    {
+      "pattern": "\\.wsgi(\\?|\\\"|\\')",
+      "engine": "Python (WSGI)",
+      "confidence": "low"
+    },
+    {
+      "pattern": "\\.fcgi(\\?|\\\"|\\')",
+      "engine": "FastCGI",
+      "confidence": "low"
+    },
+    {
+      "pattern": "\\.dll(\\?|\\\"|\\')",
+      "engine": "ISAPI / CGI DLL",
+      "confidence": "low"
+    },
+    {
+      "pattern": "__VIEWSTATE|__EVENTVALIDATION|__VIEWSTATEGENERATOR",
+      "engine": "ASP.NET WebForms (ViewState)",
+      "confidence": "high"
+    },
+    {
+      "pattern": "csrfmiddlewaretoken",
+      "engine": "Django (form token)",
+      "confidence": "high"
+    },
+    {
+      "pattern": "name=\\\"authenticity_token\\\"|csrf-param\\\" content=\\\"authenticity_token",
+      "engine": "Ruby on Rails (CSRF)",
+      "confidence": "high"
+    },
+    {
+      "pattern": "_token\\\" value=\\\"[A-Za-z0-9]{40}\\\"",
+      "engine": "Laravel (form _token)",
+      "confidence": "medium"
+    },
+    {
+      "pattern": "/livewire/|wire:",
+      "engine": "Laravel Livewire",
+      "confidence": "high"
+    },
+    {
+      "pattern": "/_next/static/",
+      "engine": "Next.js (static path)",
+      "confidence": "high"
+    },
+    {
+      "pattern": "/_nuxt/",
+      "engine": "Nuxt.js (static path)",
+      "confidence": "high"
+    },
+    {
+      "pattern": "/_astro/",
+      "engine": "Astro",
+      "confidence": "high"
+    },
+    {
+      "pattern": "/_app/immutable/",
+      "engine": "SvelteKit",
+      "confidence": "high"
+    },
+    {
+      "pattern": "/_remix/|__remixContext",
+      "engine": "Remix",
+      "confidence": "high"
+    },
+    {
+      "pattern": "/static/(?:css|js|media)/main\\.[0-9a-f]{8}\\.",
+      "engine": "React (Create React App build)",
+      "confidence": "medium"
+    },
+    {
+      "pattern": "/assets/index-[A-Za-z0-9_-]{8}\\.(?:js|css)",
+      "engine": "Vite build",
+      "confidence": "medium"
+    },
+    {
+      "pattern": "/packs/js/|/vite/assets/|vite_ruby",
+      "engine": "Rails (Webpacker / vite_ruby)",
+      "confidence": "low"
+    },
+    {
+      "pattern": "/mix-manifest\\.json|/build/assets/app-[A-Za-z0-9]+\\.",
+      "engine": "Laravel (Mix/Vite)",
+      "confidence": "low"
+    },
+    {
+      "pattern": "/bundles/[a-z]+/",
+      "engine": "Symfony (bundles path)",
+      "confidence": "low"
+    },
+    {
+      "pattern": "/sites/default/files/",
+      "engine": "Drupal (files path)",
+      "confidence": "high"
+    },
+    {
+      "pattern": "/wp-content/",
+      "engine": "WordPress (content path)",
+      "confidence": "high"
+    },
+    {
+      "pattern": "/static/admin/",
+      "engine": "Django (admin static)",
+      "confidence": "high"
+    },
+    {
+      "pattern": "/actuator/",
+      "engine": "Spring Boot (Actuator)",
+      "confidence": "medium"
+    }
+  ],
+  "header_checks": [
+    {
+      "header": "x-aspnet-version",
+      "pattern": ".+",
+      "engine": "ASP.NET",
+      "confidence": "high"
+    },
+    {
+      "header": "x-aspnetmvc-version",
+      "pattern": ".+",
+      "engine": "ASP.NET MVC",
+      "confidence": "high"
+    },
+    {
+      "header": "x-aspnetcore-version",
+      "pattern": ".+",
+      "engine": "ASP.NET Core",
+      "confidence": "high"
+    },
+    {
+      "header": "x-sourcefiles",
+      "pattern": ".+",
+      "engine": "ASP.NET (debug source disclosure)",
+      "confidence": "high"
+    },
+    {
+      "header": "x-runtime",
+      "pattern": "\\d+\\.\\d+",
+      "engine": "Ruby on Rails (Rack::Runtime)",
+      "confidence": "medium"
+    },
+    {
+      "header": "x-rack-cache",
+      "pattern": ".+",
+      "engine": "Ruby (Rack::Cache)",
+      "confidence": "medium"
+    },
+    {
+      "header": "x-request-id",
+      "pattern": "[0-9a-f-]{20,}",
+      "engine": "Rails / generic request-id",
+      "confidence": "low"
+    },
+    {
+      "header": "x-turbo-charged-by",
+      "pattern": "LiteSpeed",
+      "engine": "LiteSpeed",
+      "confidence": "high"
+    },
+    {
+      "header": "x-litespeed-cache",
+      "pattern": ".+",
+      "engine": "LiteSpeed Cache (WordPress)",
+      "confidence": "high"
+    },
+    {
+      "header": "x-lscache",
+      "pattern": ".+",
+      "engine": "LiteSpeed Cache",
+      "confidence": "high"
+    },
+    {
+      "header": "x-powered-by-plesk",
+      "pattern": ".+",
+      "engine": "Plesk",
+      "confidence": "high"
+    },
+    {
+      "header": "x-django-version",
+      "pattern": ".+",
+      "engine": "Django",
+      "confidence": "high"
+    },
+    {
+      "header": "x-envoy-upstream-service-time",
+      "pattern": "\\d+",
+      "engine": "Envoy proxy",
+      "confidence": "high"
+    },
+    {
+      "header": "x-envoy-decorator-operation",
+      "pattern": ".+",
+      "engine": "Envoy / Istio",
+      "confidence": "high"
+    },
+    {
+      "header": "x-kong-proxy-latency",
+      "pattern": "\\d+",
+      "engine": "Kong API Gateway",
+      "confidence": "high"
+    },
+    {
+      "header": "x-kong-upstream-latency",
+      "pattern": "\\d+",
+      "engine": "Kong API Gateway",
+      "confidence": "high"
+    },
+    {
+      "header": "x-varnish",
+      "pattern": "\\d+",
+      "engine": "Varnish",
+      "confidence": "high"
+    },
+    {
+      "header": "x-cache",
+      "pattern": "(?i)hit|miss",
+      "engine": "Caching proxy (generic)",
+      "confidence": "low"
+    },
+    {
+      "header": "x-hudson",
+      "pattern": ".+",
+      "engine": "Jenkins",
+      "confidence": "high"
+    },
+    {
+      "header": "x-jenkins",
+      "pattern": ".+",
+      "engine": "Jenkins",
+      "confidence": "high"
+    },
+    {
+      "header": "x-grafana-org-id",
+      "pattern": ".+",
+      "engine": "Grafana",
+      "confidence": "high"
+    },
+    {
+      "header": "x-gitlab-meta",
+      "pattern": ".+",
+      "engine": "GitLab",
+      "confidence": "high"
+    },
+    {
+      "header": "x-github-request-id",
+      "pattern": ".+",
+      "engine": "GitHub (Pages / API)",
+      "confidence": "high"
+    },
+    {
+      "header": "x-gitea-",
+      "pattern": ".+",
+      "engine": "Gitea",
+      "confidence": "medium"
+    },
+    {
+      "header": "x-oracle-dms-ecid",
+      "pattern": ".+",
+      "engine": "Oracle (WebLogic / Fusion)",
+      "confidence": "high"
+    },
+    {
+      "header": "x-oracle-dms-rid",
+      "pattern": ".+",
+      "engine": "Oracle (WebLogic / Fusion)",
+      "confidence": "high"
+    },
+    {
+      "header": "x-sap-",
+      "pattern": ".+",
+      "engine": "SAP",
+      "confidence": "medium"
+    },
+    {
+      "header": "x-fc-request-id",
+      "pattern": ".+",
+      "engine": "Alibaba Cloud Function Compute",
+      "confidence": "high"
+    },
+    {
+      "header": "x-amzn-requestid",
+      "pattern": ".+",
+      "engine": "AWS (API Gateway / Lambda)",
+      "confidence": "high"
+    },
+    {
+      "header": "x-amz-apigw-id",
+      "pattern": ".+",
+      "engine": "AWS API Gateway",
+      "confidence": "high"
+    },
+    {
+      "header": "x-amzn-trace-id",
+      "pattern": ".+",
+      "engine": "AWS (ALB / X-Ray)",
+      "confidence": "medium"
+    },
+    {
+      "header": "x-amz-request-id",
+      "pattern": ".+",
+      "engine": "Amazon S3 / AWS service",
+      "confidence": "high"
+    },
+    {
+      "header": "x-amz-id-2",
+      "pattern": ".+",
+      "engine": "Amazon S3",
+      "confidence": "high"
+    },
+    {
+      "header": "x-goog-generation",
+      "pattern": ".+",
+      "engine": "Google Cloud Storage",
+      "confidence": "high"
+    },
+    {
+      "header": "x-guploader-uploadid",
+      "pattern": ".+",
+      "engine": "Google Cloud Storage",
+      "confidence": "high"
+    },
+    {
+      "header": "x-cloud-trace-context",
+      "pattern": ".+",
+      "engine": "Google Cloud (Load Balancer / Cloud Run)",
+      "confidence": "high"
+    },
+    {
+      "header": "x-appengine-",
+      "pattern": ".+",
+      "engine": "Google App Engine",
+      "confidence": "high"
+    },
+    {
+      "header": "x-firebase-",
+      "pattern": ".+",
+      "engine": "Firebase Hosting",
+      "confidence": "medium"
+    },
+    {
+      "header": "x-ms-request-id",
+      "pattern": ".+",
+      "engine": "Microsoft Azure (Storage / services)",
+      "confidence": "high"
+    },
+    {
+      "header": "x-ms-version",
+      "pattern": ".+",
+      "engine": "Azure Storage",
+      "confidence": "high"
+    },
+    {
+      "header": "x-azure-ref",
+      "pattern": ".+",
+      "engine": "Azure Front Door",
+      "confidence": "high"
+    },
+    {
+      "header": "x-heroku-queue-wait-time",
+      "pattern": ".+",
+      "engine": "Heroku",
+      "confidence": "high"
+    },
+    {
+      "header": "x-render-origin-server",
+      "pattern": ".+",
+      "engine": "Render",
+      "confidence": "high"
+    },
+    {
+      "header": "fly-request-id",
+      "pattern": ".+",
+      "engine": "Fly.io",
+      "confidence": "high"
+    },
+    {
+      "header": "x-railway-",
+      "pattern": ".+",
+      "engine": "Railway",
+      "confidence": "medium"
+    },
+    {
+      "header": "x-vercel-id",
+      "pattern": ".+",
+      "engine": "Vercel",
+      "confidence": "high"
+    },
+    {
+      "header": "x-nf-request-id",
+      "pattern": ".+",
+      "engine": "Netlify",
+      "confidence": "high"
+    },
+    {
+      "header": "x-supabase-",
+      "pattern": ".+",
+      "engine": "Supabase",
+      "confidence": "medium"
+    },
+    {
+      "header": "sb-gateway-version",
+      "pattern": ".+",
+      "engine": "Supabase",
+      "confidence": "high"
+    },
+    {
+      "header": "x-hasura-",
+      "pattern": ".+",
+      "engine": "Hasura (GraphQL)",
+      "confidence": "high"
+    },
+    {
+      "header": "x-apollo-",
+      "pattern": ".+",
+      "engine": "Apollo (GraphQL)",
+      "confidence": "medium"
+    },
+    {
+      "header": "x-nextjs-cache",
+      "pattern": ".+",
+      "engine": "Next.js (ISR cache)",
+      "confidence": "high"
+    },
+    {
+      "header": "x-nextjs-prerender",
+      "pattern": ".+",
+      "engine": "Next.js",
+      "confidence": "high"
+    },
+    {
+      "header": "x-nextjs-matched-path",
+      "pattern": ".+",
+      "engine": "Next.js",
+      "confidence": "high"
+    },
+    {
+      "header": "x-middleware-rewrite",
+      "pattern": ".+",
+      "engine": "Next.js (middleware)",
+      "confidence": "high"
+    },
+    {
+      "header": "x-nuxt-",
+      "pattern": ".+",
+      "engine": "Nuxt",
+      "confidence": "medium"
+    },
+    {
+      "header": "x-sveltekit-",
+      "pattern": ".+",
+      "engine": "SvelteKit",
+      "confidence": "medium"
+    },
+    {
+      "header": "x-remix-",
+      "pattern": ".+",
+      "engine": "Remix",
+      "confidence": "medium"
+    },
+    {
+      "header": "x-powered-by",
+      "pattern": "(?i)express",
+      "engine": "Node.js / Express",
+      "confidence": "high"
+    },
+    {
+      "header": "server-timing",
+      "pattern": "(?i)cfcachestatus|cfL4|cdn-cache",
+      "engine": "CDN (Server-Timing)",
+      "confidence": "low"
+    },
+    {
+      "header": "x-served-by",
+      "pattern": "(?i)cache-",
+      "engine": "Fastly (cache node)",
+      "confidence": "high"
+    },
+    {
+      "header": "x-timer",
+      "pattern": "S\\d+\\.\\d+,VS\\d+",
+      "engine": "Fastly",
+      "confidence": "high"
+    },
+    {
+      "header": "via",
+      "pattern": "(?i)varnish",
+      "engine": "Varnish (Via)",
+      "confidence": "high"
+    },
+    {
+      "header": "via",
+      "pattern": "(?i)cloudfront",
+      "engine": "CloudFront (Via)",
+      "confidence": "high"
+    },
+    {
+      "header": "via",
+      "pattern": "(?i)vegur",
+      "engine": "Heroku (Vegur router)",
+      "confidence": "high"
+    },
+    {
+      "header": "via",
+      "pattern": "(?i)akamai",
+      "engine": "Akamai (Via)",
+      "confidence": "high"
+    },
+    {
+      "header": "via",
+      "pattern": "(?i)squid",
+      "engine": "Squid (Via)",
+      "confidence": "high"
+    },
+    {
+      "header": "via",
+      "pattern": "(?i)1\\.1 google",
+      "engine": "Google (Via)",
+      "confidence": "high"
+    },
+    {
+      "header": "via",
+      "pattern": "(?i)envoy",
+      "engine": "Envoy (Via)",
+      "confidence": "high"
+    },
+    {
+      "header": "x-wix-request-id",
+      "pattern": ".+",
+      "engine": "Wix",
+      "confidence": "high"
+    },
+    {
+      "header": "x-wp-nonce",
+      "pattern": ".+",
+      "engine": "WordPress",
+      "confidence": "high"
+    },
+    {
+      "header": "x-wp-cf-super-cache",
+      "pattern": ".+",
+      "engine": "WordPress (Cloudflare Super Page Cache)",
+      "confidence": "high"
+    },
+    {
+      "header": "x-ec-custom-error",
+      "pattern": ".+",
+      "engine": "Edgecast (Edgio)",
+      "confidence": "high"
+    }
+  ]
+}

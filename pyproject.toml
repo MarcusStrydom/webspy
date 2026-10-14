@@ -1,0 +1,38 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "webspy"
+dynamic = ["version"]
+description = "Passive web reconnaissance and audit toolkit (Python library and CLI)"
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = [
+    "requests>=2.31",
+    "dnspython>=2.4",
+    "mmh3>=4.0",
+]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+    "Topic :: Security",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=7"]
+
+[project.scripts]
+webspy = "webspy:main"
+
+[tool.setuptools.dynamic]
+version = { attr = "webspy.__version__" }
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+webspy = ["config/*.json"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

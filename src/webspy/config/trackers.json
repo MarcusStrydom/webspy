@@ -1,0 +1,3461 @@
+{
+  "_comment": "Entries are applied in order. Categories: tag_manager, analytics, ad_pixel, ad_network_aggressive, session_replay, chat_support, ab_testing, error_monitoring, fingerprinting, consent_management, abuse, marketing_automation, affiliate, push_notification, social_widget, embedded_content, maps, payments. Categories after 'abuse' are NEW and need to be handled by the scanner (unknown categories should fall through to a generic 'third-party' bucket). 'ad_categories' controls which categories count as advertising. Patterns after the original config set (ad_server, ad_exchange, ad_sync, native_ad categories) were carried over from the pre-config webspy.py so no detection was lost; ad_categories lists every category that counts as advertising. ad_like_hosts is the heuristic regex for unclassified ad-looking hosts.",
+  "ad_categories": [
+    "ad_pixel",
+    "ad_server",
+    "ad_exchange",
+    "ad_sync",
+    "native_ad",
+    "affiliate",
+    "ad_network_aggressive"
+  ],
+  "known_infra_hosts": "(?:^|\\.)(?:googleapis\\.com|gstatic\\.com|cloudflare\\.com|cloudflare\\.net|jsdelivr\\.net|unpkg\\.com|jquery\\.com|bootstrapcdn\\.com|maxcdn\\.com|fontawesome\\.com|wp\\.com|wordpress\\.org|w\\.org|shopify\\.com|cloudfront\\.net|akamaized\\.net|akamaihd\\.net|edgekey\\.net|edgesuite\\.net|fastly\\.net|azureedge\\.net|b-cdn\\.net|cdnjs\\.com|typekit\\.net|fonts\\.net|gravatar\\.com|githubusercontent\\.com|googleusercontent\\.com|gstatic\\.cn|msecnd\\.net|stackpathcdn\\.com|keycdn\\.com|cdn77\\.org)$",
+  "patterns": [
+    {
+      "pattern": "googletagmanager\\.com/gtm\\.js",
+      "name": "Google Tag Manager",
+      "category": "tag_manager"
+    },
+    {
+      "pattern": "googletagmanager\\.com/gtag/js",
+      "name": "Google Tag (gtag.js loader)",
+      "category": "tag_manager"
+    },
+    {
+      "pattern": "tagmanager\\.google\\.com",
+      "name": "Google Tag Manager (container)",
+      "category": "tag_manager"
+    },
+    {
+      "pattern": "assets\\.adobedtm\\.com",
+      "name": "Adobe Experience Platform Launch / DTM",
+      "category": "tag_manager"
+    },
+    {
+      "pattern": "cdn\\.tagcommander\\.com",
+      "name": "TagCommander",
+      "category": "tag_manager"
+    },
+    {
+      "pattern": "tags\\.tiqcdn\\.com",
+      "name": "Tealium iQ",
+      "category": "tag_manager"
+    },
+    {
+      "pattern": "google-analytics\\.com/analytics\\.js",
+      "name": "Google Analytics (Universal Analytics, legacy)",
+      "category": "analytics"
+    },
+    {
+      "pattern": "google-analytics\\.com/ga\\.js",
+      "name": "Google Analytics (classic ga.js)",
+      "category": "analytics"
+    },
+    {
+      "pattern": "\\bgtag\\(\\s*[\"\\']config[\"\\']\\s*,\\s*[\"\\']G-",
+      "name": "Google Analytics (GA4)",
+      "category": "analytics"
+    },
+    {
+      "pattern": "ssl\\.google-analytics\\.com",
+      "name": "Google Analytics",
+      "category": "analytics"
+    },
+    {
+      "pattern": "cdn\\.segment\\.(?:com|io)/analytics\\.js",
+      "name": "Segment",
+      "category": "analytics"
+    },
+    {
+      "pattern": "\\bSegment\\.io\\b|analytics\\.load\\([\"\\']",
+      "name": "Segment (SDK init)",
+      "category": "analytics"
+    },
+    {
+      "pattern": "cdn\\.mxpnl\\.com|mixpanel\\.init\\(",
+      "name": "Mixpanel",
+      "category": "analytics"
+    },
+    {
+      "pattern": "cdn\\.amplitude\\.com|amplitude\\.getInstance\\(",
+      "name": "Amplitude",
+      "category": "analytics"
+    },
+    {
+      "pattern": "cdn\\.heapanalytics\\.com|heap\\.load\\(",
+      "name": "Heap",
+      "category": "analytics"
+    },
+    {
+      "pattern": "static\\.cloudflareinsights\\.com/beacon",
+      "name": "Cloudflare Web Analytics",
+      "category": "analytics"
+    },
+    {
+      "pattern": "plausible\\.io/js/(?:script|plausible)",
+      "name": "Plausible Analytics",
+      "category": "analytics"
+    },
+    {
+      "pattern": "cdn\\.matomo\\.cloud|piwik\\.js|matomo\\.js",
+      "name": "Matomo / Piwik",
+      "category": "analytics"
+    },
+    {
+      "pattern": "stats\\.wp\\.com|pixel\\.wp\\.com",
+      "name": "WordPress.com Stats",
+      "category": "analytics"
+    },
+    {
+      "pattern": "cdn\\.simpleanalyticscdn\\.com",
+      "name": "Simple Analytics",
+      "category": "analytics"
+    },
+    {
+      "pattern": "cdn\\.panelbear\\.com",
+      "name": "Panelbear",
+      "category": "analytics"
+    },
+    {
+      "pattern": "app\\.fathom\\.io|cdn\\.usefathom\\.com",
+      "name": "Fathom Analytics",
+      "category": "analytics"
+    },
+    {
+      "pattern": "counter\\.yadro\\.ru|liveinternet\\.ru/(?:click|counter)",
+      "name": "LiveInternet",
+      "category": "analytics"
+    },
+    {
+      "pattern": "mc\\.yandex\\.ru/metrika",
+      "name": "Yandex Metrica",
+      "category": "analytics"
+    },
+    {
+      "pattern": "histats\\.com",
+      "name": "Histats",
+      "category": "analytics"
+    },
+    {
+      "pattern": "statcounter\\.com/counter",
+      "name": "StatCounter",
+      "category": "analytics"
+    },
+    {
+      "pattern": "extend\\.clicky\\.com",
+      "name": "Clicky",
+      "category": "analytics"
+    },
+    {
+      "pattern": "woopra\\.com",
+      "name": "Woopra",
+      "category": "analytics"
+    },
+    {
+      "pattern": "kissmetrics\\.(?:io|com)",
+      "name": "Kissmetrics",
+      "category": "analytics"
+    },
+    {
+      "pattern": "quantserve\\.com|quantcast\\.com/quant\\.js",
+      "name": "Quantcast Measure",
+      "category": "analytics"
+    },
+    {
+      "pattern": "scorecardresearch\\.com",
+      "name": "comScore / ScorecardResearch",
+      "category": "analytics"
+    },
+    {
+      "pattern": "parsely\\.com|parsely-cfg",
+      "name": "Parse.ly",
+      "category": "analytics"
+    },
+    {
+      "pattern": "chartbeat\\.(?:com|net)",
+      "name": "Chartbeat",
+      "category": "analytics"
+    },
+    {
+      "pattern": "connect\\.facebook\\.net/[^\"\\']*/fbevents\\.js",
+      "name": "Meta/Facebook Pixel",
+      "category": "ad_pixel"
+    },
+    {
+      "pattern": "\\bfbq\\(\\s*[\"\\'](?:init|track)[\"\\']",
+      "name": "Meta/Facebook Pixel (fbq call)",
+      "category": "ad_pixel"
+    },
+    {
+      "pattern": "snap\\.licdn\\.com/li\\.lms-analytics",
+      "name": "LinkedIn Insight Tag",
+      "category": "ad_pixel"
+    },
+    {
+      "pattern": "static\\.ads-twitter\\.com/uwt\\.js",
+      "name": "Twitter/X Ads",
+      "category": "ad_pixel"
+    },
+    {
+      "pattern": "\\btwq\\(\\s*[\"\\'](?:init|track|config)[\"\\']",
+      "name": "Twitter/X Ads (twq call)",
+      "category": "ad_pixel"
+    },
+    {
+      "pattern": "analytics\\.tiktok\\.com/i18n/pixel",
+      "name": "TikTok Pixel",
+      "category": "ad_pixel"
+    },
+    {
+      "pattern": "\\bttq\\.load\\(",
+      "name": "TikTok Pixel (ttq call)",
+      "category": "ad_pixel"
+    },
+    {
+      "pattern": "bat\\.bing\\.com/bat\\.js",
+      "name": "Microsoft/Bing Ads (UET)",
+      "category": "ad_pixel"
+    },
+    {
+      "pattern": "googleads\\.g\\.doubleclick\\.net|googlesyndication\\.com/pagead",
+      "name": "Google Ads / DoubleClick",
+      "category": "ad_pixel"
+    },
+    {
+      "pattern": "px\\.ads\\.linkedin\\.com",
+      "name": "LinkedIn Conversion Tracking",
+      "category": "ad_pixel"
+    },
+    {
+      "pattern": "sc-static\\.net/scevent\\.min\\.js",
+      "name": "Snapchat Pixel",
+      "category": "ad_pixel"
+    },
+    {
+      "pattern": "tr\\.snapchat\\.com",
+      "name": "Snapchat Pixel (event)",
+      "category": "ad_pixel"
+    },
+    {
+      "pattern": "tr\\.pinterest\\.com/v3",
+      "name": "Pinterest Tag",
+      "category": "ad_pixel"
+    },
+    {
+      "pattern": "ct\\.pinterest\\.com",
+      "name": "Pinterest Conversion Tag",
+      "category": "ad_pixel"
+    },
+    {
+      "pattern": "reddit\\.com/pixel|rdt\\.pixel",
+      "name": "Reddit Pixel",
+      "category": "ad_pixel"
+    },
+    {
+      "pattern": "analytics\\.twitter\\.com",
+      "name": "Twitter/X Analytics",
+      "category": "ad_pixel"
+    },
+    {
+      "pattern": "px\\.moatads\\.com",
+      "name": "Moat (ad verification)",
+      "category": "ad_pixel"
+    },
+    {
+      "pattern": "secure-us\\.imrworldwide\\.com",
+      "name": "Nielsen Digital Ad Ratings",
+      "category": "ad_pixel"
+    },
+    {
+      "pattern": "propellerads\\.com|propellerremedy\\.com",
+      "name": "PropellerAds",
+      "category": "ad_network_aggressive"
+    },
+    {
+      "pattern": "adsterra\\.com|highcpmrevenuegate\\.com",
+      "name": "Adsterra",
+      "category": "ad_network_aggressive"
+    },
+    {
+      "pattern": "exoclick\\.com|exosrv\\.com|syndication\\.exoclick\\.com",
+      "name": "ExoClick",
+      "category": "ad_network_aggressive"
+    },
+    {
+      "pattern": "juicyads\\.com|jads\\.co",
+      "name": "JuicyAds",
+      "category": "ad_network_aggressive"
+    },
+    {
+      "pattern": "popads\\.net",
+      "name": "PopAds",
+      "category": "ad_network_aggressive"
+    },
+    {
+      "pattern": "popcash\\.net",
+      "name": "PopCash",
+      "category": "ad_network_aggressive"
+    },
+    {
+      "pattern": "mgid\\.com",
+      "name": "MGID",
+      "category": "ad_network_aggressive"
+    },
+    {
+      "pattern": "clickadu\\.com",
+      "name": "Clickadu",
+      "category": "ad_network_aggressive"
+    },
+    {
+      "pattern": "hilltopads\\.net",
+      "name": "HilltopAds",
+      "category": "ad_network_aggressive"
+    },
+    {
+      "pattern": "trafficjunky\\.net",
+      "name": "TrafficJunky",
+      "category": "ad_network_aggressive"
+    },
+    {
+      "pattern": "adcash\\.com",
+      "name": "Adcash",
+      "category": "ad_network_aggressive"
+    },
+    {
+      "pattern": "admaven\\.com|ad-maven\\.com",
+      "name": "AdMaven",
+      "category": "ad_network_aggressive"
+    },
+    {
+      "pattern": "revenuehits\\.com",
+      "name": "RevenueHits",
+      "category": "ad_network_aggressive"
+    },
+    {
+      "pattern": "monetag\\.com|evadav\\.com",
+      "name": "Monetag / EvaDav",
+      "category": "ad_network_aggressive"
+    },
+    {
+      "pattern": "adnxs\\.com",
+      "name": "AppNexus / Xandr",
+      "category": "ad_network_aggressive"
+    },
+    {
+      "pattern": "criteo\\.(?:com|net)",
+      "name": "Criteo",
+      "category": "ad_network_aggressive"
+    },
+    {
+      "pattern": "taboola\\.com",
+      "name": "Taboola",
+      "category": "ad_network_aggressive"
+    },
+    {
+      "pattern": "outbrain\\.com",
+      "name": "Outbrain",
+      "category": "ad_network_aggressive"
+    },
+    {
+      "pattern": "revcontent\\.com",
+      "name": "RevContent",
+      "category": "ad_network_aggressive"
+    },
+    {
+      "pattern": "media\\.net",
+      "name": "Media.net",
+      "category": "ad_network_aggressive"
+    },
+    {
+      "pattern": "bidvertiser\\.com",
+      "name": "BidVertiser",
+      "category": "ad_network_aggressive"
+    },
+    {
+      "pattern": "adsrvr\\.org",
+      "name": "The Trade Desk",
+      "category": "ad_network_aggressive"
+    },
+    {
+      "pattern": "yllix\\.com",
+      "name": "Yllix",
+      "category": "ad_network_aggressive"
+    },
+    {
+      "pattern": "adspyglass\\.com",
+      "name": "AdsPyGlass",
+      "category": "ad_network_aggressive"
+    },
+    {
+      "pattern": "onclickads\\.net|onclickmax\\.com",
+      "name": "OnClickA / OnClickMax",
+      "category": "ad_network_aggressive"
+    },
+    {
+      "pattern": "cpmstar\\.com",
+      "name": "CPMStar",
+      "category": "ad_network_aggressive"
+    },
+    {
+      "pattern": "smartyads\\.com",
+      "name": "SmartyAds",
+      "category": "ad_network_aggressive"
+    },
+    {
+      "pattern": "adskeeper\\.co\\.uk|adskeeper\\.com",
+      "name": "AdsKeeper",
+      "category": "ad_network_aggressive"
+    },
+    {
+      "pattern": "static\\.hotjar\\.com|script\\.hotjar\\.com",
+      "name": "Hotjar",
+      "category": "session_replay"
+    },
+    {
+      "pattern": "\\bhjid\\s*[:=]",
+      "name": "Hotjar (config var)",
+      "category": "session_replay"
+    },
+    {
+      "pattern": "cdn\\.mouseflow\\.com",
+      "name": "Mouseflow",
+      "category": "session_replay"
+    },
+    {
+      "pattern": "cdn\\.lucky(?:orange)?\\.com|luckyorange\\.com",
+      "name": "Lucky Orange",
+      "category": "session_replay"
+    },
+    {
+      "pattern": "cdn\\.fullstory\\.com|fs\\.identify\\(",
+      "name": "FullStory",
+      "category": "session_replay"
+    },
+    {
+      "pattern": "static\\.crazyegg\\.com",
+      "name": "Crazy Egg",
+      "category": "session_replay"
+    },
+    {
+      "pattern": "cdn\\.inspectlet\\.com",
+      "name": "Inspectlet",
+      "category": "session_replay"
+    },
+    {
+      "pattern": "smartlook\\.com/recorder",
+      "name": "Smartlook",
+      "category": "session_replay"
+    },
+    {
+      "pattern": "cdn\\.clarity\\.ms",
+      "name": "Microsoft Clarity",
+      "category": "session_replay"
+    },
+    {
+      "pattern": "js\\.intercomcdn\\.com|widget\\.intercom\\.io",
+      "name": "Intercom",
+      "category": "chat_support"
+    },
+    {
+      "pattern": "\\bIntercom\\(\\s*[\"\\']boot[\"\\']",
+      "name": "Intercom (SDK init)",
+      "category": "chat_support"
+    },
+    {
+      "pattern": "js\\.driftt\\.com|js\\.drift\\.com",
+      "name": "Drift",
+      "category": "chat_support"
+    },
+    {
+      "pattern": "embed\\.tawk\\.to",
+      "name": "Tawk.to",
+      "category": "chat_support"
+    },
+    {
+      "pattern": "widget\\.zopim\\.com|static\\.zdassets\\.com",
+      "name": "Zendesk Chat/Widget",
+      "category": "chat_support"
+    },
+    {
+      "pattern": "embed\\.crisp\\.chat",
+      "name": "Crisp Chat",
+      "category": "chat_support"
+    },
+    {
+      "pattern": "widget\\.freshchat\\.com|wchat\\.freshchat\\.com",
+      "name": "Freshchat",
+      "category": "chat_support"
+    },
+    {
+      "pattern": "livechatinc\\.com|cdn\\.livechatinc\\.com",
+      "name": "LiveChat",
+      "category": "chat_support"
+    },
+    {
+      "pattern": "js\\.hs-scripts\\.com|js\\.hubspot\\.com",
+      "name": "HubSpot (chat/tracking)",
+      "category": "chat_support"
+    },
+    {
+      "pattern": "widget\\.manychat\\.com",
+      "name": "ManyChat",
+      "category": "chat_support"
+    },
+    {
+      "pattern": "cdn\\.optimizely\\.com",
+      "name": "Optimizely",
+      "category": "ab_testing"
+    },
+    {
+      "pattern": "www\\.googleoptimize\\.com",
+      "name": "Google Optimize",
+      "category": "ab_testing"
+    },
+    {
+      "pattern": "cdn\\.vwo\\.com|dev\\.visualwebsiteoptimizer\\.com",
+      "name": "VWO",
+      "category": "ab_testing"
+    },
+    {
+      "pattern": "cdn\\.split\\.io",
+      "name": "Split.io",
+      "category": "ab_testing"
+    },
+    {
+      "pattern": "unleash-hosted\\.com",
+      "name": "Unleash",
+      "category": "ab_testing"
+    },
+    {
+      "pattern": "browser\\.sentry-cdn\\.com|js\\.sentry-cdn\\.com",
+      "name": "Sentry",
+      "category": "error_monitoring"
+    },
+    {
+      "pattern": "\\bSentry\\.init\\(",
+      "name": "Sentry (SDK init)",
+      "category": "error_monitoring"
+    },
+    {
+      "pattern": "cdn\\.bugsnag\\.com",
+      "name": "Bugsnag",
+      "category": "error_monitoring"
+    },
+    {
+      "pattern": "cdn\\.logrocket\\.io|cdn\\.lr-ingest\\.io",
+      "name": "LogRocket",
+      "category": "error_monitoring"
+    },
+    {
+      "pattern": "rum\\.datadoghq\\.com|datadog-rum",
+      "name": "Datadog RUM",
+      "category": "error_monitoring"
+    },
+    {
+      "pattern": "cdn\\.ravenjs\\.com",
+      "name": "Raven.js (legacy Sentry)",
+      "category": "error_monitoring"
+    },
+    {
+      "pattern": "cdn\\.rollbar\\.com",
+      "name": "Rollbar",
+      "category": "error_monitoring"
+    },
+    {
+      "pattern": "js\\.appdynamics\\.com",
+      "name": "AppDynamics",
+      "category": "error_monitoring"
+    },
+    {
+      "pattern": "newrelic\\.com/nr-loader",
+      "name": "New Relic Browser",
+      "category": "error_monitoring"
+    },
+    {
+      "pattern": "cdn\\.jsdelivr\\.net/npm/@fingerprintjs|openfpcdn\\.io/fingerprintjs",
+      "name": "FingerprintJS",
+      "category": "fingerprinting"
+    },
+    {
+      "pattern": "client\\.perimeterx\\.net|px-cdn\\.net",
+      "name": "PerimeterX / HUMAN",
+      "category": "fingerprinting"
+    },
+    {
+      "pattern": "js\\.datadome\\.co",
+      "name": "DataDome",
+      "category": "fingerprinting"
+    },
+    {
+      "pattern": "challenges\\.cloudflare\\.com/turnstile",
+      "name": "Cloudflare Turnstile",
+      "category": "fingerprinting"
+    },
+    {
+      "pattern": "hcaptcha\\.com/1/api\\.js",
+      "name": "hCaptcha",
+      "category": "fingerprinting"
+    },
+    {
+      "pattern": "www\\.google\\.com/recaptcha",
+      "name": "Google reCAPTCHA",
+      "category": "fingerprinting"
+    },
+    {
+      "pattern": "cdn\\.seon\\.io",
+      "name": "SEON",
+      "category": "fingerprinting"
+    },
+    {
+      "pattern": "cdn\\.cookielaw\\.org|onetrust\\.com",
+      "name": "OneTrust",
+      "category": "consent_management"
+    },
+    {
+      "pattern": "consent\\.cookiebot\\.com",
+      "name": "Cookiebot",
+      "category": "consent_management"
+    },
+    {
+      "pattern": "cdn\\.usercentrics\\.eu",
+      "name": "Usercentrics",
+      "category": "consent_management"
+    },
+    {
+      "pattern": "cdn\\.iubenda\\.com",
+      "name": "Iubenda",
+      "category": "consent_management"
+    },
+    {
+      "pattern": "cdn\\.consentmanager\\.net",
+      "name": "Consentmanager",
+      "category": "consent_management"
+    },
+    {
+      "pattern": "coinhive\\.com/lib|authedmine\\.com",
+      "name": "Coinhive (cryptomining — legacy/malicious)",
+      "category": "abuse"
+    },
+    {
+      "pattern": "cryptoloot\\.pro|webmine\\.pro",
+      "name": "CryptoLoot/WebMine (cryptomining)",
+      "category": "abuse"
+    },
+    {
+      "pattern": "minero\\.cc",
+      "name": "Minero (cryptomining)",
+      "category": "abuse"
+    },
+    {
+      "pattern": "googletagmanager\\.com/ns\\.html",
+      "name": "Google Tag Manager (noscript)",
+      "category": "tag_manager"
+    },
+    {
+      "pattern": "\\bGTM-[A-Z0-9]{4,8}\\b",
+      "name": "Google Tag Manager (container ID)",
+      "category": "tag_manager"
+    },
+    {
+      "pattern": "launch-[0-9a-f]{12,}(?:-development|-staging)?\\.min\\.js",
+      "name": "Adobe Experience Platform Launch (container)",
+      "category": "tag_manager"
+    },
+    {
+      "pattern": "utag\\.js|utag\\.sync\\.js",
+      "name": "Tealium iQ (utag.js)",
+      "category": "tag_manager"
+    },
+    {
+      "pattern": "nexus\\.ensighten\\.com|ensighten\\.com/",
+      "name": "Ensighten",
+      "category": "tag_manager"
+    },
+    {
+      "pattern": "cdn\\.matomo\\.cloud/[^\\\"']*container_|matomo[^\\\"']*/container_",
+      "name": "Matomo Tag Manager",
+      "category": "tag_manager"
+    },
+    {
+      "pattern": "cdn\\.piwik\\.pro|\\.containers\\.piwik\\.pro|ppms\\.eu",
+      "name": "Piwik PRO",
+      "category": "tag_manager"
+    },
+    {
+      "pattern": "tags\\.bluekai\\.com|bkrtx",
+      "name": "Oracle BlueKai Tag Manager",
+      "category": "tag_manager"
+    },
+    {
+      "pattern": "cdn\\.brightedge\\.com|tags\\.brightedge",
+      "name": "BrightEdge",
+      "category": "tag_manager"
+    },
+    {
+      "pattern": "tags\\.tiqcdn\\.com|tiqcdn\\.com",
+      "name": "Tealium (CDN)",
+      "category": "tag_manager"
+    },
+    {
+      "pattern": "cdn\\.mediavoice\\.com|cdn\\.signal\\.co|tags\\.brighttag\\.com|s\\.thebrighttag\\.com",
+      "name": "Signal / BrightTag",
+      "category": "tag_manager"
+    },
+    {
+      "pattern": "tag\\.yahoo\\.com|s\\.yimg\\.com/wi/ytc\\.js|dotpixel",
+      "name": "Yahoo Dot Tag",
+      "category": "tag_manager"
+    },
+    {
+      "pattern": "gtm\\.start|dataLayer\\s*=\\s*window\\.dataLayer|window\\.dataLayer\\s*=",
+      "name": "Google dataLayer (initialised)",
+      "category": "tag_manager"
+    },
+    {
+      "pattern": "\\bdigitalData\\s*=|_satellite\\.track\\(",
+      "name": "Adobe digitalData / _satellite",
+      "category": "tag_manager"
+    },
+    {
+      "pattern": "\\bsgtm\\.|/gtm\\.js\\?id=GTM-[A-Z0-9]+&gtm_auth",
+      "name": "Google Tag Manager (server-side / preview)",
+      "category": "tag_manager"
+    },
+    {
+      "pattern": "googletagmanager\\.com/gtag/js\\?id=G-",
+      "name": "Google Analytics (GA4 loader)",
+      "category": "analytics"
+    },
+    {
+      "pattern": "\\bgtag\\(\\s*[\\\"']config[\\\"']\\s*,\\s*[\\\"']UA-",
+      "name": "Google Analytics (UA via gtag)",
+      "category": "analytics"
+    },
+    {
+      "pattern": "\\bUA-\\d{4,10}-\\d{1,4}\\b",
+      "name": "Google Analytics (UA property ID)",
+      "category": "analytics"
+    },
+    {
+      "pattern": "\\bG-[A-Z0-9]{10}\\b",
+      "name": "Google Analytics (GA4 measurement ID)",
+      "category": "analytics"
+    },
+    {
+      "pattern": "\\bga\\(\\s*[\\\"']create[\\\"']|_gaq\\.push|GoogleAnalyticsObject",
+      "name": "Google Analytics (inline init)",
+      "category": "analytics"
+    },
+    {
+      "pattern": "google-analytics\\.com/(?:collect|g/collect|j/collect)",
+      "name": "Google Analytics (beacon)",
+      "category": "analytics"
+    },
+    {
+      "pattern": "analytics\\.google\\.com/g/collect|region1\\.google-analytics\\.com",
+      "name": "Google Analytics (GA4 beacon)",
+      "category": "analytics"
+    },
+    {
+      "pattern": "google-analytics\\.com/plugins/ua/",
+      "name": "Google Analytics (UA plugin)",
+      "category": "analytics"
+    },
+    {
+      "pattern": "stats\\.g\\.doubleclick\\.net",
+      "name": "Google Analytics (DoubleClick stats)",
+      "category": "analytics"
+    },
+    {
+      "pattern": "\\bwww\\.googletagservices\\.com/tag/js/gpt\\.js|securepubads\\.g\\.doubleclick\\.net/tag/js/gpt\\.js",
+      "name": "Google Publisher Tag (GPT)",
+      "category": "analytics"
+    },
+    {
+      "pattern": "sc\\.omtrdc\\.net|\\.omtrdc\\.net|\\.2o7\\.net|s_code\\.js|AppMeasurement\\.js",
+      "name": "Adobe Analytics",
+      "category": "analytics"
+    },
+    {
+      "pattern": "dpm\\.demdex\\.net|\\.demdex\\.net",
+      "name": "Adobe Audience Manager",
+      "category": "analytics"
+    },
+    {
+      "pattern": "VisitorAPI\\.js|Visitor\\.getInstance\\(",
+      "name": "Adobe Experience Cloud ID Service",
+      "category": "analytics"
+    },
+    {
+      "pattern": "cdn\\.mxpnl\\.com|api(?:-js|-eu)?\\.mixpanel\\.com|mixpanel\\.track\\(",
+      "name": "Mixpanel (beacon/track)",
+      "category": "analytics"
+    },
+    {
+      "pattern": "api2?\\.amplitude\\.com|amplitude\\.init\\(|cdn\\.amplitude\\.com/libs/analytics-browser",
+      "name": "Amplitude (browser SDK)",
+      "category": "analytics"
+    },
+    {
+      "pattern": "api\\.segment\\.io|api\\.segment\\.com|cdn\\.segment\\.com/v1/projects",
+      "name": "Segment (API / project loader)",
+      "category": "analytics"
+    },
+    {
+      "pattern": "\\bposthog\\.init\\(|(?:us|eu)(?:-assets)?\\.i\\.posthog\\.com|app\\.posthog\\.com|posthog-js",
+      "name": "PostHog",
+      "category": "analytics"
+    },
+    {
+      "pattern": "cdn\\.rudderlabs\\.com|rudderanalytics\\.load\\(|rudderstack\\.com",
+      "name": "RudderStack",
+      "category": "analytics"
+    },
+    {
+      "pattern": "cdn\\.mparticle\\.com|mParticle\\.init|mparticle\\.com",
+      "name": "mParticle",
+      "category": "analytics"
+    },
+    {
+      "pattern": "sp\\.js|snowplow(?:analytics)?\\.(?:com|js)|snowplow\\(\\s*[\\\"']newTracker",
+      "name": "Snowplow",
+      "category": "analytics"
+    },
+    {
+      "pattern": "cdn\\.lytics\\.io|lytics\\.io/api",
+      "name": "Lytics",
+      "category": "analytics"
+    },
+    {
+      "pattern": "cdn\\.pendo\\.io|pendo\\.initialize\\(",
+      "name": "Pendo",
+      "category": "analytics"
+    },
+    {
+      "pattern": "cdn\\.heapanalytics\\.com|heapanalytics\\.com/js",
+      "name": "Heap (CDN)",
+      "category": "analytics"
+    },
+    {
+      "pattern": "umami\\.is/script\\.js|data-website-id=|/umami\\.js|/script\\.js\\\"\\s+data-website-id",
+      "name": "Umami",
+      "category": "analytics"
+    },
+    {
+      "pattern": "gc\\.zgo\\.at/count\\.js|goatcounter\\.com",
+      "name": "GoatCounter",
+      "category": "analytics"
+    },
+    {
+      "pattern": "api\\.pirsch\\.io|pirsch\\.io/pirsch",
+      "name": "Pirsch",
+      "category": "analytics"
+    },
+    {
+      "pattern": "cdn\\.counter\\.dev|counter\\.dev/script",
+      "name": "Counter.dev",
+      "category": "analytics"
+    },
+    {
+      "pattern": "scripts\\.withcabin\\.com",
+      "name": "Cabin Analytics",
+      "category": "analytics"
+    },
+    {
+      "pattern": "cdn\\.usefathom\\.com|data-site=\\\"[A-Z]{8}\\\"",
+      "name": "Fathom (CDN / site attr)",
+      "category": "analytics"
+    },
+    {
+      "pattern": "plausible\\.io/api/event|data-domain=[\\\"'][^\\\"']+[\\\"'][^>]*plausible",
+      "name": "Plausible (event API)",
+      "category": "analytics"
+    },
+    {
+      "pattern": "gauges\\.com|secure\\.gaug\\.es|track\\.gaug\\.es",
+      "name": "Gauges",
+      "category": "analytics"
+    },
+    {
+      "pattern": "openwebanalytics|owa\\.js|owa_baseUrl",
+      "name": "Open Web Analytics",
+      "category": "analytics"
+    },
+    {
+      "pattern": "\\b_paq\\.push\\(|matomo\\.php|piwik\\.php",
+      "name": "Matomo / Piwik (tracker call)",
+      "category": "analytics"
+    },
+    {
+      "pattern": "\\bClicky\\.|static\\.getclicky\\.com|clicky_site_ids",
+      "name": "Clicky (static)",
+      "category": "analytics"
+    },
+    {
+      "pattern": "hm\\.baidu\\.com/hm\\.js|_hmt\\.push",
+      "name": "Baidu Tongji (Baidu Analytics)",
+      "category": "analytics"
+    },
+    {
+      "pattern": "s\\d+\\.cnzz\\.com|cnzz\\.com/stat\\.php|_czc\\.push",
+      "name": "CNZZ (Umeng web analytics)",
+      "category": "analytics"
+    },
+    {
+      "pattern": "v1\\.cnzz\\.com|js\\.users\\.51\\.la|51\\.la/",
+      "name": "51.LA",
+      "category": "analytics"
+    },
+    {
+      "pattern": "wcs\\.naver\\.net/wcslog\\.js|wcs_add\\[",
+      "name": "Naver Analytics",
+      "category": "analytics"
+    },
+    {
+      "pattern": "t1\\.daumcdn\\.net/kas/static/kp\\.js|kakaoPixel\\(",
+      "name": "Kakao Pixel",
+      "category": "ad_pixel"
+    },
+    {
+      "pattern": "top-fwz1\\.mail\\.ru|top\\.mail\\.ru/(?:counter|js)|_tmr\\.push",
+      "name": "Mail.ru Top / Tracker",
+      "category": "analytics"
+    },
+    {
+      "pattern": "counter\\.rambler\\.ru|top100\\.rambler\\.ru",
+      "name": "Rambler Top100",
+      "category": "analytics"
+    },
+    {
+      "pattern": "mc\\.yandex\\.(?:ru|com)/watch|ym\\(\\s*\\d+\\s*,\\s*[\\\"']init",
+      "name": "Yandex Metrica (watch/init)",
+      "category": "analytics"
+    },
+    {
+      "pattern": "yastatic\\.net/metrika|cdn\\.jsdelivr\\.net/npm/yandex-metrica-watch",
+      "name": "Yandex Metrica (script)",
+      "category": "analytics"
+    },
+    {
+      "pattern": "certify\\.alexametrics\\.com|d31qbv1cthcecs\\.cloudfront\\.net/atrk\\.js",
+      "name": "Alexa Certify (legacy)",
+      "category": "analytics"
+    },
+    {
+      "pattern": "cdn\\.mouseflow\\.com/projects|mouseflow\\.com/projects",
+      "name": "Mouseflow (project)",
+      "category": "session_replay"
+    },
+    {
+      "pattern": "cdn\\.sitespect\\.net|sitespect\\.com",
+      "name": "SiteSpect",
+      "category": "analytics"
+    },
+    {
+      "pattern": "static\\.parsely\\.com/p\\.js|srv-\\d+\\.pixel\\.parsely\\.com",
+      "name": "Parse.ly (pixel)",
+      "category": "analytics"
+    },
+    {
+      "pattern": "static\\.chartbeat\\.com/js/chartbeat|chartbeat_mab\\.js",
+      "name": "Chartbeat (script)",
+      "category": "analytics"
+    },
+    {
+      "pattern": "rum\\.hlx\\.page|rum\\.hlx3?\\.page|/\\.rum/",
+      "name": "Adobe Edge Delivery RUM",
+      "category": "analytics"
+    },
+    {
+      "pattern": "cdn\\.plerdy\\.com|plerdy\\.com",
+      "name": "Plerdy",
+      "category": "analytics"
+    },
+    {
+      "pattern": "cdn\\.siteimprove\\.com|siteimproveanalytics\\.com",
+      "name": "Siteimprove Analytics",
+      "category": "analytics"
+    },
+    {
+      "pattern": "cdn\\.nr-data\\.net|bam\\.nr-data\\.net|js-agent\\.newrelic\\.com",
+      "name": "New Relic (beacon/agent)",
+      "category": "analytics"
+    },
+    {
+      "pattern": "cdn\\.branch\\.io|branch\\.init\\(|bnc\\.lt",
+      "name": "Branch.io",
+      "category": "analytics"
+    },
+    {
+      "pattern": "cdn\\.adjust\\.com|adjust\\.com/sdk",
+      "name": "Adjust (web SDK)",
+      "category": "analytics"
+    },
+    {
+      "pattern": "cdn\\.appsflyer\\.com|onelink\\.me|AF_SMART_SCRIPT",
+      "name": "AppsFlyer (OneLink / smart script)",
+      "category": "analytics"
+    },
+    {
+      "pattern": "cdn\\.kochava\\.com|control\\.kochava\\.com",
+      "name": "Kochava",
+      "category": "analytics"
+    },
+    {
+      "pattern": "cdn\\.vercel-insights\\.com|/_vercel/insights/script\\.js|va\\.vercel-scripts\\.com",
+      "name": "Vercel Web Analytics",
+      "category": "analytics"
+    },
+    {
+      "pattern": "cdn\\.statsig\\.com|featuregates\\.org",
+      "name": "Statsig",
+      "category": "analytics"
+    },
+    {
+      "pattern": "app\\.usercycle\\.com|cdn\\.usermaven\\.com|usermaven\\.com",
+      "name": "Usermaven",
+      "category": "analytics"
+    },
+    {
+      "pattern": "cdn\\.june\\.so|api\\.june\\.so",
+      "name": "June.so",
+      "category": "analytics"
+    },
+    {
+      "pattern": "cdn\\.getkoala\\.com|koala\\.js",
+      "name": "Koala",
+      "category": "analytics"
+    },
+    {
+      "pattern": "cdn\\.6sc\\.co|j\\.6sc\\.co|6sense\\.com",
+      "name": "6sense",
+      "category": "analytics"
+    },
+    {
+      "pattern": "tag\\.demandbase\\.com|api\\.company-target\\.com",
+      "name": "Demandbase",
+      "category": "analytics"
+    },
+    {
+      "pattern": "api\\.leadfeeder\\.com|lftracker|lfeeder\\.com",
+      "name": "Leadfeeder",
+      "category": "analytics"
+    },
+    {
+      "pattern": "ws\\.zoominfo\\.com|js\\.zi-scripts\\.com|zoominfo\\.com/wsgen",
+      "name": "ZoomInfo WebSights",
+      "category": "analytics"
+    },
+    {
+      "pattern": "clearbit\\.com/v1|tag\\.clearbitscripts\\.com|reveal\\.clearbit\\.com",
+      "name": "Clearbit Reveal",
+      "category": "analytics"
+    },
+    {
+      "pattern": "snitcher\\.com|cdn\\.snitcher\\.com",
+      "name": "Snitcher",
+      "category": "analytics"
+    },
+    {
+      "pattern": "identify-a\\.js|rb2b\\.com|ddwl4m2hdecbv\\.cloudfront\\.net",
+      "name": "RB2B",
+      "category": "analytics"
+    },
+    {
+      "pattern": "facebook\\.com/tr\\?id=\\d+|facebook\\.com/tr/",
+      "name": "Meta/Facebook Pixel (noscript/beacon)",
+      "category": "ad_pixel"
+    },
+    {
+      "pattern": "fbevents\\.js|fbq\\(\\s*[\\\"']init[\\\"']\\s*,\\s*[\\\"']\\d+",
+      "name": "Meta/Facebook Pixel (init with ID)",
+      "category": "ad_pixel"
+    },
+    {
+      "pattern": "graph\\.facebook\\.com|connect\\.facebook\\.net/signals/config",
+      "name": "Meta Signals / Conversions",
+      "category": "ad_pixel"
+    },
+    {
+      "pattern": "\\b_linkedin_partner_id\\b|snap\\.licdn\\.com/li\\.lms-analytics/insight\\.min\\.js",
+      "name": "LinkedIn Insight Tag (partner ID)",
+      "category": "ad_pixel"
+    },
+    {
+      "pattern": "googleadservices\\.com/pagead/conversion|google\\.com/pagead/1p-user-list|\\bgtag\\(\\s*[\\\"']config[\\\"']\\s*,\\s*[\\\"']AW-",
+      "name": "Google Ads (conversion/remarketing)",
+      "category": "ad_pixel"
+    },
+    {
+      "pattern": "fls\\.doubleclick\\.net|\\bDC-\\d{6,10}\\b",
+      "name": "Google Floodlight (Campaign Manager)",
+      "category": "ad_pixel"
+    },
+    {
+      "pattern": "ad\\.doubleclick\\.net|googleads4?\\.g\\.doubleclick\\.net|pubads\\.g\\.doubleclick\\.net",
+      "name": "DoubleClick (ad serving)",
+      "category": "ad_pixel"
+    },
+    {
+      "pattern": "pagead2\\.googlesyndication\\.com/pagead/js/adsbygoogle\\.js|adsbygoogle",
+      "name": "Google AdSense",
+      "category": "ad_pixel"
+    },
+    {
+      "pattern": "tpc\\.googlesyndication\\.com|safeframe\\.googlesyndication\\.com",
+      "name": "Google AdSense (safeframe)",
+      "category": "ad_pixel"
+    },
+    {
+      "pattern": "q\\.quora\\.com|quoraadsc\\.js|qp\\(\\s*[\\\"']init",
+      "name": "Quora Pixel",
+      "category": "ad_pixel"
+    },
+    {
+      "pattern": "s\\.yimg\\.com/wi/ytc\\.js|sp\\.analytics\\.yahoo\\.com|udc\\.yahoo\\.com",
+      "name": "Yahoo Ads Pixel",
+      "category": "ad_pixel"
+    },
+    {
+      "pattern": "amazon-adsystem\\.com|aax-us-east\\.amazon-adsystem\\.com|c\\.amazon-adsystem\\.com",
+      "name": "Amazon Advertising",
+      "category": "ad_pixel"
+    },
+    {
+      "pattern": "s\\.amazon-adsystem\\.com/iu3|assoc-amazon\\.com|z-na\\.amazon-adsystem\\.com",
+      "name": "Amazon Associates / Affiliate pixel",
+      "category": "ad_pixel"
+    },
+    {
+      "pattern": "d\\.adroll\\.com|adroll_adv_id|adroll_pix_id|s\\.adroll\\.com",
+      "name": "AdRoll",
+      "category": "ad_pixel"
+    },
+    {
+      "pattern": "tag\\.perfectaudience\\.com|marketing\\.perfectaudience\\.com",
+      "name": "Perfect Audience",
+      "category": "ad_pixel"
+    },
+    {
+      "pattern": "pixel-config\\.reddit\\.com|alb\\.reddit\\.com/snoo\\.js|redditstatic\\.com/ads/pixel\\.js",
+      "name": "Reddit Pixel (script)",
+      "category": "ad_pixel"
+    },
+    {
+      "pattern": "pixel\\.spotify\\.com|pixel-static\\.spotify\\.com",
+      "name": "Spotify Ads Pixel",
+      "category": "ad_pixel"
+    },
+    {
+      "pattern": "ads\\.linkedin\\.com|dc\\.ads\\.linkedin\\.com",
+      "name": "LinkedIn Ads",
+      "category": "ad_pixel"
+    },
+    {
+      "pattern": "analytics\\.tiktok\\.com|business-api\\.tiktok\\.com|tiktok\\.com/i18n/pixel/events\\.js",
+      "name": "TikTok Pixel (events)",
+      "category": "ad_pixel"
+    },
+    {
+      "pattern": "s\\.pinimg\\.com/ct/core\\.js|pintrk\\(\\s*[\\\"']load",
+      "name": "Pinterest Tag (core)",
+      "category": "ad_pixel"
+    },
+    {
+      "pattern": "cdn\\.taboola\\.com/libtrc|trc\\.taboola\\.com",
+      "name": "Taboola Pixel",
+      "category": "ad_pixel"
+    },
+    {
+      "pattern": "amplify\\.outbrain\\.com/cp/obtp\\.js|tr\\.outbrain\\.com",
+      "name": "Outbrain Pixel",
+      "category": "ad_pixel"
+    },
+    {
+      "pattern": "static\\.criteo\\.net|dynamic\\.criteo\\.com|widget\\.criteo\\.com|gum\\.criteo\\.com",
+      "name": "Criteo OneTag",
+      "category": "ad_pixel"
+    },
+    {
+      "pattern": "s\\.thebrighttag\\.com|cdn\\.krxd\\.net|beacon\\.krxd\\.net",
+      "name": "Salesforce DMP / Krux",
+      "category": "ad_pixel"
+    },
+    {
+      "pattern": "tags\\.bluekai\\.com|stags\\.bluekai\\.com",
+      "name": "Oracle BlueKai",
+      "category": "ad_pixel"
+    },
+    {
+      "pattern": "tags\\.crwdcntrl\\.net|bcp\\.crwdcntrl\\.net|ad\\.crwdcntrl\\.net",
+      "name": "Lotame",
+      "category": "ad_pixel"
+    },
+    {
+      "pattern": "ats\\.rlcdn\\.com|idsync\\.rlcdn\\.com|rlcdn\\.com",
+      "name": "LiveRamp (RampID / ATS)",
+      "category": "ad_pixel"
+    },
+    {
+      "pattern": "cdn\\.id5-sync\\.com|id5-sync\\.com",
+      "name": "ID5",
+      "category": "ad_pixel"
+    },
+    {
+      "pattern": "match\\.adsrvr\\.org|js\\.adsrvr\\.org|insight\\.adsrvr\\.org",
+      "name": "The Trade Desk (UID2 / pixel)",
+      "category": "ad_pixel"
+    },
+    {
+      "pattern": "adsafeprotected\\.com|iasds01\\.com|pixel\\.adsafeprotected\\.com",
+      "name": "Integral Ad Science (IAS)",
+      "category": "ad_pixel"
+    },
+    {
+      "pattern": "cdn\\.doubleverify\\.com|tps\\d+\\.doubleverify\\.com",
+      "name": "DoubleVerify",
+      "category": "ad_pixel"
+    },
+    {
+      "pattern": "cdn\\.flashtalking\\.com|servedby\\.flashtalking\\.com",
+      "name": "Flashtalking",
+      "category": "ad_pixel"
+    },
+    {
+      "pattern": "bs\\.serving-sys\\.com|serving-sys\\.com",
+      "name": "Sizmek / Serving-sys",
+      "category": "ad_pixel"
+    },
+    {
+      "pattern": "c\\.betrad\\.com|l\\.betrad\\.com|evidon\\.com",
+      "name": "Evidon / Ghostery (ad choices)",
+      "category": "ad_pixel"
+    },
+    {
+      "pattern": "cdn\\.mookie1\\.com|mookie1\\.com",
+      "name": "Mookie / Xaxis",
+      "category": "ad_pixel"
+    },
+    {
+      "pattern": "ib\\.adnxs\\.com|secure\\.adnxs\\.com|acdn\\.adnxs\\.com",
+      "name": "AppNexus / Xandr (pixel)",
+      "category": "ad_pixel"
+    },
+    {
+      "pattern": "pixel\\.rubiconproject\\.com|fastlane\\.rubiconproject\\.com|rubiconproject\\.com",
+      "name": "Rubicon / Magnite",
+      "category": "ad_network_aggressive"
+    },
+    {
+      "pattern": "ads\\.pubmatic\\.com|image2\\.pubmatic\\.com|pubmatic\\.com",
+      "name": "PubMatic",
+      "category": "ad_network_aggressive"
+    },
+    {
+      "pattern": "openx\\.net|servedbyopenx\\.com|us-u\\.openx\\.net",
+      "name": "OpenX",
+      "category": "ad_network_aggressive"
+    },
+    {
+      "pattern": "casalemedia\\.com|indexww\\.com|ads\\.indexexchange\\.com",
+      "name": "Index Exchange",
+      "category": "ad_network_aggressive"
+    },
+    {
+      "pattern": "lijit\\.com|sovrn\\.com|ap\\.lijit\\.com",
+      "name": "Sovrn / Lijit",
+      "category": "ad_network_aggressive"
+    },
+    {
+      "pattern": "3lift\\.com|tlx\\.3lift\\.com",
+      "name": "TripleLift",
+      "category": "ad_network_aggressive"
+    },
+    {
+      "pattern": "sharethrough\\.com|btlr\\.sharethrough\\.com",
+      "name": "Sharethrough",
+      "category": "ad_network_aggressive"
+    },
+    {
+      "pattern": "2mdn\\.net|33across\\.com|cdn-ima\\.33across\\.com",
+      "name": "33Across / 2mdn",
+      "category": "ad_network_aggressive"
+    },
+    {
+      "pattern": "teads\\.tv|a\\.teads\\.tv|cdn\\.teads\\.tv",
+      "name": "Teads",
+      "category": "ad_network_aggressive"
+    },
+    {
+      "pattern": "smartadserver\\.com|ced\\.sascdn\\.com|sascdn\\.com",
+      "name": "Smart AdServer",
+      "category": "ad_network_aggressive"
+    },
+    {
+      "pattern": "adform\\.net|a1\\.adform\\.net|track\\.adform\\.net",
+      "name": "Adform",
+      "category": "ad_network_aggressive"
+    },
+    {
+      "pattern": "yieldmo\\.com|ads\\.yieldmo\\.com",
+      "name": "Yieldmo",
+      "category": "ad_network_aggressive"
+    },
+    {
+      "pattern": "\\.contextweb\\.com|pulsepoint\\.com|bh\\.contextweb\\.com",
+      "name": "PulsePoint / ContextWeb",
+      "category": "ad_network_aggressive"
+    },
+    {
+      "pattern": "gumgum\\.com|g2\\.gumgum\\.com|c\\.gumgum\\.com",
+      "name": "GumGum",
+      "category": "ad_network_aggressive"
+    },
+    {
+      "pattern": "districtm\\.io|districtm\\.ca|ads\\.districtm\\.io",
+      "name": "District M",
+      "category": "ad_network_aggressive"
+    },
+    {
+      "pattern": "cdn\\.prebid\\.org|prebid\\.js|pbjs\\.addAdUnits|pbjs\\.que",
+      "name": "Prebid.js (header bidding)",
+      "category": "ad_network_aggressive"
+    },
+    {
+      "pattern": "cdn\\.amazonpublisherservices\\.com|aps\\.amazon-adsystem|apstag\\.init",
+      "name": "Amazon Publisher Services (TAM / UAM)",
+      "category": "ad_network_aggressive"
+    },
+    {
+      "pattern": "adthrive\\.com|ads\\.adthrive\\.com|raptive\\.com",
+      "name": "AdThrive / Raptive",
+      "category": "ad_network_aggressive"
+    },
+    {
+      "pattern": "mediavine\\.com|scripts\\.mediavine\\.com|mv-grow",
+      "name": "Mediavine",
+      "category": "ad_network_aggressive"
+    },
+    {
+      "pattern": "ezoic\\.net|ezojs\\.com|ezodn\\.com|ezoic\\.com|ezstandalone",
+      "name": "Ezoic",
+      "category": "ad_network_aggressive"
+    },
+    {
+      "pattern": "monumetric\\.com|ads\\.monumetric\\.com",
+      "name": "Monumetric",
+      "category": "ad_network_aggressive"
+    },
+    {
+      "pattern": "sortable\\.com|ads\\.sortable\\.com",
+      "name": "Sortable",
+      "category": "ad_network_aggressive"
+    },
+    {
+      "pattern": "setupad\\.com|setupad\\.net",
+      "name": "Setupad",
+      "category": "ad_network_aggressive"
+    },
+    {
+      "pattern": "infolinks\\.com|resources\\.infolinks\\.com|infolinks_pid",
+      "name": "Infolinks",
+      "category": "ad_network_aggressive"
+    },
+    {
+      "pattern": "zergnet\\.com|zergnet\\.js",
+      "name": "ZergNet",
+      "category": "ad_network_aggressive"
+    },
+    {
+      "pattern": "content\\.ad|api\\.content\\.ad",
+      "name": "Content.ad",
+      "category": "ad_network_aggressive"
+    },
+    {
+      "pattern": "nativo\\.com|ntv\\.io|postrelease\\.com",
+      "name": "Nativo",
+      "category": "ad_network_aggressive"
+    },
+    {
+      "pattern": "dable\\.io|api\\.dable\\.io",
+      "name": "Dable",
+      "category": "ad_network_aggressive"
+    },
+    {
+      "pattern": "carbonads\\.com|carbonads\\.net|cdn\\.carbonads\\.com|_carbonads",
+      "name": "Carbon Ads",
+      "category": "ad_pixel"
+    },
+    {
+      "pattern": "ethicalads\\.io|media\\.ethicalads\\.io",
+      "name": "EthicalAds",
+      "category": "ad_pixel"
+    },
+    {
+      "pattern": "buysellads\\.com|srv\\.buysellads\\.com",
+      "name": "BuySellAds",
+      "category": "ad_pixel"
+    },
+    {
+      "pattern": "coinzilla\\.com|coinzillatag\\.com|coinzilla\\.io",
+      "name": "Coinzilla",
+      "category": "ad_network_aggressive"
+    },
+    {
+      "pattern": "a-ads\\.com|ad\\.a-ads\\.com",
+      "name": "A-ADS",
+      "category": "ad_network_aggressive"
+    },
+    {
+      "pattern": "richads\\.com|pubads\\.richads\\.com",
+      "name": "RichAds",
+      "category": "ad_network_aggressive"
+    },
+    {
+      "pattern": "clickadilla\\.com|clickadilla\\.pro",
+      "name": "ClickAdilla",
+      "category": "ad_network_aggressive"
+    },
+    {
+      "pattern": "trafficstars\\.com|tsyndicate\\.com|trafficstars\\.net",
+      "name": "TrafficStars",
+      "category": "ad_network_aggressive"
+    },
+    {
+      "pattern": "ero-advertising\\.com|ero-ads\\.com",
+      "name": "Ero-Advertising",
+      "category": "ad_network_aggressive"
+    },
+    {
+      "pattern": "popmyads\\.com",
+      "name": "PopMyAds",
+      "category": "ad_network_aggressive"
+    },
+    {
+      "pattern": "adsco\\.re|adscore\\.com",
+      "name": "AdScore / Adsco.re",
+      "category": "ad_network_aggressive"
+    },
+    {
+      "pattern": "pushengage\\.com|clientcdn\\.pushengage\\.com",
+      "name": "PushEngage",
+      "category": "push_notification"
+    },
+    {
+      "pattern": "cdn\\.onesignal\\.com|onesignal\\.com/sdks|OneSignalSDK",
+      "name": "OneSignal",
+      "category": "push_notification"
+    },
+    {
+      "pattern": "pushwoosh\\.com|cdn\\.pushwoosh\\.com",
+      "name": "Pushwoosh",
+      "category": "push_notification"
+    },
+    {
+      "pattern": "cdn\\.webpushr\\.com|webpushr\\.com",
+      "name": "Webpushr",
+      "category": "push_notification"
+    },
+    {
+      "pattern": "cdn\\.izooto\\.com|izooto\\.com",
+      "name": "iZooto",
+      "category": "push_notification"
+    },
+    {
+      "pattern": "pushnami\\.com|api\\.pushnami\\.com",
+      "name": "Pushnami",
+      "category": "push_notification"
+    },
+    {
+      "pattern": "cdn\\.pushcrew\\.com|pushcrew\\.com",
+      "name": "PushCrew",
+      "category": "push_notification"
+    },
+    {
+      "pattern": "notifyvisitors\\.com",
+      "name": "NotifyVisitors",
+      "category": "push_notification"
+    },
+    {
+      "pattern": "sendpulse\\.com/js/push|web-push\\.sendpulse|sendpulse\\.com/",
+      "name": "SendPulse (web push)",
+      "category": "push_notification"
+    },
+    {
+      "pattern": "pushassist\\.com|pushprofit\\.net",
+      "name": "PushAssist / PushProfit",
+      "category": "push_notification"
+    },
+    {
+      "pattern": "impactradius-event\\.com|\\.impactradius\\.com|d\\.impactradius-go\\.com|utt\\.impactcdn\\.com",
+      "name": "Impact (affiliate)",
+      "category": "affiliate"
+    },
+    {
+      "pattern": "shareasale\\.com|shareasale-analytics\\.com|\\bsas_pixel",
+      "name": "ShareASale",
+      "category": "affiliate"
+    },
+    {
+      "pattern": "awin1\\.com|dwin1\\.com|zenaps\\.com|\\bawc=",
+      "name": "Awin",
+      "category": "affiliate"
+    },
+    {
+      "pattern": "tradedoubler\\.com|\\btduid=",
+      "name": "TradeDoubler",
+      "category": "affiliate"
+    },
+    {
+      "pattern": "linksynergy\\.com|rakuten\\.com/tags|rakutenmarketing\\.com|\\bltksid=",
+      "name": "Rakuten Advertising (LinkShare)",
+      "category": "affiliate"
+    },
+    {
+      "pattern": "cj\\.com|emjcd\\.com|jdoqocy\\.com|tkqlhce\\.com|anrdoezrs\\.net|dpbolvw\\.net|kqzyfj\\.com",
+      "name": "CJ Affiliate",
+      "category": "affiliate"
+    },
+    {
+      "pattern": "clickbank\\.net|hop\\.clickbank\\.net",
+      "name": "ClickBank",
+      "category": "affiliate"
+    },
+    {
+      "pattern": "partnerstack\\.com|growsumo\\.com",
+      "name": "PartnerStack / Growsumo",
+      "category": "affiliate"
+    },
+    {
+      "pattern": "cdn\\.firstpromoter\\.com|firstpromoter\\.com|fpr\\(",
+      "name": "FirstPromoter",
+      "category": "affiliate"
+    },
+    {
+      "pattern": "rewardful\\.com|r\\.wdfl\\.co",
+      "name": "Rewardful",
+      "category": "affiliate"
+    },
+    {
+      "pattern": "tapfiliate\\.com|script\\.tapfiliate\\.com",
+      "name": "Tapfiliate",
+      "category": "affiliate"
+    },
+    {
+      "pattern": "refersion\\.com|cdn\\.refersion\\.com",
+      "name": "Refersion",
+      "category": "affiliate"
+    },
+    {
+      "pattern": "skimresources\\.com|skimlinks\\.com|s\\.skimresources\\.com",
+      "name": "Skimlinks",
+      "category": "affiliate"
+    },
+    {
+      "pattern": "viglink\\.com|sovrn\\.co/commerce|redirectingat\\.com",
+      "name": "VigLink / Sovrn Commerce",
+      "category": "affiliate"
+    },
+    {
+      "pattern": "cdn\\.attn\\.tv|attn\\.tv",
+      "name": "Attentive",
+      "category": "marketing_automation"
+    },
+    {
+      "pattern": "js\\.hs-analytics\\.net|js\\.hsforms\\.net|js\\.hsadspixel\\.net|js\\.usemessages\\.com|js\\.hscollectedforms\\.net|forms\\.hsforms\\.com",
+      "name": "HubSpot (analytics/forms/ads)",
+      "category": "marketing_automation"
+    },
+    {
+      "pattern": "munchkin\\.marketo\\.net|Munchkin\\.init|app-[a-z0-9]+\\.marketo\\.com|mktoForms2",
+      "name": "Marketo (Munchkin / Forms)",
+      "category": "marketing_automation"
+    },
+    {
+      "pattern": "pi\\.pardot\\.com|cdn\\.pardot\\.com|piAId|piCId|go\\.pardot\\.com",
+      "name": "Pardot (Salesforce)",
+      "category": "marketing_automation"
+    },
+    {
+      "pattern": "elqCfg|img\\d*\\.en25\\.com|elqtracking|elqforms|eloqua\\.com",
+      "name": "Oracle Eloqua",
+      "category": "marketing_automation"
+    },
+    {
+      "pattern": "cdn\\.evgnet\\.com|jb-api\\.exacttarget\\.com|exacttarget\\.com|marketingcloudapis\\.com",
+      "name": "Salesforce Marketing Cloud",
+      "category": "marketing_automation"
+    },
+    {
+      "pattern": "chimpstatic\\.com|list-manage\\.com|mc\\.us\\d+\\.list-manage|mcjs|mailchimp\\.com",
+      "name": "Mailchimp",
+      "category": "marketing_automation"
+    },
+    {
+      "pattern": "static(?:-tracking)?\\.klaviyo\\.com|klaviyo\\.com/onsite|_learnq\\.push|a\\.klaviyo\\.com",
+      "name": "Klaviyo",
+      "category": "marketing_automation"
+    },
+    {
+      "pattern": "trackcmp\\.net|activehosted\\.com|prism\\.app-us1\\.com|vgo\\(\\s*[\\\"']setAccount",
+      "name": "ActiveCampaign",
+      "category": "marketing_automation"
+    },
+    {
+      "pattern": "assets\\.customer\\.io/assets/track\\.js|customer\\.io/assets|_cio\\.identify|track\\.customer\\.io",
+      "name": "Customer.io",
+      "category": "marketing_automation"
+    },
+    {
+      "pattern": "js\\.appboycdn\\.com|braze\\.com/web|appboy\\.initialize|braze\\.initialize|sdk\\.iad-0\\d\\.braze\\.com",
+      "name": "Braze",
+      "category": "marketing_automation"
+    },
+    {
+      "pattern": "static\\.iterable\\.com|api\\.iterable\\.com|iterable\\.com",
+      "name": "Iterable",
+      "category": "marketing_automation"
+    },
+    {
+      "pattern": "sibautomation\\.com|sendinblue\\.com|brevo\\.com|sib_conversation|sendinblue",
+      "name": "Sendinblue / Brevo",
+      "category": "marketing_automation"
+    },
+    {
+      "pattern": "tag\\.getdrip\\.com|\\b_dcq\\.push|getdrip\\.com",
+      "name": "Drip",
+      "category": "marketing_automation"
+    },
+    {
+      "pattern": "omnisnippet1\\.com|omnisrc\\.com|omnisend\\.com",
+      "name": "Omnisend",
+      "category": "marketing_automation"
+    },
+    {
+      "pattern": "cdn\\.attn\\.tv/|cdn\\.postscript\\.io|postscript\\.io",
+      "name": "Postscript / Attentive (SMS)",
+      "category": "marketing_automation"
+    },
+    {
+      "pattern": "convertkit\\.com|f\\.convertkit\\.com|ck\\.page",
+      "name": "ConvertKit",
+      "category": "marketing_automation"
+    },
+    {
+      "pattern": "cdn\\.mailerlite\\.com|assets\\.mailerlite\\.com|ml_account|mailerlite\\.com",
+      "name": "MailerLite",
+      "category": "marketing_automation"
+    },
+    {
+      "pattern": "app\\.getresponse\\.com|gr\\(\\s*[\\\"']setAccount|getresponse\\.com/(?:script|view_webform)",
+      "name": "GetResponse",
+      "category": "marketing_automation"
+    },
+    {
+      "pattern": "cdn\\.jsdelivr\\.net/npm/@sendgrid|sendgrid\\.net|u\\d+\\.ct\\.sendgrid\\.net",
+      "name": "SendGrid (click tracking)",
+      "category": "marketing_automation"
+    },
+    {
+      "pattern": "mandrillapp\\.com|mandrill\\.com",
+      "name": "Mandrill",
+      "category": "marketing_automation"
+    },
+    {
+      "pattern": "cdn\\.optimizely\\.com/js/\\d+\\.js|optimizelyEndUserId",
+      "name": "Optimizely (project)",
+      "category": "ab_testing"
+    },
+    {
+      "pattern": "zohopublic\\.com|zoho\\.com/sites|zohocdn\\.com|salesiq\\.zoho",
+      "name": "Zoho (SalesIQ / forms)",
+      "category": "marketing_automation"
+    },
+    {
+      "pattern": "cdn\\.cookiebot\\.com|web-assets\\.cookiebot",
+      "name": "Cookiebot (assets)",
+      "category": "consent_management"
+    },
+    {
+      "pattern": "cdn\\.salesloft\\.com|salesloft\\.com|sl\\.js",
+      "name": "Salesloft",
+      "category": "marketing_automation"
+    },
+    {
+      "pattern": "outreach\\.io|outreach-assets",
+      "name": "Outreach.io",
+      "category": "marketing_automation"
+    },
+    {
+      "pattern": "wufoo\\.com|jotform\\.com/js|form\\.jotform\\.com",
+      "name": "Wufoo / Jotform (embed)",
+      "category": "marketing_automation"
+    },
+    {
+      "pattern": "calendly\\.com/assets|assets\\.calendly\\.com",
+      "name": "Calendly (embed)",
+      "category": "marketing_automation"
+    },
+    {
+      "pattern": "cdn\\.heapanalytics\\.com/js/heap-\\d+\\.js",
+      "name": "Heap (app ID script)",
+      "category": "analytics"
+    },
+    {
+      "pattern": "hotjar\\.com/c/hotjar-|hotjar\\.io|insights\\.hotjar\\.com|vars\\.hotjar\\.com",
+      "name": "Hotjar (collector)",
+      "category": "session_replay"
+    },
+    {
+      "pattern": "\\bheatmap\\.com|cdn\\.heatmap\\.com",
+      "name": "Heatmap.com",
+      "category": "session_replay"
+    },
+    {
+      "pattern": "cdn\\.contentsquare\\.net|t\\.contentsquare\\.net|contentsquare\\.com|c\\.contentsquare",
+      "name": "Contentsquare",
+      "category": "session_replay"
+    },
+    {
+      "pattern": "cdn\\.quantummetric\\.com|quantummetric\\.com|QuantumMetricAPI",
+      "name": "Quantum Metric",
+      "category": "session_replay"
+    },
+    {
+      "pattern": "cdn\\.glassboxdigital\\.com|glassboxdigital\\.com|glassbox",
+      "name": "Glassbox",
+      "category": "session_replay"
+    },
+    {
+      "pattern": "clicktale\\.net|cdnssl\\.clicktale\\.net|ClickTale",
+      "name": "ClickTale (legacy Contentsquare)",
+      "category": "session_replay"
+    },
+    {
+      "pattern": "decibelinsight\\.net|cdn\\.decibelinsight\\.net|decibel_insight",
+      "name": "Decibel Insight",
+      "category": "session_replay"
+    },
+    {
+      "pattern": "cdn\\.sessionstack\\.com|sessionstack\\.com|SessionStack\\.",
+      "name": "SessionStack",
+      "category": "session_replay"
+    },
+    {
+      "pattern": "cdn\\.openreplay\\.com|openreplay\\.com|OpenReplay\\(",
+      "name": "OpenReplay",
+      "category": "session_replay"
+    },
+    {
+      "pattern": "app\\.highlight\\.io|static\\.highlight\\.io|highlight\\.io|H\\.init\\(",
+      "name": "Highlight.io",
+      "category": "session_replay"
+    },
+    {
+      "pattern": "cdn\\.userleap\\.com|userleap\\.com|sprig\\.com|cdn\\.sprig\\.com",
+      "name": "Sprig (UserLeap)",
+      "category": "session_replay"
+    },
+    {
+      "pattern": "cdn\\.logrocket\\.com|LogRocket\\.init\\(",
+      "name": "LogRocket (init)",
+      "category": "session_replay"
+    },
+    {
+      "pattern": "script\\.crazyegg\\.com/pages/scripts|dnn506yrbagrg\\.cloudfront\\.net",
+      "name": "Crazy Egg (script)",
+      "category": "session_replay"
+    },
+    {
+      "pattern": "cdn\\.heapanalytics\\.com|heap-\\d+\\.js",
+      "name": "Heap (replay)",
+      "category": "session_replay"
+    },
+    {
+      "pattern": "cdn\\.fullstory\\.com|edge\\.fullstory\\.com|rs\\.fullstory\\.com|window\\._fs_host",
+      "name": "FullStory (edge)",
+      "category": "session_replay"
+    },
+    {
+      "pattern": "w1\\.luckyorange\\.com|d10lpsik1i8c69\\.cloudfront\\.net/w\\.js|luckyorange\\.net",
+      "name": "Lucky Orange (collector)",
+      "category": "session_replay"
+    },
+    {
+      "pattern": "cdn\\.walkme\\.com|walkme\\.com|WalkMeSnippet",
+      "name": "WalkMe",
+      "category": "session_replay"
+    },
+    {
+      "pattern": "cdn\\.appcues\\.com|fast\\.appcues\\.com|appcues\\.com",
+      "name": "Appcues",
+      "category": "session_replay"
+    },
+    {
+      "pattern": "cdn\\.userpilot\\.io|userpilot\\.io|Userpilot\\.",
+      "name": "Userpilot",
+      "category": "session_replay"
+    },
+    {
+      "pattern": "cdn\\.userguiding\\.com|userguiding\\.com",
+      "name": "UserGuiding",
+      "category": "session_replay"
+    },
+    {
+      "pattern": "cdn\\.whatfix\\.com|whatfix\\.com",
+      "name": "Whatfix",
+      "category": "session_replay"
+    },
+    {
+      "pattern": "cdn\\.usabilla\\.com|w\\.usabilla\\.com|usabilla_live",
+      "name": "Usabilla",
+      "category": "session_replay"
+    },
+    {
+      "pattern": "cdn\\.qualaroo\\.com|qualaroo\\.com",
+      "name": "Qualaroo",
+      "category": "session_replay"
+    },
+    {
+      "pattern": "cdn\\.medallia\\.com|nebula-cdn\\.kampyle\\.com|kampyle\\.com|medallia-dxa|resources\\.digital-cloud\\.medallia",
+      "name": "Medallia / Kampyle",
+      "category": "session_replay"
+    },
+    {
+      "pattern": "cdn\\.foresee\\.com|foresee\\.com|ForeSee",
+      "name": "ForeSee (Verint)",
+      "category": "session_replay"
+    },
+    {
+      "pattern": "cdn\\.survicate\\.com|survicate\\.com",
+      "name": "Survicate",
+      "category": "session_replay"
+    },
+    {
+      "pattern": "cdn\\.userzoom\\.com|userzoom\\.com",
+      "name": "UserZoom",
+      "category": "session_replay"
+    },
+    {
+      "pattern": "cdn\\.mouseflow\\.com/projects/[0-9a-f-]+\\.js|mouseflow\\.com/projects",
+      "name": "Mouseflow (project script)",
+      "category": "session_replay"
+    },
+    {
+      "pattern": "cdn\\.smartlook\\.com|web-sdk\\.smartlook\\.com|smartlook\\(\\s*[\\\"']init",
+      "name": "Smartlook (SDK)",
+      "category": "session_replay"
+    },
+    {
+      "pattern": "script\\.hotjar\\.com/modules\\.[0-9a-f]+\\.js",
+      "name": "Hotjar (modules)",
+      "category": "session_replay"
+    },
+    {
+      "pattern": "cdn\\.sessioncam\\.com|sessioncam\\.com|SessionCam",
+      "name": "SessionCam",
+      "category": "session_replay"
+    },
+    {
+      "pattern": "cdn\\.inspectlet\\.com/inspectlet\\.js|__insp\\.push",
+      "name": "Inspectlet (init)",
+      "category": "session_replay"
+    },
+    {
+      "pattern": "cdn\\.bugherd\\.com|bugherd\\.com|sidebar\\.bugherd",
+      "name": "BugHerd",
+      "category": "session_replay"
+    },
+    {
+      "pattern": "cdn\\.usersnap\\.com|api\\.usersnap\\.com|usersnap\\.com",
+      "name": "Usersnap",
+      "category": "session_replay"
+    },
+    {
+      "pattern": "cdn\\.userback\\.io|userback\\.io",
+      "name": "Userback",
+      "category": "session_replay"
+    },
+    {
+      "pattern": "cdn\\.olark\\.com|static\\.olark\\.com|olark\\.identify|olark\\('",
+      "name": "Olark",
+      "category": "chat_support"
+    },
+    {
+      "pattern": "salesiq\\.zoho\\.(?:com|eu|in)|\\$zoho\\.salesiq|zsiqchat",
+      "name": "Zoho SalesIQ",
+      "category": "chat_support"
+    },
+    {
+      "pattern": "code\\.tidio\\.co|tidiochat|tidioChatApi|widget-v4\\.tidiochat\\.com",
+      "name": "Tidio",
+      "category": "chat_support"
+    },
+    {
+      "pattern": "config\\.gorgias\\.chat|gorgias\\.chat|gorgias-chat|gorgias\\.io",
+      "name": "Gorgias Chat",
+      "category": "chat_support"
+    },
+    {
+      "pattern": "beacon-v2\\.helpscout\\.net|d3hb14vkzrxvou\\.cloudfront\\.net/helpscout\\.js|Beacon\\(\\s*[\\\"']init",
+      "name": "Help Scout Beacon",
+      "category": "chat_support"
+    },
+    {
+      "pattern": "freshdesk\\.com/js/widget|wchat\\.freshchat\\.com/js/widget\\.js|freshworks\\.com/widgets|FreshworksWidget\\(",
+      "name": "Freshdesk / Freshworks Widget",
+      "category": "chat_support"
+    },
+    {
+      "pattern": "app\\.purechat\\.com|purechat\\.com",
+      "name": "Pure Chat",
+      "category": "chat_support"
+    },
+    {
+      "pattern": "api\\.userlike\\.com|userlike-cdn-widgets|userlike\\.com",
+      "name": "Userlike",
+      "category": "chat_support"
+    },
+    {
+      "pattern": "smartsuppchat\\.com|smartsupp\\.com|_smartsupp\\.key",
+      "name": "Smartsupp",
+      "category": "chat_support"
+    },
+    {
+      "pattern": "code\\.jivosite\\.com|jivosite\\.com|jivo_api",
+      "name": "JivoChat",
+      "category": "chat_support"
+    },
+    {
+      "pattern": "call\\.chatra\\.io|chatra\\.io|ChatraID",
+      "name": "Chatra",
+      "category": "chat_support"
+    },
+    {
+      "pattern": "chat-widget\\.kustomer\\.com|kustomerapp\\.com|Kustomer\\.start",
+      "name": "Kustomer",
+      "category": "chat_support"
+    },
+    {
+      "pattern": "chat-assets\\.frontapp\\.com|frontapp\\.com|FrontChat\\(",
+      "name": "Front Chat",
+      "category": "chat_support"
+    },
+    {
+      "pattern": "cdn\\.liveagent\\.com|\\.ladesk\\.com|LiveAgent\\.createButton",
+      "name": "LiveAgent",
+      "category": "chat_support"
+    },
+    {
+      "pattern": "cdn\\.botpress\\.cloud|botpress\\.cloud|botpressWebChat",
+      "name": "Botpress",
+      "category": "chat_support"
+    },
+    {
+      "pattern": "static\\.ada\\.support|adaEmbed|ada\\.support/embed",
+      "name": "Ada",
+      "category": "chat_support"
+    },
+    {
+      "pattern": "qualified\\.com|js\\.qualified\\.com|qualified\\.js",
+      "name": "Qualified",
+      "category": "chat_support"
+    },
+    {
+      "pattern": "gladly\\.com|cdn\\.gladly\\.com|gladlyConfig",
+      "name": "Gladly",
+      "category": "chat_support"
+    },
+    {
+      "pattern": "service\\.force\\.com/embeddedservice|embeddedservice\\.min\\.js|liveagent\\.init\\(|salesforceliveagent\\.com",
+      "name": "Salesforce Chat (Embedded Service)",
+      "category": "chat_support"
+    },
+    {
+      "pattern": "class=[\\\"']fb-customerchat|fb-customerchat|connect\\.facebook\\.net/[^\\\"']*customerchat\\.js",
+      "name": "Facebook Customer Chat / Messenger plugin",
+      "category": "chat_support"
+    },
+    {
+      "pattern": "cdn\\.livechatinc\\.com/tracking\\.js|__lc\\.license|__lc\\s*=",
+      "name": "LiveChat (tracking)",
+      "category": "chat_support"
+    },
+    {
+      "pattern": "cdn\\.kommunicate\\.io|kommunicate\\.io",
+      "name": "Kommunicate",
+      "category": "chat_support"
+    },
+    {
+      "pattern": "widget\\.trengo\\.eu|trengo\\.eu",
+      "name": "Trengo",
+      "category": "chat_support"
+    },
+    {
+      "pattern": "cdn\\.chaport\\.com|chaport\\.com|chaport\\.js",
+      "name": "Chaport",
+      "category": "chat_support"
+    },
+    {
+      "pattern": "cdn\\.hubspot\\.net|hs-scripts\\.com/\\d+\\.js|hs-banner\\.com|hubspotusercontent",
+      "name": "HubSpot (script ID)",
+      "category": "chat_support"
+    },
+    {
+      "pattern": "widget\\.intercom\\.io/widget/[a-z0-9]{8}|intercomSettings|window\\.intercomSettings",
+      "name": "Intercom (app ID/settings)",
+      "category": "chat_support"
+    },
+    {
+      "pattern": "js\\.driftt\\.com/include|drift\\.load\\(|driftt\\.load",
+      "name": "Drift (include/load)",
+      "category": "chat_support"
+    },
+    {
+      "pattern": "cdn\\.crisp\\.chat|client\\.crisp\\.chat|CRISP_WEBSITE_ID|\\$crisp\\.push",
+      "name": "Crisp (website ID)",
+      "category": "chat_support"
+    },
+    {
+      "pattern": "embed\\.tawk\\.to/[0-9a-f]+/|Tawk_API|Tawk_LoadStart",
+      "name": "Tawk.to (property ID/API)",
+      "category": "chat_support"
+    },
+    {
+      "pattern": "cdn\\.zopim\\.com|v2\\.zopim\\.com|zEmbed|zE\\(\\s*[\\\"']webWidget",
+      "name": "Zendesk Web Widget",
+      "category": "chat_support"
+    },
+    {
+      "pattern": "cdn\\.aivo\\.co|aivo\\.co",
+      "name": "Aivo",
+      "category": "chat_support"
+    },
+    {
+      "pattern": "cdn\\.livespace\\.io|livespace\\.io",
+      "name": "Livespace",
+      "category": "chat_support"
+    },
+    {
+      "pattern": "cdn\\.getsitecontrol\\.com|getsitecontrol\\.com",
+      "name": "Getsitecontrol",
+      "category": "chat_support"
+    },
+    {
+      "pattern": "cdn\\.zdassets\\.com|ekr\\.zdassets\\.com",
+      "name": "Zendesk (assets)",
+      "category": "chat_support"
+    },
+    {
+      "pattern": "cdn\\.livecall\\.com|cdn\\.wati\\.io|wati\\.io",
+      "name": "WATI / WhatsApp widget",
+      "category": "chat_support"
+    },
+    {
+      "pattern": "wa\\.me/\\d+|api\\.whatsapp\\.com/send",
+      "name": "WhatsApp click-to-chat",
+      "category": "chat_support"
+    },
+    {
+      "pattern": "cdn\\.voiceflow\\.com|voiceflow\\.com",
+      "name": "Voiceflow",
+      "category": "chat_support"
+    },
+    {
+      "pattern": "cdn\\.chatbase\\.co|chatbase\\.co",
+      "name": "Chatbase",
+      "category": "chat_support"
+    },
+    {
+      "pattern": "widget\\.manychat\\.com|manychat\\.com",
+      "name": "ManyChat (widget)",
+      "category": "chat_support"
+    },
+    {
+      "pattern": "abtasty\\.com|try\\.abtasty\\.com|ABTasty",
+      "name": "AB Tasty",
+      "category": "ab_testing"
+    },
+    {
+      "pattern": "convertexperiments\\.com|cdn-4\\.convertexperiments\\.com|_conv_q",
+      "name": "Convert Experiences",
+      "category": "ab_testing"
+    },
+    {
+      "pattern": "kameleoon\\.com|kameleoon\\.eu|Kameleoon\\.",
+      "name": "Kameleoon",
+      "category": "ab_testing"
+    },
+    {
+      "pattern": "launchdarkly\\.com|clientsdk\\.launchdarkly\\.com|LDClient|ld-client-sdk",
+      "name": "LaunchDarkly",
+      "category": "ab_testing"
+    },
+    {
+      "pattern": "dynamicyield\\.com|cdn\\.dynamicyield\\.com|DY\\.recommendationContext",
+      "name": "Dynamic Yield",
+      "category": "ab_testing"
+    },
+    {
+      "pattern": "monetate\\.net|se\\.monetate\\.net|monetate\\.com",
+      "name": "Monetate",
+      "category": "ab_testing"
+    },
+    {
+      "pattern": "tt\\.omtrdc\\.net|at\\.js|adobe\\.target|mboxCreate|mbox\\.js",
+      "name": "Adobe Target",
+      "category": "ab_testing"
+    },
+    {
+      "pattern": "cdn\\.growthbook\\.io|growthbook\\.io|GrowthBook\\(",
+      "name": "GrowthBook",
+      "category": "ab_testing"
+    },
+    {
+      "pattern": "cdn\\.flagsmith\\.com|flagsmith\\.com|flagsmith\\.init",
+      "name": "Flagsmith",
+      "category": "ab_testing"
+    },
+    {
+      "pattern": "cdn\\.statsigapi\\.net|statsigapi\\.net|statsig\\.initialize",
+      "name": "Statsig (SDK)",
+      "category": "ab_testing"
+    },
+    {
+      "pattern": "cdn\\.unbounce\\.com|ubembed\\.com|unbouncepages\\.com|ub-lp",
+      "name": "Unbounce",
+      "category": "ab_testing"
+    },
+    {
+      "pattern": "instapage\\.com|pageserve\\.co|instapagemetrics\\.com",
+      "name": "Instapage",
+      "category": "ab_testing"
+    },
+    {
+      "pattern": "leadpages\\.net|leadpages\\.com|lp-pages",
+      "name": "Leadpages",
+      "category": "ab_testing"
+    },
+    {
+      "pattern": "cdn\\.sitespect\\.net|sitespect\\.com/js",
+      "name": "SiteSpect (script)",
+      "category": "ab_testing"
+    },
+    {
+      "pattern": "cdn\\.evergage\\.com|evergage\\.com|Evergage\\.init|interaction\\.studio",
+      "name": "Salesforce Interaction Studio / Evergage",
+      "category": "ab_testing"
+    },
+    {
+      "pattern": "cdn\\.nosto\\.com|connect\\.nosto\\.com|nostojs\\(",
+      "name": "Nosto",
+      "category": "ab_testing"
+    },
+    {
+      "pattern": "cdn\\.bloomreach\\.com|exponea\\.com|bloomreach\\.com|exponea\\.initialize",
+      "name": "Bloomreach / Exponea",
+      "category": "ab_testing"
+    },
+    {
+      "pattern": "cdn\\.richrelevance\\.com|richrelevance\\.com",
+      "name": "RichRelevance",
+      "category": "ab_testing"
+    },
+    {
+      "pattern": "cdn\\.barilliance\\.net|barilliance\\.com",
+      "name": "Barilliance",
+      "category": "ab_testing"
+    },
+    {
+      "pattern": "cdn\\.vwo\\.com/v2/vwo_|VWO\\.|_vwo_code|_vis_opt_",
+      "name": "VWO (inline)",
+      "category": "ab_testing"
+    },
+    {
+      "pattern": "cdn\\.optimizely\\.com/public/\\d+/s/|window\\[?[\\\"']optimizely[\\\"']\\]?",
+      "name": "Optimizely (public)",
+      "category": "ab_testing"
+    },
+    {
+      "pattern": "plausible\\.io/js/script\\.(?:tagged-events|outbound-links|file-downloads)",
+      "name": "Plausible (extensions)",
+      "category": "analytics"
+    },
+    {
+      "pattern": "js\\.honeybadger\\.io|honeybadger\\.configure\\(|Honeybadger\\.",
+      "name": "Honeybadger",
+      "category": "error_monitoring"
+    },
+    {
+      "pattern": "cdn\\.airbrake\\.io|airbrake-js|new Airbrake",
+      "name": "Airbrake",
+      "category": "error_monitoring"
+    },
+    {
+      "pattern": "cdn\\.trackjs\\.com|usage\\.trackjs\\.com|TrackJS\\.install",
+      "name": "TrackJS",
+      "category": "error_monitoring"
+    },
+    {
+      "pattern": "cdn\\.raygun\\.io|api\\.raygun\\.io|rg4js\\(",
+      "name": "Raygun",
+      "category": "error_monitoring"
+    },
+    {
+      "pattern": "elastic-apm-rum|apm-server|\\.apm\\.[a-z0-9.-]+\\.elastic-cloud\\.com",
+      "name": "Elastic APM RUM",
+      "category": "error_monitoring"
+    },
+    {
+      "pattern": "js-cdn\\.dynatrace\\.com|ruxitagentjs|dtrum\\.|bf\\d+\\.dynatrace",
+      "name": "Dynatrace RUM",
+      "category": "error_monitoring"
+    },
+    {
+      "pattern": "cdn\\.signalfx\\.com|signalfx-rum|splunk-otel-web|rum\\.signalfx\\.com|SplunkRum\\.init",
+      "name": "Splunk RUM",
+      "category": "error_monitoring"
+    },
+    {
+      "pattern": "eum\\.instana\\.io|instana\\.io|ineum\\(",
+      "name": "Instana EUM",
+      "category": "error_monitoring"
+    },
+    {
+      "pattern": "faro-web-sdk|faro-collector|grafana\\.net/faro|initializeFaro",
+      "name": "Grafana Faro",
+      "category": "error_monitoring"
+    },
+    {
+      "pattern": "lux\\.speedcurve\\.com|speedcurve\\.com|LUX\\s*=\\s*",
+      "name": "SpeedCurve RUM",
+      "category": "error_monitoring"
+    },
+    {
+      "pattern": "go-mpulse\\.net|c\\.go-mpulse\\.net|boomerang\\.js|boomerang-",
+      "name": "Akamai mPulse / Boomerang",
+      "category": "error_monitoring"
+    },
+    {
+      "pattern": "rum-static\\.pingdom\\.net|pingdom\\.net|prum\\.min\\.js",
+      "name": "Pingdom RUM",
+      "category": "error_monitoring"
+    },
+    {
+      "pattern": "collector\\.catchpoint\\.com|catchpoint\\.com|rum\\.catchpoint",
+      "name": "Catchpoint RUM",
+      "category": "error_monitoring"
+    },
+    {
+      "pattern": "sematext\\.com|cdn\\.sematext\\.com|SematextRum",
+      "name": "Sematext",
+      "category": "error_monitoring"
+    },
+    {
+      "pattern": "atatus\\.com|cdn\\.atatus\\.com|atatus-spa",
+      "name": "Atatus",
+      "category": "error_monitoring"
+    },
+    {
+      "pattern": "embrace\\.io|cdn\\.embrace\\.io",
+      "name": "Embrace",
+      "category": "error_monitoring"
+    },
+    {
+      "pattern": "glitchtip\\.com|app\\.glitchtip\\.com",
+      "name": "GlitchTip",
+      "category": "error_monitoring"
+    },
+    {
+      "pattern": "bam\\.nr-data\\.net|js-agent\\.newrelic\\.com|NREUM|newrelic\\.setCustomAttribute",
+      "name": "New Relic Browser (agent)",
+      "category": "error_monitoring"
+    },
+    {
+      "pattern": "o\\d+\\.ingest\\.sentry\\.io|ingest\\.(?:us\\.|de\\.)?sentry\\.io|https://[0-9a-f]{32}@[^\\\"'/]+/\\d+",
+      "name": "Sentry (DSN/ingest)",
+      "category": "error_monitoring"
+    },
+    {
+      "pattern": "cdn\\.bugsnag\\.com|notify\\.bugsnag\\.com|Bugsnag\\.start\\(|bugsnag\\.init",
+      "name": "Bugsnag (start)",
+      "category": "error_monitoring"
+    },
+    {
+      "pattern": "rum\\.browser-intake-datadoghq\\.(?:com|eu)|browser-intake-datadoghq|DD_RUM\\.init|datadogRum\\.init",
+      "name": "Datadog RUM (init)",
+      "category": "error_monitoring"
+    },
+    {
+      "pattern": "cdn\\.lr-in-prod\\.com|lr-in-prod\\.com|r\\.lr-ingest\\.io|lr-ingest\\.com",
+      "name": "LogRocket (ingest)",
+      "category": "error_monitoring"
+    },
+    {
+      "pattern": "api\\.rollbar\\.com|Rollbar\\.init|_rollbarConfig",
+      "name": "Rollbar (config)",
+      "category": "error_monitoring"
+    },
+    {
+      "pattern": "cdn\\.azure\\.com/scripts/ai|js\\.monitor\\.azure\\.com|appInsights|ApplicationInsights|dc\\.services\\.visualstudio\\.com",
+      "name": "Azure Application Insights",
+      "category": "error_monitoring"
+    },
+    {
+      "pattern": "gstatic\\.com/firebasejs/[\\d.]+/firebase-performance|firebase-perf",
+      "name": "Firebase Performance",
+      "category": "error_monitoring"
+    },
+    {
+      "pattern": "cdn\\.amazon-cloudwatch-rum|cwr\\.js|rum\\.us-[a-z0-9-]+\\.amazonaws\\.com|aws-rum-web",
+      "name": "AWS CloudWatch RUM",
+      "category": "error_monitoring"
+    },
+    {
+      "pattern": "cdn\\.opentelemetry\\.io|@opentelemetry/sdk-trace-web|otel-collector",
+      "name": "OpenTelemetry Web",
+      "category": "error_monitoring"
+    },
+    {
+      "pattern": "cdn\\.statuspage\\.io|statuspage\\.io/embed|metastatuspage\\.com",
+      "name": "Atlassian Statuspage embed",
+      "category": "error_monitoring"
+    },
+    {
+      "pattern": "cdn\\.usefathom\\.com/script\\.js\\?|webpagetest\\.org",
+      "name": "WebPageTest beacon",
+      "category": "error_monitoring"
+    },
+    {
+      "pattern": "cdn\\.arkoselabs\\.com|client-api\\.arkoselabs\\.com|funcaptcha\\.com|arkoselabs\\.com",
+      "name": "Arkose Labs / FunCaptcha",
+      "category": "fingerprinting"
+    },
+    {
+      "pattern": "geetest\\.com|static\\.geetest\\.com|gt\\.js|initGeetest",
+      "name": "GeeTest",
+      "category": "fingerprinting"
+    },
+    {
+      "pattern": "kasada\\.io|ips\\.js|/ips\\.js\\?|x-kpsdk",
+      "name": "Kasada",
+      "category": "fingerprinting"
+    },
+    {
+      "pattern": "online-metrix\\.net|h\\.online-metrix\\.net|threatmetrix",
+      "name": "ThreatMetrix (LexisNexis)",
+      "category": "fingerprinting"
+    },
+    {
+      "pattern": "cdn\\.sift\\.com|cdn\\.siftscience\\.com|siftscience\\.com|_sift\\.push",
+      "name": "Sift",
+      "category": "fingerprinting"
+    },
+    {
+      "pattern": "forter\\.com|cdn\\d+\\.forter\\.com|forterToken",
+      "name": "Forter",
+      "category": "fingerprinting"
+    },
+    {
+      "pattern": "riskified\\.com|beacon\\.riskified\\.com|riskx\\.js",
+      "name": "Riskified",
+      "category": "fingerprinting"
+    },
+    {
+      "pattern": "signifyd\\.com|cdn-scripts\\.signifyd\\.com|sig-api",
+      "name": "Signifyd",
+      "category": "fingerprinting"
+    },
+    {
+      "pattern": "biocatch\\.com|bc-snippet|cdn\\.biocatch\\.com",
+      "name": "BioCatch",
+      "category": "fingerprinting"
+    },
+    {
+      "pattern": "iovation\\.com|mpsnare\\.iesnare\\.com|iesnare\\.com",
+      "name": "iovation / TransUnion",
+      "category": "fingerprinting"
+    },
+    {
+      "pattern": "incognia\\.com|cdn\\.incognia\\.com",
+      "name": "Incognia",
+      "category": "fingerprinting"
+    },
+    {
+      "pattern": "fpjs\\.io|fpcdn\\.io|fingerprint\\.com|FingerprintJS\\.load|fpjs_script|api\\.fpjs\\.io",
+      "name": "Fingerprint (FingerprintJS Pro)",
+      "category": "fingerprinting"
+    },
+    {
+      "pattern": "clientjs|ClientJS\\(\\)|getFingerprint\\(\\)",
+      "name": "ClientJS",
+      "category": "fingerprinting"
+    },
+    {
+      "pattern": "cdn\\.jsdelivr\\.net/npm/@thumbmarkjs|thumbmark\\.js|ThumbmarkJS",
+      "name": "ThumbmarkJS",
+      "category": "fingerprinting"
+    },
+    {
+      "pattern": "friendlycaptcha\\.com|cdn\\.jsdelivr\\.net/npm/friendly-challenge|frc-captcha",
+      "name": "Friendly Captcha",
+      "category": "fingerprinting"
+    },
+    {
+      "pattern": "mcaptcha\\.|cdn\\.mcaptcha",
+      "name": "mCaptcha",
+      "category": "fingerprinting"
+    },
+    {
+      "pattern": "smartcaptcha\\.yandexcloud\\.net|captcha-api\\.yandex\\.ru",
+      "name": "Yandex SmartCaptcha",
+      "category": "fingerprinting"
+    },
+    {
+      "pattern": "awswaf\\.com|aws-waf-captcha|AwsWafCaptcha|AwsWafIntegration",
+      "name": "AWS WAF CAPTCHA / Challenge",
+      "category": "fingerprinting"
+    },
+    {
+      "pattern": "recaptcha/enterprise\\.js|recaptcha\\.net/recaptcha|gstatic\\.com/recaptcha",
+      "name": "Google reCAPTCHA (enterprise / assets)",
+      "category": "fingerprinting"
+    },
+    {
+      "pattern": "hcaptcha\\.com/captcha|js\\.hcaptcha\\.com|newassets\\.hcaptcha\\.com|hcaptcha-api",
+      "name": "hCaptcha (assets)",
+      "category": "fingerprinting"
+    },
+    {
+      "pattern": "perimeterx\\.net|px-client\\.net|px-cloud\\.net|/px/client/main\\.min\\.js|_pxAppId",
+      "name": "PerimeterX / HUMAN (client)",
+      "category": "fingerprinting"
+    },
+    {
+      "pattern": "geo\\.captcha-delivery\\.com|ct\\.captcha-delivery\\.com|api-js\\.datadome\\.co|dd\\.datadome",
+      "name": "DataDome (captcha-delivery)",
+      "category": "fingerprinting"
+    },
+    {
+      "pattern": "cdn\\.reblaze\\.com|reblaze\\.com|rbzns",
+      "name": "Reblaze",
+      "category": "fingerprinting"
+    },
+    {
+      "pattern": "akamai[^\\\"']*bm|/akam/\\d+/|_abck|bm-verify",
+      "name": "Akamai Bot Manager",
+      "category": "fingerprinting"
+    },
+    {
+      "pattern": "cdn\\.jsdelivr\\.net/npm/@fingerprintjs/botd|botd\\.js|BotD\\.load",
+      "name": "FingerprintJS BotD",
+      "category": "fingerprinting"
+    },
+    {
+      "pattern": "cdn\\.jsdelivr\\.net/npm/@fingerprintjs/fingerprintjs|fingerprintjs2|Fingerprint2\\.get",
+      "name": "FingerprintJS (OSS)",
+      "category": "fingerprinting"
+    },
+    {
+      "pattern": "cdn\\.socure\\.com|socure\\.com/digital|devicerisk\\.js",
+      "name": "Socure",
+      "category": "fingerprinting"
+    },
+    {
+      "pattern": "cdn\\.persona(?:cdn)?\\.com|withpersona\\.com",
+      "name": "Persona (identity verification)",
+      "category": "fingerprinting"
+    },
+    {
+      "pattern": "cdn\\.onfido\\.com|onfido\\.com",
+      "name": "Onfido",
+      "category": "fingerprinting"
+    },
+    {
+      "pattern": "cdn\\.veriff\\.me|veriff\\.com|sdk\\.veriff",
+      "name": "Veriff",
+      "category": "fingerprinting"
+    },
+    {
+      "pattern": "cdn\\.plaid\\.com/link|plaid\\.com/link",
+      "name": "Plaid Link",
+      "category": "fingerprinting"
+    },
+    {
+      "pattern": "cmp\\.quantcast\\.com|quantcast\\.mgr\\.consensu\\.org|quantcast-choice|quantcast\\.com/choice",
+      "name": "Quantcast Choice (CMP)",
+      "category": "consent_management"
+    },
+    {
+      "pattern": "consent\\.trustarc\\.com|trustarc\\.com|truste\\.com|teconsent|truste-consent",
+      "name": "TrustArc / TRUSTe",
+      "category": "consent_management"
+    },
+    {
+      "pattern": "sdk\\.privacy-center\\.org|didomi\\.io|didomiConfig|Didomi\\.on",
+      "name": "Didomi",
+      "category": "consent_management"
+    },
+    {
+      "pattern": "cmp\\.osano\\.com|osano\\.com|Osano\\.cm",
+      "name": "Osano",
+      "category": "consent_management"
+    },
+    {
+      "pattern": "cdn-cookieyes\\.com|cookieyes\\.com|cky-consent",
+      "name": "CookieYes",
+      "category": "consent_management"
+    },
+    {
+      "pattern": "app\\.termly\\.io|termly\\.io/resource-blocker|Termly\\.",
+      "name": "Termly",
+      "category": "consent_management"
+    },
+    {
+      "pattern": "complianz|cmplz-|cmplz_",
+      "name": "Complianz (WordPress)",
+      "category": "consent_management"
+    },
+    {
+      "pattern": "cookie-script\\.com|cdn\\.cookie-script\\.com|cookiescript",
+      "name": "Cookie-Script",
+      "category": "consent_management"
+    },
+    {
+      "pattern": "consent\\.cookiefirst\\.com|cookiefirst\\.com",
+      "name": "CookieFirst",
+      "category": "consent_management"
+    },
+    {
+      "pattern": "cdn\\.privacy-mgmt\\.com|sourcepoint\\.mgr\\.consensu\\.org|sp-prod\\.net|_sp_\\.config|sourcepoint",
+      "name": "Sourcepoint",
+      "category": "consent_management"
+    },
+    {
+      "pattern": "static\\.axept\\.io|axeptio\\.eu|axeptioSettings",
+      "name": "Axeptio",
+      "category": "consent_management"
+    },
+    {
+      "pattern": "borlabs-cookie|BorlabsCookie|borlabsCookieConfig",
+      "name": "Borlabs Cookie (WordPress)",
+      "category": "consent_management"
+    },
+    {
+      "pattern": "klaro(?:\\.js|-no-css\\.js)|klaroConfig|kiprotect",
+      "name": "Klaro",
+      "category": "consent_management"
+    },
+    {
+      "pattern": "cookiecontrol|civiccomputing\\.com|CookieControl\\.load",
+      "name": "Civic Cookie Control",
+      "category": "consent_management"
+    },
+    {
+      "pattern": "global\\.ketchcdn\\.com|ketchcdn\\.com|ketch_data_privacy",
+      "name": "Ketch",
+      "category": "consent_management"
+    },
+    {
+      "pattern": "transcend-cdn\\.com|cdn\\.transcend\\.io|transcend\\.io",
+      "name": "Transcend",
+      "category": "consent_management"
+    },
+    {
+      "pattern": "securiti\\.ai|cdn\\.securiti\\.ai",
+      "name": "Securiti",
+      "category": "consent_management"
+    },
+    {
+      "pattern": "cdn\\.cookie-consent|cookieconsent\\.min\\.js|cookieconsent@|cookieconsent\\.insites\\.com|cc\\.initialise",
+      "name": "Cookie Consent (Osano OSS / Insites)",
+      "category": "consent_management"
+    },
+    {
+      "pattern": "cookie-law-info|cli_cookiebar|cookielawinfo",
+      "name": "Cookie Law Info (WordPress)",
+      "category": "consent_management"
+    },
+    {
+      "pattern": "cookie-notice|cn-notice-text|cookie_notice_options",
+      "name": "Cookie Notice (WordPress)",
+      "category": "consent_management"
+    },
+    {
+      "pattern": "gdpr-cookie-compliance|moove_gdpr",
+      "name": "GDPR Cookie Compliance (WordPress)",
+      "category": "consent_management"
+    },
+    {
+      "pattern": "consent\\.cookiebot\\.com/uc\\.js|CookieConsent\\.consent|Cookiebot\\.consent",
+      "name": "Cookiebot (UC / API)",
+      "category": "consent_management"
+    },
+    {
+      "pattern": "cdn\\.cookielaw\\.org/scripttemplates/otSDKStub|OptanonWrapper|OneTrust\\.",
+      "name": "OneTrust (SDK stub)",
+      "category": "consent_management"
+    },
+    {
+      "pattern": "app\\.usercentrics\\.eu|usercentrics\\.eu|UC_UI|uc-block",
+      "name": "Usercentrics (app)",
+      "category": "consent_management"
+    },
+    {
+      "pattern": "cdn\\.iubenda\\.com/cs/iubenda_cs\\.js|iubenda\\.com/cons|_iub\\.csConfiguration|_iub\\.cs",
+      "name": "Iubenda (cookie solution)",
+      "category": "consent_management"
+    },
+    {
+      "pattern": "cmp\\.inmobi\\.com|inmobi\\.com/choice|inmobi-choice",
+      "name": "InMobi Choice",
+      "category": "consent_management"
+    },
+    {
+      "pattern": "cmp\\.setupad|cmpv2|__tcfapi\\(|__cmp\\(|window\\.__tcfapi",
+      "name": "IAB TCF CMP API",
+      "category": "consent_management"
+    },
+    {
+      "pattern": "gtag\\(\\s*[\\\"']consent[\\\"']\\s*,\\s*[\\\"'](?:default|update)",
+      "name": "Google Consent Mode",
+      "category": "consent_management"
+    },
+    {
+      "pattern": "cdn\\.consentmanager\\.net/delivery/autoblocking|consentmanager\\.mgr\\.consensu\\.org",
+      "name": "Consentmanager (autoblocking)",
+      "category": "consent_management"
+    },
+    {
+      "pattern": "connect\\.facebook\\.net/[^\\\"']*/sdk\\.js|FB\\.init\\(|fb-root",
+      "name": "Facebook SDK (JS)",
+      "category": "social_widget"
+    },
+    {
+      "pattern": "platform\\.twitter\\.com/widgets\\.js|twttr\\.widgets|twitter-tweet|twitter-timeline",
+      "name": "Twitter/X Widgets",
+      "category": "social_widget"
+    },
+    {
+      "pattern": "platform\\.x\\.com|syndication\\.twitter\\.com|syndication\\.x\\.com",
+      "name": "Twitter/X Syndication",
+      "category": "social_widget"
+    },
+    {
+      "pattern": "instagram\\.com/embed\\.js|instagram-media|cdninstagram\\.com",
+      "name": "Instagram Embed",
+      "category": "social_widget"
+    },
+    {
+      "pattern": "assets\\.pinterest\\.com/js/pinit\\.js|pinterest\\.com/pin/create|data-pin-do",
+      "name": "Pinterest Widgets / Save button",
+      "category": "social_widget"
+    },
+    {
+      "pattern": "s7\\.addthis\\.com|addthis_widget\\.js|addthis\\.com/js|addthis_config",
+      "name": "AddThis",
+      "category": "social_widget"
+    },
+    {
+      "pattern": "platform-api\\.sharethis\\.com|w\\.sharethis\\.com|sharethis\\.com/button|__sharethis__",
+      "name": "ShareThis",
+      "category": "social_widget"
+    },
+    {
+      "pattern": "static\\.addtoany\\.com|a2a_config|addtoany\\.com/",
+      "name": "AddToAny",
+      "category": "social_widget"
+    },
+    {
+      "pattern": "disqus\\.com/embed\\.js|\\.disqus\\.com/|disqus_shortname|DISQUS\\.",
+      "name": "Disqus",
+      "category": "social_widget"
+    },
+    {
+      "pattern": "platform\\.linkedin\\.com/in\\.js|linkedin\\.com/shareArticle|linkedin\\.com/embed",
+      "name": "LinkedIn Plugin / Share",
+      "category": "social_widget"
+    },
+    {
+      "pattern": "accounts\\.google\\.com/gsi/client|apis\\.google\\.com/js/platform\\.js|g_id_onload|google\\.accounts\\.id",
+      "name": "Google Sign-In / Identity Services",
+      "category": "social_widget"
+    },
+    {
+      "pattern": "appleid\\.cdn-apple\\.com/appleauth|AppleID\\.auth",
+      "name": "Sign in with Apple JS",
+      "category": "social_widget"
+    },
+    {
+      "pattern": "sdk\\.tiktok\\.com|tiktok\\.com/embed\\.js|tiktok-embed",
+      "name": "TikTok Embed / SDK",
+      "category": "social_widget"
+    },
+    {
+      "pattern": "elfsight\\.com|apps\\.elfsight\\.com|elfsight-app",
+      "name": "Elfsight widgets",
+      "category": "social_widget"
+    },
+    {
+      "pattern": "cdn\\.lightwidget\\.com|lightwidget\\.com|snapwidget\\.com|behold\\.so",
+      "name": "Instagram feed widgets",
+      "category": "social_widget"
+    },
+    {
+      "pattern": "embedsocial\\.com|embedsocial\\.js",
+      "name": "EmbedSocial",
+      "category": "social_widget"
+    },
+    {
+      "pattern": "giscus\\.app|utteranc\\.es|cusdis\\.com",
+      "name": "Giscus / Utterances (GitHub comments)",
+      "category": "social_widget"
+    },
+    {
+      "pattern": "gravatar\\.com/avatar|secure\\.gravatar\\.com",
+      "name": "Gravatar",
+      "category": "social_widget"
+    },
+    {
+      "pattern": "youtube(?:-nocookie)?\\.com/(?:embed|iframe_api)|youtube\\.com/player_api|ytimg\\.com/vi",
+      "name": "YouTube Embed",
+      "category": "embedded_content"
+    },
+    {
+      "pattern": "player\\.vimeo\\.com|f\\.vimeocdn\\.com|vimeo\\.com/api/player",
+      "name": "Vimeo Player",
+      "category": "embedded_content"
+    },
+    {
+      "pattern": "fast\\.wistia\\.(?:com|net)|wistia\\.com/embed|wistia_embed|embed-ssl\\.wistia\\.com",
+      "name": "Wistia",
+      "category": "embedded_content"
+    },
+    {
+      "pattern": "cdn\\.jwplayer\\.com|content\\.jwplatform\\.com|jwplayer\\(",
+      "name": "JW Player",
+      "category": "embedded_content"
+    },
+    {
+      "pattern": "players\\.brightcove\\.net|brightcove\\.com|bcov\\.js",
+      "name": "Brightcove",
+      "category": "embedded_content"
+    },
+    {
+      "pattern": "open\\.spotify\\.com/embed|embed\\.spotify\\.com|spotify-embed",
+      "name": "Spotify Embed",
+      "category": "embedded_content"
+    },
+    {
+      "pattern": "w\\.soundcloud\\.com/player|soundcloud\\.com/player|api\\.soundcloud\\.com",
+      "name": "SoundCloud Embed",
+      "category": "embedded_content"
+    },
+    {
+      "pattern": "embed\\.music\\.apple\\.com|podcasts\\.apple\\.com/embed",
+      "name": "Apple Music / Podcasts Embed",
+      "category": "embedded_content"
+    },
+    {
+      "pattern": "twitch\\.tv/embed|player\\.twitch\\.tv|embed\\.twitch\\.tv",
+      "name": "Twitch Embed",
+      "category": "embedded_content"
+    },
+    {
+      "pattern": "cdn\\.plyr\\.io|video\\.js|vjs-|videojs\\(",
+      "name": "Video.js / Plyr",
+      "category": "embedded_content"
+    },
+    {
+      "pattern": "fonts\\.googleapis\\.com|fonts\\.gstatic\\.com",
+      "name": "Google Fonts (external — IP disclosure to Google)",
+      "category": "embedded_content"
+    },
+    {
+      "pattern": "use\\.typekit\\.net|use\\.typekit\\.com|p\\.typekit\\.net|Typekit\\.load",
+      "name": "Adobe Fonts (Typekit)",
+      "category": "embedded_content"
+    },
+    {
+      "pattern": "fast\\.fonts\\.net|fonts\\.com/fonts|cloud\\.typography\\.com|webfonts\\.fonts\\.com",
+      "name": "Monotype / Fonts.com",
+      "category": "embedded_content"
+    },
+    {
+      "pattern": "use\\.fontawesome\\.com|kit\\.fontawesome\\.com|cdnjs\\.cloudflare\\.com/ajax/libs/font-awesome",
+      "name": "Font Awesome (CDN / Kit)",
+      "category": "embedded_content"
+    },
+    {
+      "pattern": "maps\\.googleapis\\.com/maps/api/(?:js|staticmap|geocode)|maps\\.google\\.com/maps|google\\.com/maps/embed",
+      "name": "Google Maps",
+      "category": "maps"
+    },
+    {
+      "pattern": "api\\.mapbox\\.com|events\\.mapbox\\.com|mapbox-gl|mapboxgl\\.accessToken",
+      "name": "Mapbox",
+      "category": "maps"
+    },
+    {
+      "pattern": "tile\\.openstreetmap\\.org|[abc]\\.tile\\.openstreetmap|openstreetmap\\.org/export/embed",
+      "name": "OpenStreetMap tiles",
+      "category": "maps"
+    },
+    {
+      "pattern": "api\\.tiles\\.mapbox\\.com|a\\.tiles\\.mapbox\\.com",
+      "name": "Mapbox (tiles)",
+      "category": "maps"
+    },
+    {
+      "pattern": "api\\.here\\.com|js\\.api\\.here\\.com|here\\.com/maps",
+      "name": "HERE Maps",
+      "category": "maps"
+    },
+    {
+      "pattern": "maps\\.bing\\.com|bing\\.com/maps|virtualearth\\.net",
+      "name": "Bing Maps",
+      "category": "maps"
+    },
+    {
+      "pattern": "api-maps\\.yandex\\.ru|enterprise\\.api-maps\\.yandex\\.ru|ymaps\\.",
+      "name": "Yandex Maps",
+      "category": "maps"
+    },
+    {
+      "pattern": "js\\.stripe\\.com|m\\.stripe\\.network|m\\.stripe\\.com|checkout\\.stripe\\.com",
+      "name": "Stripe.js (fraud signals)",
+      "category": "payments"
+    },
+    {
+      "pattern": "paypal\\.com/sdk/js|paypalobjects\\.com|paypal\\.com/tagmanager|paypal-js",
+      "name": "PayPal JS SDK",
+      "category": "payments"
+    },
+    {
+      "pattern": "js\\.braintreegateway\\.com|assets\\.braintreegateway\\.com|braintree-web",
+      "name": "Braintree",
+      "category": "payments"
+    },
+    {
+      "pattern": "js\\.klarna\\.com|x\\.klarnacdn\\.net|klarna-placement",
+      "name": "Klarna JS",
+      "category": "payments"
+    },
+    {
+      "pattern": "js\\.afterpay\\.com|portal\\.afterpay\\.com|static\\.afterpay\\.com",
+      "name": "Afterpay",
+      "category": "payments"
+    },
+    {
+      "pattern": "js\\.squareup\\.com|web\\.squarecdn\\.com|squareup\\.com/v2/paymentform",
+      "name": "Square Web Payments",
+      "category": "payments"
+    },
+    {
+      "pattern": "checkoutshopper-live\\.adyen\\.com|adyen\\.com/checkoutshopper|adyen-checkout",
+      "name": "Adyen Checkout",
+      "category": "payments"
+    },
+    {
+      "pattern": "cdn\\.paddle\\.com|Paddle\\.Setup|paddle\\.js",
+      "name": "Paddle",
+      "category": "payments"
+    },
+    {
+      "pattern": "cdn\\.lemonsqueezy\\.com|assets\\.lemonsqueezy\\.com|lemon\\.js",
+      "name": "Lemon Squeezy",
+      "category": "payments"
+    },
+    {
+      "pattern": "cdn\\.sezzle\\.com|widget\\.sezzle\\.com|sezzle-widget",
+      "name": "Sezzle",
+      "category": "payments"
+    },
+    {
+      "pattern": "js\\.affirm\\.com|cdn1\\.affirm\\.com|affirm\\.ui",
+      "name": "Affirm",
+      "category": "payments"
+    },
+    {
+      "pattern": "cdn\\.razorpay\\.com|checkout\\.razorpay\\.com",
+      "name": "Razorpay",
+      "category": "payments"
+    },
+    {
+      "pattern": "js\\.paystack\\.co|checkout\\.paystack\\.com",
+      "name": "Paystack",
+      "category": "payments"
+    },
+    {
+      "pattern": "checkout\\.flutterwave\\.com|ravesandbox\\.flutterwave",
+      "name": "Flutterwave",
+      "category": "payments"
+    },
+    {
+      "pattern": "cdn\\.mercadopago\\.com|sdk\\.mercadopago\\.com|mercadopago\\.",
+      "name": "Mercado Pago",
+      "category": "payments"
+    },
+    {
+      "pattern": "coin-hive\\.com|coinhive\\.min\\.js|CoinHive\\.(?:Anonymous|User)|CoinHive\\.Token",
+      "name": "Coinhive (legacy cryptominer, variant)",
+      "category": "abuse"
+    },
+    {
+      "pattern": "coinimp\\.com|www\\.hostingcloud\\.|hostingcloud\\.racing|Client\\.Anonymous\\(",
+      "name": "CoinImp / HostingCloud (cryptominer)",
+      "category": "abuse"
+    },
+    {
+      "pattern": "crypto-loot\\.com|crypto-loot\\.org|CRLT\\.Anonymous",
+      "name": "Crypto-Loot (cryptominer)",
+      "category": "abuse"
+    },
+    {
+      "pattern": "jsecoin\\.com|load\\.jsecoin\\.com|JSEcoin",
+      "name": "JSEcoin (cryptominer)",
+      "category": "abuse"
+    },
+    {
+      "pattern": "mineralt\\.io|monerominer\\.rocks|ppoi\\.org|browsermine\\.com|papoto\\.com|webminepool\\.com|webmine\\.cz|minemytraffic\\.com|coinblind\\.com|miner\\.start\\(",
+      "name": "Browser cryptominer (misc. known)",
+      "category": "abuse"
+    },
+    {
+      "pattern": "deepMiner|deepminer\\.js|new\\s+CoinHive|ProjectPoi|\\bwasm-miner\\b|cryptonight\\.wasm",
+      "name": "Browser cryptominer (WASM / generic)",
+      "category": "abuse"
+    },
+    {
+      "pattern": "polyfill\\.io/v[123]/polyfill|cdn\\.polyfill\\.io|polyfill\\.io",
+      "name": "polyfill.io (compromised CDN — supply-chain risk)",
+      "category": "abuse"
+    },
+    {
+      "pattern": "cdn\\.bootcss\\.com|cdn\\.bootcdn\\.net|bootcdn\\.net|staticfile\\.net|unionadjs\\.com|xhsbpza\\.com|newcrbpc\\.com",
+      "name": "Polyfill.io-campaign related domains (supply-chain risk)",
+      "category": "abuse"
+    },
+    {
+      "pattern": "eval\\(\\s*(?:atob|unescape|String\\.fromCharCode)\\s*\\(",
+      "name": "Obfuscated eval loader (heuristic)",
+      "category": "abuse"
+    },
+    {
+      "pattern": "document\\.write\\(\\s*unescape\\(\\s*[\\\"']%3C(?:script|iframe)",
+      "name": "Obfuscated document.write injection (heuristic)",
+      "category": "abuse"
+    },
+    {
+      "pattern": "<iframe[^>]+(?:width|height)=[\\\"']?[01](?:px)?[\\\"']?[^>]*src=[\\\"']https?://",
+      "name": "Hidden iframe (0/1px) to external host (heuristic)",
+      "category": "abuse"
+    },
+    {
+      "pattern": "window\\.location(?:\\.href)?\\s*=\\s*[\\\"']https?://[^\\\"']+[\\\"'];?\\s*//\\s*redirect|top\\.location\\.replace\\(\\s*[\\\"']https?://",
+      "name": "Forced top-level redirect (heuristic)",
+      "category": "abuse"
+    },
+    {
+      "pattern": "navigator\\.sendBeacon\\([^)]*(?:card|cc_num|cvv|cardnumber)",
+      "name": "Possible payment-card skimmer exfil (heuristic)",
+      "category": "abuse"
+    },
+    {
+      "pattern": "addEventListener\\(\\s*[\\\"']submit[\\\"'][^)]{0,200}(?:cardnumber|cc-number|cvv)",
+      "name": "Possible payment-form skimmer hook (heuristic)",
+      "category": "abuse"
+    },
+    {
+      "pattern": "\\.(?:tk|ml|ga|cf|gq)/[^\\\"'\\s]*\\.js",
+      "name": "Script loaded from free-TLD host (.tk/.ml/.ga/.cf/.gq)",
+      "category": "abuse"
+    },
+    {
+      "pattern": "\\bgtag\\(\\s*[\"\\']config[\"\\']\\s*,\\s*[\"\\']G-|googletagmanager\\.com/gtag/js\\?id=G-",
+      "name": "Google Analytics (GA4)",
+      "category": "analytics"
+    },
+    {
+      "pattern": "ssl\\.google-analytics\\.com|google-analytics\\.com/(?:g/)?collect",
+      "name": "Google Analytics",
+      "category": "analytics"
+    },
+    {
+      "pattern": "counter\\.yadro\\.ru",
+      "name": "LiveInternet / Yadro counter",
+      "category": "analytics"
+    },
+    {
+      "pattern": "mc\\.yandex\\.(?:ru|com)/(?:metrika|watch)|yandex\\.ru/metrika|\\bym\\(\\s*\\d{5,}",
+      "name": "Yandex Metrica",
+      "category": "analytics"
+    },
+    {
+      "pattern": "facebook\\.com/tr\\?",
+      "name": "Meta/Facebook Pixel (noscript beacon)",
+      "category": "ad_pixel"
+    },
+    {
+      "pattern": "bat\\.bing\\.com/bat\\.js|bat\\.bing\\.com/action",
+      "name": "Microsoft/Bing Ads (UET)",
+      "category": "ad_pixel"
+    },
+    {
+      "pattern": "googleads\\.g\\.doubleclick\\.net|(?<![\\w-])doubleclick\\.net|googleadservices\\.com",
+      "name": "Google Ads / DoubleClick",
+      "category": "ad_pixel"
+    },
+    {
+      "pattern": "tr\\.pinterest\\.com/v3|s\\.pinimg\\.com/ct/core\\.js",
+      "name": "Pinterest Tag",
+      "category": "ad_pixel"
+    },
+    {
+      "pattern": "reddit\\.com/pixel|redditstatic\\.com/ads/pixel\\.js|rdt\\.pixel",
+      "name": "Reddit Pixel",
+      "category": "ad_pixel"
+    },
+    {
+      "pattern": "doubleverify\\.com|dvtps\\.com",
+      "name": "DoubleVerify (ad verification)",
+      "category": "ad_pixel"
+    },
+    {
+      "pattern": "adsafeprotected\\.com|iasds01\\.com",
+      "name": "Integral Ad Science (ad verification)",
+      "category": "ad_pixel"
+    },
+    {
+      "pattern": "pagead2\\.googlesyndication\\.com|adsbygoogle|\\bca-pub-\\d{8,}|\\bdata-ad-client\\b",
+      "name": "Google AdSense",
+      "category": "ad_server"
+    },
+    {
+      "pattern": "securepubads\\.g\\.doubleclick\\.net|pubads\\.g\\.doubleclick\\.net|googletagservices\\.com/tag/js/gpt\\.js|\\bgoogletag\\.(?:cmd|defineSlot|pubads|display)|\\bdiv-gpt-ad",
+      "name": "Google Ad Manager / GPT",
+      "category": "ad_server"
+    },
+    {
+      "pattern": "tpc\\.googlesyndication\\.com|googlesyndication\\.com/(?:safeframe|pagead)",
+      "name": "Google Syndication",
+      "category": "ad_server"
+    },
+    {
+      "pattern": "adservice\\.google\\.[a-z.]+",
+      "name": "Google Ad Service",
+      "category": "ad_server"
+    },
+    {
+      "pattern": "smartadserver\\.com|sascdn\\.com",
+      "name": "Smart AdServer",
+      "category": "ad_server"
+    },
+    {
+      "pattern": "adform\\.net|adformdsp\\.net",
+      "name": "Adform",
+      "category": "ad_server"
+    },
+    {
+      "pattern": "adition\\.com",
+      "name": "ADITION",
+      "category": "ad_server"
+    },
+    {
+      "pattern": "prebid[\\w.\\-]*\\.js|\\bpbjs\\.(?:que|addAdUnits|requestBids|setConfig)",
+      "name": "Prebid.js (header bidding)",
+      "category": "ad_exchange"
+    },
+    {
+      "pattern": "amazon-adsystem\\.com|\\bapstag\\.",
+      "name": "Amazon Publisher Services (A9/TAM)",
+      "category": "ad_exchange"
+    },
+    {
+      "pattern": "rubiconproject\\.com|magnite\\.com",
+      "name": "Magnite (Rubicon Project)",
+      "category": "ad_exchange"
+    },
+    {
+      "pattern": "pubmatic\\.com",
+      "name": "PubMatic",
+      "category": "ad_exchange"
+    },
+    {
+      "pattern": "openx\\.(?:net|com)|servedbyopenx\\.com",
+      "name": "OpenX",
+      "category": "ad_exchange"
+    },
+    {
+      "pattern": "casalemedia\\.com|indexww\\.com|indexexchange\\.com",
+      "name": "Index Exchange",
+      "category": "ad_exchange"
+    },
+    {
+      "pattern": "lijit\\.com|sovrn\\.com",
+      "name": "Sovrn",
+      "category": "ad_exchange"
+    },
+    {
+      "pattern": "3lift\\.com|triplelift\\.com",
+      "name": "TripleLift",
+      "category": "ad_exchange"
+    },
+    {
+      "pattern": "sharethrough\\.com",
+      "name": "Sharethrough",
+      "category": "ad_exchange"
+    },
+    {
+      "pattern": "teads\\.tv|teads\\.com",
+      "name": "Teads",
+      "category": "ad_exchange"
+    },
+    {
+      "pattern": "gumgum\\.com",
+      "name": "GumGum",
+      "category": "ad_exchange"
+    },
+    {
+      "pattern": "33across\\.com",
+      "name": "33Across",
+      "category": "ad_exchange"
+    },
+    {
+      "pattern": "yieldmo\\.com",
+      "name": "Yieldmo",
+      "category": "ad_exchange"
+    },
+    {
+      "pattern": "conversantmedia\\.com|dotomi\\.com",
+      "name": "Epsilon / Conversant",
+      "category": "ad_exchange"
+    },
+    {
+      "pattern": "advertising\\.com|ads\\.yahoo\\.com|gemini\\.yahoo\\.com|ads\\.yap\\.yahoo\\.com",
+      "name": "Yahoo / Verizon Media Ads",
+      "category": "ad_exchange"
+    },
+    {
+      "pattern": "spotxchange\\.com|spotx\\.tv",
+      "name": "SpotX",
+      "category": "ad_exchange"
+    },
+    {
+      "pattern": "smaato\\.(?:net|com)",
+      "name": "Smaato",
+      "category": "ad_exchange"
+    },
+    {
+      "pattern": "360yield\\.com|improvedigital\\.com",
+      "name": "Improve Digital",
+      "category": "ad_exchange"
+    },
+    {
+      "pattern": "btloader\\.com|blockthrough\\.com",
+      "name": "Blockthrough (ad-block recovery)",
+      "category": "ad_exchange"
+    },
+    {
+      "pattern": "(?<![\\w-])media\\.net",
+      "name": "Media.net",
+      "category": "ad_exchange"
+    },
+    {
+      "pattern": "bidswitch\\.net",
+      "name": "BidSwitch",
+      "category": "ad_exchange"
+    },
+    {
+      "pattern": "demdex\\.net",
+      "name": "Adobe Audience Manager",
+      "category": "ad_sync"
+    },
+    {
+      "pattern": "everesttech\\.net",
+      "name": "Adobe Advertising Cloud",
+      "category": "ad_sync"
+    },
+    {
+      "pattern": "rlcdn\\.com|liveramp\\.com",
+      "name": "LiveRamp",
+      "category": "ad_sync"
+    },
+    {
+      "pattern": "crwdcntrl\\.net",
+      "name": "Lotame",
+      "category": "ad_sync"
+    },
+    {
+      "pattern": "bluekai\\.com|bkrtx\\.com",
+      "name": "Oracle BlueKai",
+      "category": "ad_sync"
+    },
+    {
+      "pattern": "agkn\\.com",
+      "name": "Neustar / TransUnion",
+      "category": "ad_sync"
+    },
+    {
+      "pattern": "id5-sync\\.com",
+      "name": "ID5",
+      "category": "ad_sync"
+    },
+    {
+      "pattern": "liveintent\\.com",
+      "name": "LiveIntent",
+      "category": "ad_sync"
+    },
+    {
+      "pattern": "tapad\\.com",
+      "name": "Tapad",
+      "category": "ad_sync"
+    },
+    {
+      "pattern": "krxd\\.net",
+      "name": "Salesforce DMP (Krux)",
+      "category": "ad_sync"
+    },
+    {
+      "pattern": "mathtag\\.com",
+      "name": "MediaMath",
+      "category": "ad_sync"
+    },
+    {
+      "pattern": "rfihub\\.com|rfihub\\.net",
+      "name": "Rocket Fuel",
+      "category": "ad_sync"
+    },
+    {
+      "pattern": "adsymptotic\\.com",
+      "name": "Drawbridge",
+      "category": "ad_sync"
+    },
+    {
+      "pattern": "(?<![\\w-])mgid\\.com",
+      "name": "MGID",
+      "category": "native_ad"
+    },
+    {
+      "pattern": "zemanta\\.com",
+      "name": "Zemanta",
+      "category": "native_ad"
+    },
+    {
+      "pattern": "content\\.ad(?:/|\\b)|contentad\\.net",
+      "name": "Content.ad",
+      "category": "native_ad"
+    },
+    {
+      "pattern": "awin1\\.com|zenaps\\.com|dwin1\\.com",
+      "name": "Awin",
+      "category": "affiliate"
+    },
+    {
+      "pattern": "shareasale\\.com|shareasale-analytics\\.com",
+      "name": "ShareASale",
+      "category": "affiliate"
+    },
+    {
+      "pattern": "impactradius\\.com|(?<![\\w-])impact\\.com|sjv\\.io|ojrq\\.net|d\\.impactradius-event\\.com",
+      "name": "Impact",
+      "category": "affiliate"
+    },
+    {
+      "pattern": "dpbolvw\\.net|anrdoezrs\\.net|jdoqocy\\.com|tkqlhce\\.com|kqzyfj\\.com|(?<![\\w-])cj\\.com",
+      "name": "CJ Affiliate",
+      "category": "affiliate"
+    },
+    {
+      "pattern": "clickbank\\.net",
+      "name": "ClickBank",
+      "category": "affiliate"
+    },
+    {
+      "pattern": "linksynergy\\.com|rakuten-ads",
+      "name": "Rakuten Advertising",
+      "category": "affiliate"
+    },
+    {
+      "pattern": "prf\\.hn|partnerize\\.com",
+      "name": "Partnerize",
+      "category": "affiliate"
+    },
+    {
+      "pattern": "amazon-adsystem\\.com/widgets|assoc-amazon\\.com|amzn\\.to/",
+      "name": "Amazon Associates",
+      "category": "affiliate"
+    },
+    {
+      "pattern": "propellerads\\.com|propellerremedy\\.com|propu\\.sh|(?<![\\w-])pushails\\.com",
+      "name": "PropellerAds",
+      "category": "ad_network_aggressive"
+    },
+    {
+      "pattern": "adsterra\\.com|highcpmrevenuegate\\.com|highperformanceformat\\.com|effectivegatecpm\\.com",
+      "name": "Adsterra",
+      "category": "ad_network_aggressive"
+    },
+    {
+      "pattern": "exoclick\\.com|exosrv\\.com|exdynsrv\\.com|syndication\\.exoclick\\.com|magsrv\\.com|exoticads\\.com",
+      "name": "ExoClick",
+      "category": "ad_network_aggressive"
+    },
+    {
+      "pattern": "juicyads\\.com|jads\\.co|juicyads\\.net",
+      "name": "JuicyAds",
+      "category": "ad_network_aggressive"
+    },
+    {
+      "pattern": "popads\\.net|popadscdn\\.net",
+      "name": "PopAds",
+      "category": "ad_network_aggressive"
+    },
+    {
+      "pattern": "clickadu\\.com|clickaduilbvvlsoiu\\.com",
+      "name": "Clickadu",
+      "category": "ad_network_aggressive"
+    },
+    {
+      "pattern": "hilltopads\\.net|hilltopads\\.com",
+      "name": "HilltopAds",
+      "category": "ad_network_aggressive"
+    },
+    {
+      "pattern": "trafficjunky\\.(?:net|com)",
+      "name": "TrafficJunky",
+      "category": "ad_network_aggressive"
+    },
+    {
+      "pattern": "adcash\\.com|adcash\\.net",
+      "name": "Adcash",
+      "category": "ad_network_aggressive"
+    },
+    {
+      "pattern": "monetag\\.com|evadav\\.com|alwingulla\\.com|(?<![\\w-])3nbf4\\.com",
+      "name": "Monetag / EvaDav",
+      "category": "ad_network_aggressive"
+    },
+    {
+      "pattern": "plugrush\\.com",
+      "name": "PlugRush",
+      "category": "ad_network_aggressive"
+    },
+    {
+      "pattern": "ero-advertising\\.com",
+      "name": "Ero-Advertising",
+      "category": "ad_network_aggressive"
+    },
+    {
+      "pattern": "a-ads\\.com|acceptable\\.a-ads\\.com",
+      "name": "A-ADS",
+      "category": "ad_network_aggressive"
+    },
+    {
+      "pattern": "richads\\.com|richpush",
+      "name": "RichAds",
+      "category": "ad_network_aggressive"
+    },
+    {
+      "pattern": "galaksion\\.com|glxtag\\.com",
+      "name": "Galaksion",
+      "category": "ad_network_aggressive"
+    },
+    {
+      "pattern": "zeropark\\.com|zeroredirect",
+      "name": "Zeropark",
+      "category": "ad_network_aggressive"
+    },
+    {
+      "pattern": "adxpansion\\.com|adxxx\\.com",
+      "name": "AdXpansion",
+      "category": "ad_network_aggressive"
+    },
+    {
+      "pattern": "\\bpopunder\\b|\\bpop-?under\\.js|window\\.open\\([^)]*\\bpopunder",
+      "name": "Popunder script",
+      "category": "ad_network_aggressive"
+    },
+    {
+      "pattern": "luckyorange\\.(?:com|net)",
+      "name": "Lucky Orange",
+      "category": "session_replay"
+    },
+    {
+      "pattern": "cdn\\.fullstory\\.com|fs\\.identify\\(|fullstory\\.com/s/fs\\.js",
+      "name": "FullStory",
+      "category": "session_replay"
+    },
+    {
+      "pattern": "static\\.crazyegg\\.com|script\\.crazyegg\\.com",
+      "name": "Crazy Egg",
+      "category": "session_replay"
+    },
+    {
+      "pattern": "smartlook\\.com/recorder|rec\\.smartlook\\.com",
+      "name": "Smartlook",
+      "category": "session_replay"
+    },
+    {
+      "pattern": "clarity\\.ms/tag|cdn\\.clarity\\.ms",
+      "name": "Microsoft Clarity",
+      "category": "session_replay"
+    },
+    {
+      "pattern": "embed\\.crisp\\.chat|client\\.crisp\\.chat",
+      "name": "Crisp Chat",
+      "category": "chat_support"
+    },
+    {
+      "pattern": "js\\.hs-scripts\\.com|js\\.hubspot\\.com|js\\.hsforms\\.net|js\\.usemessages\\.com",
+      "name": "HubSpot (chat/tracking)",
+      "category": "chat_support"
+    },
+    {
+      "pattern": "newrelic\\.com/nr-loader|js-agent\\.newrelic\\.com",
+      "name": "New Relic Browser",
+      "category": "error_monitoring"
+    },
+    {
+      "pattern": "cdn\\.jsdelivr\\.net/npm/@fingerprintjs|openfpcdn\\.io/fingerprintjs|fpjs\\.io|fpcdn\\.io",
+      "name": "FingerprintJS",
+      "category": "fingerprinting"
+    },
+    {
+      "pattern": "www\\.google\\.com/recaptcha|www\\.gstatic\\.com/recaptcha",
+      "name": "Google reCAPTCHA",
+      "category": "fingerprinting"
+    },
+    {
+      "pattern": "cdn\\.usercentrics\\.eu|app\\.usercentrics\\.eu",
+      "name": "Usercentrics",
+      "category": "consent_management"
+    },
+    {
+      "pattern": "quantcast\\.mgr\\.consensu\\.org|cmp\\.quantcast\\.com",
+      "name": "Quantcast Choice (CMP)",
+      "category": "consent_management"
+    },
+    {
+      "pattern": "coinhive\\.com/lib|authedmine\\.com|coin-hive\\.com",
+      "name": "Coinhive (cryptomining — legacy/malicious)",
+      "category": "abuse"
+    },
+    {
+      "pattern": "cryptoloot\\.pro|webmine\\.pro|crypto-loot\\.com",
+      "name": "CryptoLoot/WebMine (cryptomining)",
+      "category": "abuse"
+    },
+    {
+      "pattern": "minero\\.cc|coinimp\\.com|jsecoin\\.com",
+      "name": "Minero/CoinImp/JSEcoin (cryptomining)",
+      "category": "abuse"
+    },
+    {
+      "pattern": "(?<![\\w-])polyfill\\.io|bootcss\\.com|unionadjs\\.com|xhsbpza\\.com|newcrbpc\\.com",
+      "name": "Domains tied to the 2024 polyfill.io supply-chain campaign",
+      "category": "abuse"
+    }
+  ],
+  "ad_like_hosts": "(?:^|[.\\-])(?:ads?|adserv\\w*|adsrv\\w*|adx|adv|advert\\w*|banner\\w*|click\\w*|pop(?:s|under|cash|ads)?|syndicat\\w*|pixel|track\\w*|bid\\w*|rtb|dsp|ssp|promo\\w*|sponsor\\w*|monetiz\\w*|affiliate|aff|cpm|cpc|traffic\\w*|native|offerwall)\\d*(?:[.\\-]|$)"
+}

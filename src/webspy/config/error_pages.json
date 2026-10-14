@@ -1,0 +1,441 @@
+{
+  "_comment": "Regexes are matched against the body of probe responses (404, 400, 500 and malformed-request pages). Labels containing 'takeover risk' indicate a likely dangling DNS/hosting record; 'misconfig' or 'serious' labels should be raised in severity.",
+  "fingerprints": [
+    {
+      "pattern": "Whitelabel Error Page",
+      "label": "Spring Boot"
+    },
+    {
+      "pattern": "DEBUG = True",
+      "label": "Django (debug mode enabled — serious misconfig if seen in production)"
+    },
+    {
+      "pattern": "django\\.db|Traceback \\(most recent call last\\)",
+      "label": "Django/Python stack trace"
+    },
+    {
+      "pattern": "Fatal error:.*in.*\\.php on line",
+      "label": "PHP (errors displayed — misconfig if in production)"
+    },
+    {
+      "pattern": "Warning:.*in.*\\.php on line",
+      "label": "PHP (warnings displayed — misconfig if in production)"
+    },
+    {
+      "pattern": "Server Error in .* Application",
+      "label": "ASP.NET"
+    },
+    {
+      "pattern": "HTTP Error 404\\.0 - Not Found",
+      "label": "IIS"
+    },
+    {
+      "pattern": "nginx/[\\d.]+",
+      "label": "Nginx (version disclosed)"
+    },
+    {
+      "pattern": "Apache/[\\d.]+",
+      "label": "Apache (version disclosed)"
+    },
+    {
+      "pattern": "Cannot GET ",
+      "label": "Express/Node.js"
+    },
+    {
+      "pattern": "java\\.lang\\.\\w+Exception",
+      "label": "Java stack trace"
+    },
+    {
+      "pattern": "Ruby on Rails|ActionController::RoutingError",
+      "label": "Ruby on Rails"
+    },
+    {
+      "pattern": "Apache Tomcat/[\\d.]+",
+      "label": "Apache Tomcat (version disclosed)"
+    },
+    {
+      "pattern": "HTTP Status 404\\s*[–-]\\s*Not Found|HTTP Status [45]\\d\\d\\s*[–-]",
+      "label": "Apache Tomcat (default error page)"
+    },
+    {
+      "pattern": "Powered by Jetty|Jetty:?//[\\d.]+|Eclipse Jetty",
+      "label": "Jetty (error page)"
+    },
+    {
+      "pattern": "JBoss Web/[\\d.]+|JBossWeb|WildFly",
+      "label": "JBoss / WildFly (error page)"
+    },
+    {
+      "pattern": "Error 404--Not Found|From RFC 2068|WebLogic Server [\\d.]+",
+      "label": "Oracle WebLogic"
+    },
+    {
+      "pattern": "SRVE0190E|WebSphere Application Server|Error 404: SRVE",
+      "label": "IBM WebSphere"
+    },
+    {
+      "pattern": "GlassFish Server|Payara Server",
+      "label": "GlassFish / Payara"
+    },
+    {
+      "pattern": "WEB-INF|org\\.apache\\.catalina|org\\.apache\\.jasper",
+      "label": "Java (internal paths disclosed)"
+    },
+    {
+      "pattern": "Whoops, looks like something went wrong|Illuminate\\\\\\\\|Illuminate/",
+      "label": "Laravel (debug stack trace)"
+    },
+    {
+      "pattern": "Ignition|facade/ignition|Laravel\\\\\\\\Exceptions",
+      "label": "Laravel Ignition (debug mode — serious misconfig)"
+    },
+    {
+      "pattern": "Symfony Exception|Symfony\\\\\\\\Component|Symfony Profiler|sf-toolbar",
+      "label": "Symfony (debug mode / profiler)"
+    },
+    {
+      "pattern": "A PHP Error was encountered|CodeIgniter",
+      "label": "CodeIgniter (error output)"
+    },
+    {
+      "pattern": "Cake\\\\\\\\Core|CakePHP|Error: .* Cake",
+      "label": "CakePHP (error output)"
+    },
+    {
+      "pattern": "yii\\\\\\\\base|Yii Framework|Yii::",
+      "label": "Yii (error output)"
+    },
+    {
+      "pattern": "Zend_|Laminas\\\\\\\\|Zend\\\\\\\\",
+      "label": "Zend / Laminas (error output)"
+    },
+    {
+      "pattern": "Werkzeug Debugger|The debugger caught an exception|console\\.\\s*Console locked",
+      "label": "Flask / Werkzeug debugger (RCE risk — serious misconfig)"
+    },
+    {
+      "pattern": "Using the URLconf defined in|Page not found \\(404\\)|Request Method:\\s*GET\\s*Request URL:",
+      "label": "Django (404 debug page — DEBUG=True)"
+    },
+    {
+      "pattern": "We're sorry, but something went wrong|Action Controller: Exception caught|ActiveRecord::",
+      "label": "Ruby on Rails"
+    },
+    {
+      "pattern": "Routing Error|No route matches|uninitialized constant",
+      "label": "Ruby on Rails (routing/debug error)"
+    },
+    {
+      "pattern": "Runtime Error|Version Information: Microsoft \\.NET Framework|<b>\\s*Stack Trace:\\s*</b>",
+      "label": "ASP.NET (YSOD stack trace)"
+    },
+    {
+      "pattern": "Server Error in '/' Application",
+      "label": "ASP.NET (YSOD)"
+    },
+    {
+      "pattern": "HTTP Error 50[0-3]\\.\\d+|Detailed Error Information|HTTP Error 404\\.\\d+",
+      "label": "IIS (detailed error page)"
+    },
+    {
+      "pattern": "An unhandled exception occurred while processing the request",
+      "label": "ASP.NET Core (Developer Exception Page)"
+    },
+    {
+      "pattern": "Microsoft OLE DB Provider|ODBC (?:SQL Server )?Driver|\\[Microsoft\\]\\[ODBC",
+      "label": "Microsoft OLE DB/ODBC error (DB info disclosure)"
+    },
+    {
+      "pattern": "You have an error in your SQL syntax|mysql_fetch|mysqli_sql_exception|MySQLSyntaxErrorException|Warning: mysql_",
+      "label": "MySQL (SQL error disclosed)"
+    },
+    {
+      "pattern": "pg_query\\(\\)|PSQLException|ERROR:\\s+syntax error at or near|PostgreSQL.*ERROR",
+      "label": "PostgreSQL (SQL error disclosed)"
+    },
+    {
+      "pattern": "ORA-\\d{5}|Oracle error|oracle\\.jdbc",
+      "label": "Oracle DB (error disclosed)"
+    },
+    {
+      "pattern": "Unclosed quotation mark|SqlException|Incorrect syntax near|Msg \\d+, Level \\d+, State \\d+",
+      "label": "Microsoft SQL Server (SQL error disclosed)"
+    },
+    {
+      "pattern": "SQLite3::|SQLITE_ERROR|sqlite3\\.OperationalError|SQLiteException",
+      "label": "SQLite (error disclosed)"
+    },
+    {
+      "pattern": "MongoError|MongoServerError|MongoNetworkError|E11000 duplicate key",
+      "label": "MongoDB (error disclosed)"
+    },
+    {
+      "pattern": "elasticsearch\\.exceptions|ElasticsearchException|SearchPhaseExecutionException",
+      "label": "Elasticsearch (error disclosed)"
+    },
+    {
+      "pattern": "redis\\.exceptions|ERR unknown command|WRONGTYPE Operation",
+      "label": "Redis (error disclosed)"
+    },
+    {
+      "pattern": "ReferenceError:|TypeError: Cannot read propert|at (?:Object|Module|Function)\\.<anonymous>|at .*node_modules",
+      "label": "Node.js (stack trace)"
+    },
+    {
+      "pattern": "goroutine \\d+ \\[running\\]|panic: runtime error",
+      "label": "Go (panic / stack trace)"
+    },
+    {
+      "pattern": "File \\\".*\\\", line \\d+, in |Traceback \\(most recent call last\\)",
+      "label": "Python (stack trace)"
+    },
+    {
+      "pattern": "at (?:org|com|java|javax|sun)\\.[\\w.$]+\\([\\w]+\\.java:\\d+\\)",
+      "label": "Java (stack trace with source lines)"
+    },
+    {
+      "pattern": "Caused by: [\\w.]+Exception",
+      "label": "Java (chained exception trace)"
+    },
+    {
+      "pattern": "play\\.api\\.|Action Not Found|For request 'GET",
+      "label": "Play Framework"
+    },
+    {
+      "pattern": "500: Internal Server Error\\s*$|tornado\\.web",
+      "label": "Tornado"
+    },
+    {
+      "pattern": "\\{\\\"detail\\\":\\s*\\\"Not Found\\\"\\}",
+      "label": "FastAPI / Starlette (default 404 JSON)"
+    },
+    {
+      "pattern": "Application error: a server-side exception has occurred|This page could not be found\\.",
+      "label": "Next.js (error page)"
+    },
+    {
+      "pattern": "Nuxt error|__nuxt_error|nuxt-error-page",
+      "label": "Nuxt (error page)"
+    },
+    {
+      "pattern": "Error code 52\\d|Error 52\\d|cf-error-details|cf-wrapper",
+      "label": "Cloudflare (52x origin error page)"
+    },
+    {
+      "pattern": "Error 1020|Error 1015|Error 1010|Error 1006|Error 1005|Error 1003",
+      "label": "Cloudflare (access/ratelimit error 10xx)"
+    },
+    {
+      "pattern": "502 Bad Gateway\\s*(?:<hr>)?\\s*<center>nginx|<center>nginx</center>",
+      "label": "nginx (error page)"
+    },
+    {
+      "pattern": "openresty/[\\d.]+",
+      "label": "OpenResty (version disclosed)"
+    },
+    {
+      "pattern": "LiteSpeed Web Server|Proudly Served by LiteSpeed|litespeedtech",
+      "label": "LiteSpeed (error page)"
+    },
+    {
+      "pattern": "Caddy|caddyserver",
+      "label": "Caddy (error page)"
+    },
+    {
+      "pattern": "Guru Meditation|Error 5\\d\\d.*Varnish|Varnish cache server",
+      "label": "Varnish (error page)"
+    },
+    {
+      "pattern": "ERROR: The requested URL could not be retrieved|Generated .* by squid",
+      "label": "Squid (error page)"
+    },
+    {
+      "pattern": "503 Service Unavailable.*No server is available to handle this request",
+      "label": "HAProxy (503 error page)"
+    },
+    {
+      "pattern": "ERROR: The request could not be satisfied|Generated by cloudfront \\(CloudFront\\)",
+      "label": "Amazon CloudFront (error page)"
+    },
+    {
+      "pattern": "<Code>NoSuchBucket</Code>|<Code>NoSuchKey</Code>|<Code>AccessDenied</Code>|The specified bucket does not exist",
+      "label": "Amazon S3 (error XML; NoSuchBucket may indicate takeover risk)"
+    },
+    {
+      "pattern": "The specified blob does not exist|ResourceNotFound.*Azure|BlobNotFound",
+      "label": "Azure Blob Storage (error)"
+    },
+    {
+      "pattern": "The resource you are looking for has been removed|Error 404 - Web app not found|404 Web Site not found",
+      "label": "Azure App Service (error / possible takeover)"
+    },
+    {
+      "pattern": "There isn't a GitHub Pages site here|For root URLs \\(like http://example\\.com/\\) you must provide an index\\.html",
+      "label": "GitHub Pages (unclaimed — takeover risk)"
+    },
+    {
+      "pattern": "No such app|herokucdn\\.com/error-pages/no-such-app",
+      "label": "Heroku (no such app — takeover risk)"
+    },
+    {
+      "pattern": "Sorry, this shop is currently unavailable|Only one step left!",
+      "label": "Shopify (unclaimed shop — takeover risk)"
+    },
+    {
+      "pattern": "Fastly error: unknown domain|Fatal Error:.*Fastly",
+      "label": "Fastly (unknown domain — takeover risk)"
+    },
+    {
+      "pattern": "Not Found - Request ID:|Page Not Found.*Netlify",
+      "label": "Netlify (404)"
+    },
+    {
+      "pattern": "DEPLOYMENT_NOT_FOUND|The deployment could not be found on Vercel|NOT_FOUND\\s*Code:",
+      "label": "Vercel (deployment not found — takeover risk)"
+    },
+    {
+      "pattern": "Error establishing a database connection|There has been a critical error on this website",
+      "label": "WordPress (critical error / DB failure)"
+    },
+    {
+      "pattern": "The website encountered an unexpected error|Drupal\\\\\\\\Core\\\\\\\\|Drupal\\\\\\\\",
+      "label": "Drupal (unexpected error / stack trace)"
+    },
+    {
+      "pattern": "<title>0\\s*-\\s*Error|Joomla! - Error|JFolder::|JException",
+      "label": "Joomla (error)"
+    },
+    {
+      "pattern": "There has been an error processing your request|Magento\\\\\\\\Framework|Magento\\\\\\\\",
+      "label": "Magento (error)"
+    },
+    {
+      "pattern": "ColdFusion|cfdump|coldfusion\\.runtime",
+      "label": "ColdFusion (error/debug)"
+    },
+    {
+      "pattern": "PHP Version [\\d.]+|phpinfo\\(\\)|<title>phpinfo\\(\\)",
+      "label": "PHP (phpinfo exposed)"
+    },
+    {
+      "pattern": "xdebug-error|Xdebug|Call Stack:\\s*#\\s*Time\\s*Memory",
+      "label": "PHP Xdebug (debug output)"
+    },
+    {
+      "pattern": "Stack trace:\\s*#0 |PHP Stack trace:|Uncaught (?:Exception|Error|TypeError)",
+      "label": "PHP (uncaught exception trace)"
+    },
+    {
+      "pattern": "Parse error:.*in.*\\.php on line|syntax error, unexpected",
+      "label": "PHP (parse error disclosed)"
+    },
+    {
+      "pattern": "Notice:.*in.*\\.php on line|Deprecated:.*in.*\\.php on line",
+      "label": "PHP (notices displayed — misconfig if in production)"
+    },
+    {
+      "pattern": "default backend - 404",
+      "label": "Kubernetes ingress-nginx (default backend)"
+    },
+    {
+      "pattern": "404 page not found\\s*$",
+      "label": "Go net/http or Traefik (default 404)"
+    },
+    {
+      "pattern": "upstream connect error or disconnect/reset before headers|no healthy upstream",
+      "label": "Envoy / Istio (upstream error)"
+    },
+    {
+      "pattern": "Bad Request - Invalid Hostname|HTTP Error 400\\. The request hostname is invalid",
+      "label": "IIS (invalid hostname)"
+    },
+    {
+      "pattern": "Index of /|<title>Index of",
+      "label": "Directory listing enabled"
+    },
+    {
+      "pattern": "Directory listing for /",
+      "label": "Directory listing enabled (Python http.server)"
+    },
+    {
+      "pattern": "Parent Directory|\\[To Parent Directory\\]",
+      "label": "Directory listing enabled (generic)"
+    },
+    {
+      "pattern": "phpMyAdmin|pma_|phpmyadmin\\.css",
+      "label": "phpMyAdmin (exposed)"
+    },
+    {
+      "pattern": "Adminer|adminer\\.css",
+      "label": "Adminer (exposed)"
+    },
+    {
+      "pattern": "Swagger UI|swagger-ui|\\\"swagger\\\":\\s*\\\"2\\.0\\\"|\\\"openapi\\\":\\s*\\\"3\\.",
+      "label": "Swagger / OpenAPI (exposed)"
+    },
+    {
+      "pattern": "GraphQL Playground|GraphiQL|graphql-playground",
+      "label": "GraphQL IDE (exposed)"
+    },
+    {
+      "pattern": "Kibana|kbn-name|kibana-body",
+      "label": "Kibana (exposed)"
+    },
+    {
+      "pattern": "Grafana|grafana-app",
+      "label": "Grafana (exposed)"
+    },
+    {
+      "pattern": "Jenkins|X-Jenkins|Dashboard \\[Jenkins\\]",
+      "label": "Jenkins (exposed)"
+    },
+    {
+      "pattern": "phpinfo\\(\\)|<h1 class=\\\"p\\\">PHP Version",
+      "label": "phpinfo page"
+    },
+    {
+      "pattern": "Whitelabel Error Page.*This application has no explicit mapping for /error",
+      "label": "Spring Boot (whitelabel, no /error mapping)"
+    },
+    {
+      "pattern": "\\\"timestamp\\\":\\\"[^\\\"]+\\\",\\\"status\\\":\\d+,\\\"error\\\":\\\"[^\\\"]+\\\",\\\"path\\\":",
+      "label": "Spring Boot (JSON error body)"
+    },
+    {
+      "pattern": "org\\.springframework\\.|spring-boot",
+      "label": "Spring (class names disclosed)"
+    },
+    {
+      "pattern": "actuator/health|\\\"status\\\":\\\"UP\\\"",
+      "label": "Spring Boot Actuator (health exposed)"
+    },
+    {
+      "pattern": "Cannot (?:POST|PUT|DELETE|PATCH) /",
+      "label": "Express/Node.js (other-method 404)"
+    },
+    {
+      "pattern": "NoHandlerFoundException|HttpRequestMethodNotSupportedException",
+      "label": "Spring MVC (exception disclosed)"
+    },
+    {
+      "pattern": "Powered by Phusion Passenger|Phusion Passenger",
+      "label": "Phusion Passenger (error page)"
+    },
+    {
+      "pattern": "nginx/[\\d.]+ \\(Ubuntu\\)|Apache/[\\d.]+ \\((?:Ubuntu|Debian|CentOS|Red Hat|Unix|Win\\d+)",
+      "label": "Web server + OS/version disclosed"
+    },
+    {
+      "pattern": "mod_ssl/[\\d.]+|OpenSSL/[\\d.]+|PHP/[\\d.]+|mod_perl/[\\d.]+",
+      "label": "Apache module versions disclosed in banner"
+    },
+    {
+      "pattern": "Microsoft-IIS/[\\d.]+|ASP\\.NET Version:[\\d.]+",
+      "label": "IIS / ASP.NET version disclosed"
+    },
+    {
+      "pattern": "Server at .* Port \\d+",
+      "label": "Apache (server signature in error page)"
+    }
+  ]
+}
